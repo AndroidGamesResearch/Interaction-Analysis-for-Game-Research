@@ -78,7 +78,7 @@ The code covers the main stages of the empirical analysis:
 
 The implementation includes estimation of stratum-specific relationships and interaction on both additive and multiplicative scales, together with the corresponding statistical uncertainty measures.
 
-Code and analysis scripts are provided in the `code/` directory.
+The complete analysis code is provided in the `code/` directory.
 
 ## Reproducibility
 
