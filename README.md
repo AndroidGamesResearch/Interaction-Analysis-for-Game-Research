@@ -34,7 +34,7 @@ The analysis uses **1,778,700 game–market–month observations**, covering **1
 
 ## Repository Contents
 
-The repository will contain:
+The repository contains:
 
 - Implementation of the Interaction-Analysis Framework
 - Experimental analysis scripts
@@ -50,10 +50,55 @@ The repository will contain:
 
 ```text
 .
-├── src/                 # Interaction-analysis implementation
-├── experiments/         # Empirical analysis scripts
-├── supplementary/       # Supplementary tables and research artifacts
-├── results/             # Experimental outputs
-├── figures/             # Supporting figures
-├── requirements.txt     # Python dependencies
+├── data/                 # Data information and analysis inputs
+├── code/                 # Framework implementation and analysis scripts
+├── supplementary/        # Detailed supplementary research materials
+├── figures/              # Supporting figures and visualizations
+├── requirements.txt      # Python dependencies
 └── README.md
+```
+
+## Data
+
+The empirical analysis uses a cross-country dataset of Android mobile games covering multiple national Google Play markets and monthly observation periods.
+
+Information required to access the underlying dataset is provided with the research materials.
+
+## Code
+
+The repository provides the analysis code used to implement the Interaction-Analysis Framework and reproduce the empirical analyses reported in the associated study.
+
+The code covers the main stages of the empirical analysis:
+
+- Genre-level interaction analysis
+- Cross-market interaction analysis
+- Temporal interaction analysis
+- Gameplay characterization analysis
+- National-context analysis
+
+The implementation includes estimation of stratum-specific relationships and interaction on both additive and multiplicative scales, together with the corresponding statistical uncertainty measures.
+
+Code and analysis scripts are provided in the `code/` directory.
+
+## Reproducibility
+
+The repository is organized to support reproduction of the analyses reported in the associated study.
+
+Scripts, dependencies, analysis inputs, experimental outputs, and supplementary materials are provided in their corresponding directories. Instructions for executing the analyses and reproducing the reported results are provided with the relevant code.
+
+## Supplementary Materials
+
+Detailed supplementary materials include:
+
+- Complete game-level gameplay characterizations
+- Gameplay-characteristic coding matrices
+- Profile-level calculations
+- Country-level interaction estimates
+- Temporal interaction estimates
+- National-context analysis results
+
+The supplementary materials are provided in the `supplementary/` directory.
+
+## Citation
+
+Citation information will be added following publication of the associated research.
