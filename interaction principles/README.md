@@ -41,6 +41,7 @@ Knol and VanderWeele distinguish these analytical questions by separating the ex
 Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of effect modification and interaction.* International Journal of Epidemiology. 2012;41(2):514–520.  
 **[DOI: 10.1093/ije/dyr218](https://doi.org/10.1093/ije/dyr218)**
 
+
 ---
 
 ## 1.1 Interaction
