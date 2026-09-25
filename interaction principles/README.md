@@ -1298,7 +1298,7 @@ qualitative interaction does not.
 ```
 ### Game-data example
 
-![Qualitative crossover interaction](examples/crossover.png)
+![Qualitative crossover interaction](interaction principles/example/crossover.png)
 
 *Illustrative game-marketplace example of qualitative interaction. The
 relationship changes direction across the contextual condition, producing a
@@ -1582,7 +1582,7 @@ contextual variable causally produces the reversal.
 
 ### Game-data example
 
-![Amplification pattern](examples/freeIAP.png)
+![Amplification pattern](interaction principles/example/freeIAP.jpg)
 
 *Illustrative game-marketplace example of amplification. The conditional
 relationship retains its direction but becomes stronger under the combined
