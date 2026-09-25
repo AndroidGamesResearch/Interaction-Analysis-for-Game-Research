@@ -1602,6 +1602,406 @@ Qualitative interaction therefore represents a particularly consequential
 form of contextual dependence because a single overall direction can fail to
 represent the relationships observed within different contexts.
 
+## 3.3 Amplification and Attenuation
+
+When a relationship retains the same direction across contexts, contextual
+variation can often be described in terms of **amplification** or
+**attenuation**.
+
+These terms describe what happens to the **magnitude of the underlying
+relationship** as the contextual condition changes.
+
+```text
+                 SAME-DIRECTION RELATIONSHIP
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+                ▼                       ▼
+         magnitude becomes       magnitude becomes
+              larger                  smaller
+                │                       │
+                ▼                       ▼
+          AMPLIFICATION             ATTENUATION
+```
+
+This distinction belongs within the broader category of **quantitative
+interaction** introduced above: the direction is retained, but the strength
+of the relationship differs across context.
+
+---
+
+### Amplification
+
+Amplification occurs when the magnitude of the relationship between \(r\)
+and \(y\) is greater within one contextual condition than within the
+reference condition.
+
+For a positive probability-difference relationship, suppose:
+
+```math
+PD_{r\mid\bar c}=+0.10
+```
+
+and
+
+```math
+PD_{r\mid c}=+0.30.
+```
+
+The relationship remains positive, but becomes stronger in the presence of
+\(c\):
+
+```text
+c̄        r̄ ─────────► r
+              +0.10
+
+c         r̄ ─────────────────────► r
+                       +0.30
+
+                  same direction
+                        +
+                 larger magnitude
+                        │
+                        ▼
+                  AMPLIFICATION
+```
+
+The corresponding additive interaction contrast is:
+
+```math
+\mathrm{DDP}
+=
+0.30-0.10
+=
++0.20.
+```
+
+Here, the positive DDP and amplification point in the same direction because
+the underlying relationship is positive and becomes more positive within
+\(c\).
+
+---
+
+### Attenuation
+
+Now suppose:
+
+```math
+PD_{r\mid\bar c}=+0.30
+```
+
+but
+
+```math
+PD_{r\mid c}=+0.10.
+```
+
+The relationship remains positive, but its magnitude becomes smaller:
+
+```text
+c̄        r̄ ─────────────────────► r
+                       +0.30
+
+c         r̄ ─────────► r
+              +0.10
+
+                  same direction
+                        +
+                 smaller magnitude
+                        │
+                        ▼
+                   ATTENUATION
+```
+
+The DDP is:
+
+```math
+\mathrm{DDP}
+=
+0.10-0.30
+=
+-0.20.
+```
+
+Thus, in this example, the negative departure corresponds to attenuation of
+an underlying positive relationship.
+
+---
+
+### Why the sign of DDP is not sufficient
+
+Amplification and attenuation should **not be assigned solely from whether
+DDP is positive or negative**.
+
+Consider an underlying negative relationship.
+
+Suppose:
+
+```math
+PD_{r\mid\bar c}=-0.10
+```
+
+and
+
+```math
+PD_{r\mid c}=-0.30.
+```
+
+The relationship becomes **more strongly negative** within \(c\).
+
+Its magnitude changes from
+
+```math
+|{-0.10}|=0.10
+```
+
+to
+
+```math
+|{-0.30}|=0.30.
+```
+
+Therefore, the relationship has been **amplified in magnitude**.
+
+Yet:
+
+```math
+\mathrm{DDP}
+=
+-0.30-(-0.10)
+=
+-0.20.
+```
+
+So a negative DDP can describe amplification when the underlying relationship
+is negative.
+
+Conversely:
+
+```math
+PD_{r\mid\bar c}=-0.30
+```
+
+and
+
+```math
+PD_{r\mid c}=-0.10
+```
+
+represent attenuation of the negative relationship, even though:
+
+```math
+\mathrm{DDP}
+=
+-0.10-(-0.30)
+=
++0.20.
+```
+
+The distinction is therefore:
+
+```text
+SIGN OF DDP
+     │
+     ▼
+Direction of departure from
+the additive reference
+
+
+AMPLIFICATION / ATTENUATION
+     │
+     ▼
+Change in magnitude of the
+underlying relationship
+```
+
+These are related descriptions, but they are **not interchangeable**.
+
+---
+
+### A magnitude-based representation
+
+For same-direction relationships, amplification can be represented
+descriptively as:
+
+```math
+\left|PD_{r\mid c}\right|
+>
+\left|PD_{r\mid\bar c}\right|,
+```
+
+whereas attenuation corresponds to:
+
+```math
+\left|PD_{r\mid c}\right|
+<
+\left|PD_{r\mid\bar c}\right|.
+```
+
+This absolute-magnitude comparison is useful for describing the pattern, but
+it should not replace DDP as the formal additive interaction contrast.
+
+```text
+                       FORMAL CONTRAST
+                             │
+                             ▼
+                            DDP
+                             │
+                  direction of departure
+
+
+                    PATTERN DESCRIPTION
+                             │
+              ┌──────────────┴──────────────┐
+              ▼                             ▼
+       |relationship| grows          |relationship| shrinks
+              │                             │
+              ▼                             ▼
+       AMPLIFICATION                  ATTENUATION
+```
+
+---
+
+### Multiplicative interpretation
+
+The same conceptual distinction can be made on the odds-ratio scale, but the
+null reference is now \(1\), rather than \(0\).
+
+For example:
+
+```math
+\theta_{yr\mid\bar c}=1.20
+```
+
+and
+
+```math
+\theta_{yr\mid c}=1.80
+```
+
+describe a positive association that is stronger within \(c\).
+
+The corresponding ratio of odds ratios is:
+
+```math
+\mathrm{RoR}
+=
+\frac{1.80}{1.20}
+=
+1.50.
+```
+
+However, as with DDP, the value of RoR must be interpreted together with the
+underlying conditional odds ratios.
+
+For example:
+
+```math
+\theta_{yr\mid\bar c}=0.80,
+\qquad
+\theta_{yr\mid c}=0.50
+```
+
+describes an association moving farther below the null value of \(1\), even
+though:
+
+```math
+\mathrm{RoR}
+=
+\frac{0.50}{0.80}
+=
+0.625.
+```
+
+Therefore, RoR describes the **relative change between conditional odds
+ratios**, whereas amplification or attenuation describes how the magnitude of
+the underlying association changes relative to its null.
+
+---
+
+### Translation to game research
+
+Suppose:
+
+```text
+r = Free
+c = Offers IAP
+y = Marketplace success
+```
+
+The relationship between being Free and marketplace success can first be
+estimated among games without IAP and then among games offering IAP.
+
+Conceptually:
+
+```text
+                       FREE–SUCCESS
+                       RELATIONSHIP
+                            │
+                 compare across IAP
+                            │
+              ┌─────────────┴─────────────┐
+              ▼                           ▼
+           No IAP                        IAP
+              │                           │
+       weaker relationship        stronger relationship
+              │                           │
+              └─────────────┬─────────────┘
+                            ▼
+                    AMPLIFICATION
+```
+
+If the Free–success relationship remains in the same direction but becomes
+substantially stronger among games offering IAP, the observed pattern can be
+described as **amplification of the Free–success relationship in the IAP
+context**.
+
+The reverse pattern—where the relationship remains in the same direction but
+moves closer to its null—can be described as **attenuation**.
+
+Because these are observational marketplace relationships, amplification and
+attenuation here describe changes in the **observed conditional association**;
+they do not imply that the contextual factor causally strengthens or weakens
+the relationship.
+
+---
+
+### Relationship to the preceding concepts
+
+The terminology can now be organized as:
+
+```text
+                    CONTEXTUAL VARIATION
+                            │
+             Does direction change?
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+               NO                      YES
+                │                       │
+                ▼                       ▼
+         QUANTITATIVE              QUALITATIVE /
+          INTERACTION                CROSSOVER
+                │
+        Does magnitude change?
+                │
+       ┌────────┴────────┐
+       ▼                 ▼
+   becomes             becomes
+   stronger             weaker
+       │                 │
+       ▼                 ▼
+AMPLIFICATION        ATTENUATION
+```
+
+Thus, **quantitative interaction** identifies a same-direction difference in
+magnitude, while **amplification** and **attenuation** provide descriptive
+language for the direction of that magnitude change.
+
+The next distinction concerns patterns in which additive and multiplicative
+interaction do not agree, showing why the same contextual relationship may
+appear differently depending on the scale used to evaluate it.
+
 ## References
 
 1. Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. *International Journal of Epidemiology*. 2012;41(2):514–520.  
