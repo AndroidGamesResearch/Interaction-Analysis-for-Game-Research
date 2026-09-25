@@ -1062,3 +1062,12 @@ structures.
 
 4. Brumback BA. On effect-measure modification: Relationships among changes in the relative risk, odds ratio, and risk difference. *Statistics in Medicine*. 2008;27(18):3453–3465.  
    **[https://doi.org/10.1002/sim.3246](https://doi.org/10.1002/sim.3246)**
+
+5. VanderWeele TJ, Knol MJ. A Tutorial on Interaction. *Epidemiologic Methods*. 2014;3(1):33–72.  
+   **[https://doi.org/10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
+
+6. Andersson T, Alfredsson L, Källberg H, Zdravkovic S, Ahlbom A. Calculating measures of biological interaction. *European Journal of Epidemiology*. 2005;20(7):575–579.  
+   **[https://doi.org/10.1007/s10654-005-7835-x](https://doi.org/10.1007/s10654-005-7835-x)**
+
+7. Richardson DB, Kaufman JS. Estimation of the Relative Excess Risk Due to Interaction and Associated Confidence Bounds. *American Journal of Epidemiology*. 2009;169(6):756–760.  
+   **[https://doi.org/10.1093/aje/kwn411](https://doi.org/10.1093/aje/kwn411)**
