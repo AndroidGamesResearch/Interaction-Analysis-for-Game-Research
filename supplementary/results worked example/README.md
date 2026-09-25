@@ -1,45 +1,49 @@
 # Worked Interaction-Analysis Examples
 
-This directory provides the complete worked examples accompanying the
-Interaction-Analysis Framework presented in the paper. The materials are
-included to make the analytical procedure transparent and to allow readers
-to inspect and verify the calculations and results illustrated in the study.
+This directory contains the complete worked examples accompanying the
+Interaction-Analysis Framework presented in the paper. These materials
+document the analytical procedure used to obtain the worked-example results
+and provide the corresponding publication-style outputs for inspection and
+verification.
 
-Three monetization–genre interactions are provided:
+Three monetization–genre interactions are included:
 
-- **Ads × RPG** — demonstrates a negative interaction profile.
-- **IAP × RPG** — demonstrates a positive interaction profile that recurs
-  across the examined national and temporal contexts.
-- **IAP × Sports** — demonstrates a context-dependent profile in which
-  interaction direction and statistical support vary across national markets.
+- **Ads × RPG** — illustrates a negative interaction profile.
+- **IAP × RPG** — illustrates a positive interaction profile recurring across
+  the examined national and temporal contexts.
+- **IAP × Sports** — illustrates a context-varying interaction profile, with
+  interaction direction and statistical support varying across national
+  markets.
 
-Together, the examples illustrate how the same analytical framework is used
-to identify negative, positive, and context-varying interaction profiles.
+Together, these examples demonstrate the application of the same interaction-
+analysis procedure to negative, positive, and context-varying empirical
+relationships.
 
 ## Files
 
-Each worked example is provided in two formats:
+Each worked example is provided as a Python analysis script and its
+corresponding generated PDF.
 
-| Worked example | Reproducible analysis | Generated output |
+| Worked example | Analysis script | Worked-example output |
 |---|---|---|
 | Ads × RPG | `ads_rpg_worked_example.py` | `ads_rpg_worked_example.pdf` |
 | IAP × RPG | `iap_rpg_worked_example.py` | `iap_rpg_worked_example.pdf` |
 | IAP × Sports | `iap_sports_worked_example.py` | `iap_sports_worked_example.pdf` |
 
-The **Python scripts** reproduce the complete analytical workflow for each
-example, including data construction, conditional success probabilities,
-additive and multiplicative interaction estimates, 95% confidence intervals,
-and country- and time-specific analyses.
+The Python scripts contain the complete analytical procedure used for each
+example, including construction of the comparison groups, conditional success
+probabilities, additive and multiplicative interaction estimates, 95%
+confidence intervals, and analyses across national and temporal contexts.
 
-The corresponding **PDF files** are the generated publication-style worked
-examples, allowing the analytical steps and resulting estimates to be
-inspected without executing the code.
+The corresponding PDFs present the complete worked analyses in a
+reader-oriented format, including the intermediate calculations, estimates,
+tables, and visual summaries used to illustrate the framework in the paper.
 
-## Reproducing the Worked Examples
+## Purpose
 
-The scripts assume that the study dataset has already been loaded as the
-pandas DataFrame `apps`. Each script can then be executed to generate its
-corresponding PDF:
+These worked examples are provided as supplementary methodological material
+to make the implementation of the Interaction-Analysis Framework transparent
+and to document how the reported interaction results are derived.
 
-```python
-exec(open("ads_rpg_worked_example.py").read())
+The broader study analysis pipeline and study-level outputs are available
+separately in the repository's `code/` and `results/` directories.
