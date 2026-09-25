@@ -574,6 +574,7 @@ can depend on the scale on which the joint relationship is evaluated.
 VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic Methods.
 2014;3(1):33–72.  
 **[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
+
 ---
 
 ## 2.1 Additive Interaction
