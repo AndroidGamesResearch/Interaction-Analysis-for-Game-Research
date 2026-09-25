@@ -1,698 +1,4372 @@
-# Interaction Principles for Game Research
+# Interaction Principles
 
-This methodological companion explains the interaction principles used in the **Interaction-Analysis Framework for Game Research**. The framework examines whether an empirical relationship observed in game-marketplace data remains equivalent when the context changes. In the accompanying study, this question is applied to monetization and marketplace success across gameplay, national-market, and temporal contexts.
+The **Interaction-Analysis Framework** developed in this research draws
+on established principles of interaction and effect-measure modification
+from epidemiology and translates them to contextual questions in game
+research.
 
-The central distinction is between documenting that outcomes differ across contexts and testing whether the **relationship connecting an exposure to an outcome changes across those contexts**. Evidence established in one setting does not, by itself, establish that the same relationship has the same direction or magnitude elsewhere.
+The central principle is that an empirical relationship observed overall
+does not necessarily remain equivalent across the conditions in which it
+is observed.
 
-> **Scope.** The concepts below concern statistical interaction, effect modification, and effect-measure modification in observational data. They do not, by themselves, establish causal or mechanistic interaction.
+> **Core idea:**\
+> A relationship can strengthen, weaken, disappear, or change direction
+> across contexts.
 
-## Notation
+This page develops these principles progressively. Each concept is
+introduced from the methodological literature, expressed statistically,
+translated to the game-research setting, and, where appropriate,
+illustrated using game-marketplace examples.
 
-Throughout the examples:
-
-- \(r\): focal feature or exposure, such as an Ads monetization feature
-- \(\bar r\): absence/complement of \(r\)
-- \(c\): contextual condition, such as a genre or national-market condition
-- \(\bar c\): comparison context
-- \(y\): outcome event, such as install success
-- \(\bar y\): complement of the outcome
-
-The four conditional outcome probabilities are:
-
-| | c̄ | c |
-|---|---:|---:|
-| **r̄** | p<sub>y\|r̄c̄</sub> | p<sub>y\|r̄c</sub> |
-| **r** | p<sub>y\|rc̄</sub> | p<sub>y\|rc</sub> |
-
----
+------------------------------------------------------------------------
 
 # 1. Interaction, Effect Modification, and Effect-Measure Modification
 
-## 1.1 Interaction
+The epidemiological literature uses **interaction**, **effect
+modification**, and **effect-measure modification** for closely related
+but distinguishable ideas.
 
-Interaction asks whether the relationship between \(r\) and \(y\) differs according to the level of \(c\). In this sense, the empirical relationship is **conditional on context** rather than represented adequately by a single pooled association.
+A useful starting point is to distinguish whether the question concerns
+the **joint relationship of two factors** or whether the relationship of
+**one focal factor varies across levels of another factor**.
 
-The idea is not that \(r\) or \(c\) must independently be beneficial or harmful. The question is whether the observed association between \(r\) and \(y\) changes when \(c\) changes.
-
-```text
-                    Context c
-                       │
-                       ▼
-Feature r ───────► Relationship ───────► Outcome y
-                       │
-             direction / magnitude
-                 may change
+``` text
+                         CONTEXTUAL DEPENDENCE
+                                  │
+                 ┌────────────────┴────────────────┐
+                 │                                 │
+                 ▼                                 ▼
+        JOINT RELATIONSHIP                 STRATUM-SPECIFIC
+           OF A AND B                     RELATIONSHIP OF A
+                 │                                 │
+                 ▼                                 ▼
+           INTERACTION                    EFFECT MODIFICATION
+                                                   │
+                                                   ▼
+                                      EFFECT-MEASURE MODIFICATION
+                                      when defined for a specific
+                                             effect measure
 ```
 
-In game research, \(r\) might represent Ads, \(c\) a game genre, and \(y\) marketplace success. An interaction is present on a specified effect scale when the Ads-success relationship differs between the compared genre contexts.
+Knol and VanderWeele distinguish these analytical questions by
+separating the examination of the effect of one exposure across strata
+of another factor from examination of the joint effects of two
+exposures.
 
-## 1.2 Effect Modification
+**Methodological source:**\
+Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of
+effect modification and interaction.* International Journal of
+Epidemiology. 2012;41(2):514--520.\
+**[DOI: 10.1093/ije/dyr218](https://doi.org/10.1093/ije/dyr218)**
 
-In epidemiology, **effect modification** describes a situation in which an effect differs across levels of another variable. The modifier identifies contexts in which the estimated relationship is different. This makes effect modification directly relevant to research concerned with the contextual scope of empirical relationships.
+------------------------------------------------------------------------
 
-For observational game-marketplace analyses, however, causal language should be used cautiously. When causal identification is not established, the safer interpretation is that the **measured association varies across contexts** rather than that the context modifies a causal effect.
+## 1.1 Interaction
 
-See Knol and VanderWeele (2012) and Greenland (1983) for discussion of interaction and effect modification [1,2].
+### The principle
 
-## 1.3 Effect-Measure Modification
+**Interaction concerns the joint relationship of two factors with an
+outcome and whether that joint relationship departs from a specified
+no-interaction reference.**
 
-**Effect-measure modification** makes the scale dependence explicit. A relationship may be homogeneous on one measure and heterogeneous on another. Consequently, interaction is not a single scale-free property of a dataset.
+Let:
 
-For example, the same four probabilities can yield:
+-   \(r\) = first factor
+-   \(c\) = second factor
+-   \(y\) = outcome
 
-- little or no departure from homogeneity on a probability-difference scale; and
-- clear departure from homogeneity on an odds-ratio scale,
+For two binary factors, four joint conditions are possible:
 
-or the reverse.
+                                              c̄                                     c
+  ------- ------------------------------------- -------------------------------------
+  **r̄**     p`<sub>`{=html}y\|r̄c̄`</sub>`{=html}   p`<sub>`{=html}y\|r̄c`</sub>`{=html}
+  **r**     p`<sub>`{=html}y\|rc̄`</sub>`{=html}   p`<sub>`{=html}y\|rc`</sub>`{=html}
 
-The framework therefore evaluates interaction on two complementary scales:
+where
 
-- **DDP** — difference in probability differences, representing additive interaction;
-- **RoR** — ratio of odds ratios, representing multiplicative interaction.
+``` math
+p_{y\mid rc}=P(y\mid r,c).
+```
 
-This dual-scale interpretation follows the epidemiological emphasis on specifying the effect measure when discussing interaction [1–5].
+Thus,
 
-## 1.4 Three Concepts at a Glance
+``` math
+p_{y\mid\bar r\bar c}=P(y\mid\bar r,\bar c)
+```
 
-| Concept | Core question | Interpretation in this framework |
-|---|---|---|
-| **Interaction** | Does the relationship between \(r\) and \(y\) differ across \(c\)? | General contextual variation in a specified association |
-| **Effect modification** | Does an effect differ across levels of a third variable? | Causal terminology only when causal assumptions are justified |
-| **Effect-measure modification** | Does the measured association differ across \(c\) on a specified scale? | Preferred statistical framing for the observational analyses |
+is the outcome probability when neither factor is present, whereas
 
----
+``` math
+p_{y\mid rc}=P(y\mid r,c)
+```
 
-# 2. Additive and Multiplicative Interaction
+is the outcome probability when both factors are present.
 
-## 2.1 Additive Interaction
+These four conditions provide the basic structure from which interaction
+can be evaluated.
 
-On the probability-difference scale, first estimate the relationship between \(r\) and \(y\) within each context.
+### What makes it an interaction?
 
-For context \(c\):
+A large value of (p\_{y`\mid `{=tex}rc}) is **not, by itself, evidence
+of interaction**.
 
-$$
-PD_{r\mid c}=p_{y\mid rc}-p_{y\mid \bar r c}
-$$
+The critical question is whether the observed joint relationship differs
+from the relationship expected from the separate relationships of (r)
+and (c) under a specified **no-interaction model**.
 
-For context \(\bar c\):
+``` text
+Observed joint relationship
+           │
+           ▼
+          P₁₁
+           │
+           │ compare with
+           ▼
+Expected joint relationship
+under a no-interaction model
+           │
+           ▼
+ Departure from expectation?
+       /               \
+     NO                 YES
+     │                   │
+No interaction       Interaction
+on that scale        on that scale
+```
 
-$$
-PD_{r\mid \bar c}=p_{y\mid r\bar c}-p_{y\mid \bar r\bar c}
-$$
+What counts as the expected joint relationship depends on the **scale**
+on which interaction is evaluated.
 
-The additive interaction contrast is the **difference in probability differences**:
+------------------------------------------------------------------------
 
-$$
-\boxed{DDP=PD_{r\mid c}-PD_{r\mid \bar c}}
-$$
+### Additive reference
 
-The null value is:
+On the probability-difference scale, the individual relationships
+associated with (r) and (c) can be written as
 
-$$
-DDP=0.
-$$
-
-A non-zero DDP indicates that the probability-difference association between \(r\) and \(y\) is not homogeneous across the compared contexts.
-
-### Numerical example
-
-Suppose:
-
-$$
-PD_{r\mid c}=0.30, \qquad PD_{r\mid \bar c}=0.10.
-$$
-
-Then:
-
-$$
-DDP=0.30-0.10=0.20.
-$$
-
-The relationship is positive in both contexts, but it is 0.20 larger on the probability-difference scale under \(c\).
-
-### Game-research translation
-
-If \(r\) represents Ads, \(c\) represents RPG rather than a comparison genre context, and \(y\) represents install success, DDP asks whether the Ads-install-success probability difference changes when the gameplay context changes.
-
-## 2.2 Multiplicative Interaction
-
-For a probability \(p\), the corresponding odds are:
-
-$$
-o=\frac{p}{1-p}.
-$$
-
-Within context \(c\), the conditional odds ratio is:
-
-$$
-\theta_{yr\mid c}
-=
-\frac{o_{y\mid rc}}{o_{y\mid \bar r c}}.
-$$
-
-Within \(\bar c\):
-
-$$
-\theta_{yr\mid \bar c}
-=
-\frac{o_{y\mid r\bar c}}{o_{y\mid \bar r\bar c}}.
-$$
-
-The multiplicative interaction contrast is the **ratio of odds ratios**:
-
-$$
-\boxed{RoR=
-\frac{\theta_{yr\mid c}}
-{\theta_{yr\mid \bar c}}}
-$$
-
-The null value is:
-
-$$
-RoR=1.
-$$
-
-Thus, equal conditional odds ratios imply no multiplicative effect-measure modification, whereas unequal conditional odds ratios imply multiplicative heterogeneity.
-
-## 2.3 Why the Two Scales Can Disagree
-
-Additive and multiplicative interaction answer different questions. DDP compares **absolute probability differences**, whereas RoR compares **relative odds-ratio relationships**. Because these measures transform the underlying probabilities differently, evidence of interaction on one scale does not require evidence of interaction on the other.
-
-Accordingly:
-
-$$
-DDP=0 \;\not\Rightarrow\; RoR=1,
-$$
+``` math
+PD_r=p_{y\mid r\bar c}-p_{y\mid\bar r\bar c}
+```
 
 and
 
-$$
-RoR=1 \;\not\Rightarrow\; DDP=0.
-$$
+``` math
+PD_c=p_{y\mid\bar r c}-p_{y\mid\bar r\bar c}.
+```
 
-This is why reporting the scale is essential when describing interaction or homogeneity [1–5].
+Under an additive no-interaction model, the expected joint probability
+is
 
-## 2.4 From Epidemiological Measures to the Framework
+``` math
+p_{y\mid rc}^{(\mathrm{expected})}
+=
+p_{y\mid r\bar c}+p_{y\mid\bar r c}-p_{y\mid\bar r\bar c}.
+```
 
-Epidemiological research has developed several measures for evaluating departure from additivity or multiplicativity, including the **relative excess risk due to interaction (RERI)**, attributable proportion due to interaction, synergy index, and regression product terms [5–8]. These measures formalize the general principle that interaction must be defined relative to a particular effect measure.
+The departure from additivity is therefore
 
-The present framework applies the same principle directly to conditional marketplace-success probabilities and odds:
+``` math
+IC_{\mathrm{add}}
+=
+p_{y\mid rc}-p_{y\mid r\bar c}-p_{y\mid\bar r c}+p_{y\mid\bar r\bar c}.
+```
 
-$$
-\text{Additive scale} \rightarrow DDP
-$$
+The additive null is
 
-$$
-\text{Multiplicative scale} \rightarrow RoR.
-$$
+``` math
+IC_{\mathrm{add}}=0.
+```
 
-DDP and RoR are therefore not intended as replacements for every epidemiological interaction measure. They are the study's chosen contrasts for evaluating whether the focal game-marketplace association changes across the examined contexts.
+A non-zero value represents departure from the additive no-interaction
+reference.
 
-## 2.5 Why Both Scales Are Retained
+------------------------------------------------------------------------
 
-Retaining both scales prevents a contextual relationship from being characterized from only one mathematical representation. Agreement across DDP and RoR provides stronger descriptive evidence that contextual heterogeneity is not confined to one effect scale. Disagreement is itself informative because it shows that the conclusion depends on how the relationship is measured.
+### Multiplicative reference
 
+A different reference is obtained when relationships are represented on
+a relative scale.
+
+For example, using risk ratios,
+
+``` math
+RR_{10}=\frac{p_{y\mid r\bar c}}{p_{y\mid\bar r\bar c}},
+\qquad
+RR_{01}=\frac{p_{y\mid\bar r c}}{p_{y\mid\bar r\bar c}},
+\qquad
+RR_{11}=\frac{p_{y\mid rc}}{p_{y\mid\bar r\bar c}}.
+```
+
+Under a multiplicative no-interaction model,
+
+``` math
+RR_{11}^{(\mathrm{expected})}
+=
+RR_{10}\times RR_{01}.
+```
+
+Departure from multiplicativity can therefore be represented by
+
+``` math
+IC_{\mathrm{mult}}
+=
+\frac{RR_{11}}
+     {RR_{10}RR_{01}}.
+```
+
+The multiplicative null is
+
+``` math
+IC_{\mathrm{mult}}=1.
+```
+
+This leads to an important principle:
+
+> **Interaction is scale dependent.**
+
+``` text
+                 SAME FOUR JOINT CONDITIONS
+                           │
+                    p(y|r̄c̄) p(y|rc̄) p(y|r̄c) p(y|rc)
+                           │
+             ┌─────────────┴─────────────┐
+             ▼                           ▼
+       ADDITIVE SCALE             MULTIPLICATIVE SCALE
+             │                           │
+       No interaction:             No interaction:
+             0                           1
+             │                           │
+             └─────────────┬─────────────┘
+                           ▼
+                   Conclusions need
+                  not be equivalent
+```
+
+The same data can therefore show departure from additivity, departure
+from multiplicativity, departure from both, or departure from neither.
+
+**Methodological sources:**
+
+Greenland S. *Tests for interaction in epidemiologic studies: A review
+and a study of power.* Statistics in Medicine. 1983;2(2):243--251.\
+**[DOI:
+10.1002/sim.4780020219](https://doi.org/10.1002/sim.4780020219)**
+
+Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of
+effect modification and interaction.* International Journal of
+Epidemiology. 2012;41(2):514--520.\
+**[DOI: 10.1093/ije/dyr218](https://doi.org/10.1093/ije/dyr218)**
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+The same structure can be used when (r) and (c) represent
+characteristics of games rather than epidemiological exposures.
+
+For example:
+
+``` text
+r = Free
+c = Offers IAP
+y = Marketplace success
+```
+
+This gives four conditions:
+
+                                                No IAP (c̄)                               IAP (c)
+  ------------------ ------------------------------------- -------------------------------------
+  **Not Free (r̄)**     p`<sub>`{=html}y\|r̄c̄`</sub>`{=html}   p`<sub>`{=html}y\|r̄c`</sub>`{=html}
+  **Free (r)**         p`<sub>`{=html}y\|rc̄`</sub>`{=html}   p`<sub>`{=html}y\|rc`</sub>`{=html}
+
+The interaction question is **not simply whether Free + IAP games have
+high marketplace success**.
+
+Instead, the question is:
+
+> **Is the joint Free × IAP relationship with marketplace success
+> different from what would be expected from the separate Free and IAP
+> relationships under the specified interaction scale?**
+
+This distinction becomes important when specific interaction patterns
+are introduced later on this page.
+
+------------------------------------------------------------------------
+
+## 1.2 Effect Modification
+
+Interaction can focus on the joint relationship of two factors. **Effect
+modification changes the orientation of the question.**
+
+Suppose:
+
+-   \(r\) = focal factor
+-   \(c\) = modifying factor
+-   \(y\) = outcome
+
+Instead of primarily evaluating the joint (r `\times `{=tex}c)
+relationship, the relationship between (r) and (y) is examined within
+different levels of (c):
+
+``` math
+M(r,y\mid\bar c)
+```
+
+versus
+
+``` math
+M(r,y\mid c).
+```
+
+Conceptually:
+
+``` text
+                     A ─────────────► Y
+                     │
+                     │
+              Does this relationship
+                  depend on X?
+                     │
+          ┌──────────┴──────────┐
+          ▼                     ▼
+        X = 0                 X = 1
+          │                     │
+          ▼                     ▼
+     A ─────► Y            A ─────────► Y
+      relationship          relationship
+          │                     │
+          └──────────┬──────────┘
+                     ▼
+                   Compare
+```
+
+If the relationship differs across levels of (c), the (r)--(y)
+relationship is modified across (c).
+
+The conceptual distinction can therefore be expressed as:
+
+``` text
+INTERACTION
+
+"What happens when r and c occur jointly?"
+
+                    versus
+
+EFFECT MODIFICATION
+
+"Does the r–y relationship differ across levels of c?"
+```
+
+**Methodological source:**\
+Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of
+effect modification and interaction.* International Journal of
+Epidemiology. 2012;41(2):514--520.\
+**[DOI: 10.1093/ije/dyr218](https://doi.org/10.1093/ije/dyr218)**
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+Let:
+
+``` text
+r = Ads
+c = Game genre
+y = Marketplace success
+```
+
+The question becomes:
+
+> **Does the Ads--marketplace-success relationship differ across game
+> genres?**
+
+Conceptually:
+
+``` text
+                    ADS
+                     │
+                     ▼
+             MARKETPLACE SUCCESS
+                     │
+              examined within
+                     │
+       ┌─────────────┼─────────────┐
+       ▼             ▼             ▼
+     Puzzle         RPG         Strategy
+       │             │             │
+   Ads–success   Ads–success   Ads–success
+   relationship  relationship  relationship
+       │             │             │
+       └─────────────┼─────────────┘
+                     ▼
+          Are they equivalent?
+```
+
+The same question can be extended to other contexts:
+
+``` text
+Ads ──► Success | Genre
+
+Ads ──► Success | Country
+
+Ads ──► Success | Time
+```
+
+The substantive question is therefore no longer merely whether Ads and
+marketplace success are associated overall, but whether the observed
+relationship is **context dependent**.
+
+------------------------------------------------------------------------
+
+## 1.3 Effect-Measure Modification
+
+The term **effect-measure modification (EMM)** makes an important
+additional distinction.
+
+What varies across contexts is a **specified measure of the
+relationship**.
+
+Greenland distinguishes variation in a chosen effect measure across
+levels of a background variable as **effect-measure modification**.
+
+**Methodological source:**\
+Greenland S. *Effect Modification and Interaction.* Wiley StatsRef:
+Statistics Reference Online.\
+**[DOI:
+10.1002/9781118445112.stat03728.pub2](https://doi.org/10.1002/9781118445112.stat03728.pub2)**
+
+### Formal representation
+
+Let (M) denote a chosen measure of the (r)--(y) relationship.
+
+Effect-measure modification can be represented as
+
+``` math
+M(r,y\mid\bar c)
+\neq
+M(r,y\mid c).
+```
+
+More generally, across (K) contexts:
+
+``` math
+M(r,y\mid c),\;
+M(r,y\mid c_2),\;
+\dots,\;
+M(r,y\mid c_K)
+```
+
+need not be homogeneous.
+
+The important point is that the conclusion depends on **what (M)
+represents**.
+
+For example,
+
+``` math
+M_{\mathrm{add}}
+=
+\text{Probability Difference}
+```
+
+and
+
+``` math
+M_{\mathrm{mult}}
+=
+\text{Relative Measure}
+```
+
+represent the relationship on different scales.
+
+Therefore:
+
+``` text
+                    A ─────► Y
+                        │
+                  conditioned on X
+                        │
+             ┌──────────┴──────────┐
+             │                     │
+             ▼                     ▼
+       ADDITIVE MEASURE     MULTIPLICATIVE MEASURE
+             │                     │
+       M_add(r,y|c)          M_mult(r,y|c)
+             │                     │
+             └──────────┬──────────┘
+                        ▼
+              Contextual conclusions
+                can differ by scale
+```
+
+A relationship can therefore exhibit effect-measure modification on one
+scale without exhibiting the same pattern on another scale.
+
+This is why specifying the measure is important rather than simply
+stating that an "effect is modified."
+
+**Methodological source:**\
+Brumback BA. *On effect-measure modification: Relationships among
+changes in the relative risk, odds ratio, and risk difference.*
+Statistics in Medicine. 2008;27(18):3453--3465.\
+**[DOI: 10.1002/sim.3246](https://doi.org/10.1002/sim.3246)**
+
+------------------------------------------------------------------------
+
+### Translation to the Interaction-Analysis Framework
+
+This distinction is particularly important for the present framework.
+
+The observational question is not simply:
+
+> *Does monetization work differently in different contexts?*
+
+Rather, it is:
+
+> **Does the measured relationship between monetization and marketplace
+> success vary across the contexts represented in the data?**
+
+For example:
+
+``` text
+                    ADS
+                     │
+                     ▼
+               INSTALL SUCCESS
+                     │
+              examined across
+                     │
+       ┌─────────────┼─────────────┐
+       ▼             ▼             ▼
+     Genre         Country         Time
+       │             │             │
+       └─────────────┼─────────────┘
+                     ▼
+              MEASURED ON
+                     │
+          ┌──────────┴──────────┐
+          ▼                     ▼
+       ADDITIVE             MULTIPLICATIVE
+         DDP                     RoR
+          │                       │
+          └──────────┬────────────┘
+                     ▼
+             CONTEXTUAL PROFILE
+```
+
+The framework therefore evaluates contextual variation on both additive
+and multiplicative scales rather than assuming that a relationship
+characterized on one measure fully describes its contextual behavior.
+
+------------------------------------------------------------------------
+
+## 1.4 The Three Concepts at a Glance
+
+``` text
+┌──────────────────────────────────────────────────────────────┐
+│                         INTERACTION                          │
+│                                                              │
+│  Do r and c jointly depart from the relationship expected   │
+│  from their separate relationships on a specified scale?    │
+└──────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    EFFECT MODIFICATION                       │
+│                                                              │
+│  Does the relationship between r and y differ across        │
+│  levels of c?                                               │
+└──────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────┐
+│                EFFECT-MEASURE MODIFICATION                   │
+│                                                              │
+│  Does a specified measure of the r–y relationship differ    │
+│  across levels of c?                                        │
+└──────────────────────────────────────────────────────────────┘
+```
+
+These concepts provide the foundation for the interaction principles
+developed in the following sections.
+
+The next step is to distinguish **additive and multiplicative
+interaction**, define the corresponding **no-interaction reference on
+each scale**, and examine how departures from those references can be
+interpreted.
+
+------------------------------------------------------------------------
+
+# 2. Additive and Multiplicative Interaction
+
+Interaction has no single scale-independent definition. The same four
+outcome probabilities can be compared using different reference models,
+and the conclusion about interaction can depend on the scale chosen.
+
+For the two factors (r) and (c), the four success probabilities are:
+
+                                              c̄                                     c
+  ------- ------------------------------------- -------------------------------------
+  **r̄**     p`<sub>`{=html}y\|r̄c̄`</sub>`{=html}   p`<sub>`{=html}y\|r̄c`</sub>`{=html}
+  **r**     p`<sub>`{=html}y\|rc̄`</sub>`{=html}   p`<sub>`{=html}y\|rc`</sub>`{=html}
+
+The question is not simply whether these probabilities differ. The
+question is whether the relationship associated with (r) changes across
+(c), relative to a particular **no-interaction reference**.
+
+``` text
+                         SAME FOUR PROBABILITIES
+                                  │
+                                  ▼
+                 What counts as "no interaction"?
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+             ADDITIVE SCALE              MULTIPLICATIVE SCALE
+                    │                           │
+             Differences are                Ratios are
+                compared                     compared
+                    │                           │
+                    ▼                           ▼
+               Null = 0                     Null = 1
+```
+
+This distinction between additive and multiplicative interaction is well
+established in epidemiological methodology, where evidence of
+interaction can depend on the scale on which the joint relationship is
+evaluated.
+
+**Methodological source:**\
+VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic
+Methods. 2014;3(1):33--72.\
+**[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
 ---
 
-# 3. Patterns of Interaction
+## 2.1 Additive Interaction
 
-## 3.1 Quantitative Interaction: Same Direction, Different Magnitude
+### Comparing differences
 
-A **quantitative interaction** occurs when the conditional relationships remain in the same direction but differ in magnitude.
+On the additive scale, the relationship is expressed as an **absolute
+difference in outcome probabilities**.
 
-For example:
+Within (c), the probability difference associated with (r) is:
 
-$$
-PD_{r\mid c}>0, \qquad PD_{r\mid \bar c}>0,
-$$
+``` math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}.
+```
 
-but
+Within (`\bar `{=tex}c), the corresponding probability difference is:
 
-$$
-PD_{r\mid c}\neq PD_{r\mid \bar c}.
-$$
+``` math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
 
-If:
+Additive interaction asks whether these two differences are equal:
 
-$$
-PD_{r\mid c}=0.30, \qquad PD_{r\mid \bar c}=0.10,
-$$
+``` math
+PD_{r\mid c}
+\stackrel{?}{=}
+PD_{r\mid\bar c}.
+```
 
-then:
+Their difference gives the **difference in differences of probabilities
+(DDP)**:
 
-$$
-DDP=0.20.
-$$
+``` math
+\mathrm{DDP}
+=
+PD_{r\mid c}
+-
+PD_{r\mid\bar c}.
+```
 
-Both relationships are positive; the interaction concerns their unequal magnitude.
+Expanding the expression:
 
-In a game-marketplace example, Ads could be positively associated with install success in two genre contexts but substantially more strongly in one than the other.
+``` math
+\mathrm{DDP}
+=
+\left(
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+\right)
+-
+\left(
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}
+\right).
+```
 
-Importantly, **quantitative interaction is not synonymous with positive DDP**. If both conditional relationships are positive but the relationship under \(c\) is weaker, DDP will be negative even though neither relationship has changed direction. VanderWeele and Knol discuss the distinction between quantitative and qualitative interaction [5].
+Equivalently:
 
-## 3.2 Qualitative / Crossover Interaction
+``` math
+\boxed{
+\mathrm{DDP}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+-
+p_{y\mid r\bar c}
++
+p_{y\mid\bar r\bar c}
+}
+```
 
-A **qualitative** or **crossover interaction** occurs when the direction of the relationship changes across contexts. On the probability-difference scale:
+The additive no-interaction condition is:
 
-$$
-PD_{r\mid c}\times PD_{r\mid \bar c}<0.
-$$
+``` math
+\boxed{\mathrm{DDP}=0}
+```
 
-For example:
+because this means:
 
-$$
-PD_{r\mid c}=0.20,
+``` math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}.
+```
+
+In other words, the absolute probability difference associated with (r)
+is the same whether (c) is present or absent.
+
+------------------------------------------------------------------------
+
+### Reading the additive scale
+
+``` text
+DDP < 0                    DDP = 0                    DDP > 0
+   │                          │                          │
+   ▼                          ▼                          ▼
+Negative departure       No departure             Positive departure
+from additivity          from additivity           from additivity
+```
+
+Thus, the sign of DDP describes the **direction of departure from the
+additive reference**.
+
+Importantly, a positive DDP does not simply mean that the joint group
+has a high probability of success, and a negative DDP does not simply
+mean that it has a low probability.
+
+The quantity describes how far the observed joint pattern departs from
+the pattern expected under additivity.
+
+------------------------------------------------------------------------
+
+### A simple numerical example
+
+Suppose:
+
+``` math
+p_{y\mid\bar r\bar c}=0.20,
 \qquad
-PD_{r\mid \bar c}=-0.20.
-$$
+p_{y\mid r\bar c}=0.30,
+```
+
+``` math
+p_{y\mid\bar r c}=0.40,
+\qquad
+p_{y\mid rc}=0.65.
+```
+
+The relationship associated with (r) when (c) is absent is:
+
+``` math
+PD_{r\mid\bar c}
+=
+0.30-0.20
+=
+0.10.
+```
+
+When (c) is present:
+
+``` math
+PD_{r\mid c}
+=
+0.65-0.40
+=
+0.25.
+```
+
+Therefore:
+
+``` math
+\mathrm{DDP}
+=
+0.25-0.10
+=
+0.15.
+```
+
+The positive value indicates that the probability difference associated
+with (r) is **0.15 larger in the presence of (c)** than in its absence.
+
+Visually:
+
+``` text
+                     r̄                     r
+                     │                      │
+
+c̄                  0.20 ───── +0.10 ───► 0.30
+
+c                   0.40 ───── +0.25 ───► 0.65
+                                     
+                         difference
+                         in differences
+                              │
+                              ▼
+                         0.25 - 0.10
+                              │
+                              ▼
+                         DDP = +0.15
+```
+
+This is a **positive departure from additivity**.
+
+------------------------------------------------------------------------
+
+### Game-research interpretation
+
+Suppose:
+
+``` text
+r = Ads
+c = RPG
+y = Install success
+```
 
 Then:
 
-$$
-DDP=0.20-(-0.20)=0.40.
-$$
-
-The defining feature is not the size of DDP alone. It is the **opposite signs of the underlying conditional relationships**.
-
-```text
-Outcome
-  ↑
-  |        /  context c
-  |       /
-  |------X----------------
-  |     /
-  |    /   context c̄
-  +----------------------→ r
+``` math
+PD_{r\mid c}
 ```
 
-In game research, a monetization feature may be positively associated with marketplace success under one gameplay context and negatively associated under another. This is a stronger form of contextual variation than a same-direction magnitude difference, but it remains an observational association unless causal assumptions are independently justified [5].
+represents the Ads--install-success probability difference among RPG
+games, whereas
+
+``` math
+PD_{r\mid\bar c}
+```
+
+represents the corresponding Ads--install-success probability difference
+among non-RPG games.
+
+The DDP therefore asks:
+
+> **How much does the Ads--install-success probability difference change
+> when moving from non-RPG to RPG games?**
+
+This provides an additive measure of contextual variation in the
+observed Ads--success relationship.
+
+------------------------------------------------------------------------
+
+## 2.2 Multiplicative Interaction
+
+### Comparing relative relationships
+
+The same four probabilities can be examined on a multiplicative scale.
+
+In the present framework, the outcome probabilities are first
+transformed to odds:
+
+``` math
+o_{y\mid rc}
+=
+\frac{p_{y\mid rc}}
+     {1-p_{y\mid rc}}.
+```
+
+Analogously:
+
+``` math
+o_{y\mid\bar r c},
+\qquad
+o_{y\mid r\bar c},
+\qquad
+o_{y\mid\bar r\bar c}.
+```
+
+Within (c), the conditional odds ratio for the association between (r)
+and (y) is:
+
+``` math
+\theta_{yr\mid c}
+=
+\frac{o_{y\mid rc}}
+     {o_{y\mid\bar r c}}.
+```
+
+Within (`\bar `{=tex}c):
+
+``` math
+\theta_{yr\mid\bar c}
+=
+\frac{o_{y\mid r\bar c}}
+     {o_{y\mid\bar r\bar c}}.
+```
+
+Multiplicative interaction asks whether these conditional odds ratios
+are equal:
+
+``` math
+\theta_{yr\mid c}
+\stackrel{?}{=}
+\theta_{yr\mid\bar c}.
+```
+
+Their ratio gives the **ratio of odds ratios (RoR)**:
+
+``` math
+\boxed{
+\mathrm{RoR}
+=
+\frac{\theta_{yr\mid c}}
+     {\theta_{yr\mid\bar c}}
+}
+```
+
+The multiplicative no-interaction condition is:
+
+``` math
+\boxed{\mathrm{RoR}=1}
+```
+
+because:
+
+``` math
+\mathrm{RoR}=1
+\iff
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}.
+```
+
+Thus, RoR evaluates whether the odds-ratio association between (r) and
+(y) is homogeneous across the two conditions defined by (c).
+
+------------------------------------------------------------------------
+
+### Reading the multiplicative scale
+
+``` text
+RoR < 1                    RoR = 1                    RoR > 1
+   │                          │                          │
+   ▼                          ▼                          ▼
+Negative departure       No departure             Positive departure
+from multiplicativity    from multiplicativity     from multiplicativity
+```
+
+Again, these values describe **departure from the multiplicative
+reference**. They should not be interpreted simply as low, neutral, or
+high marketplace success.
+
+------------------------------------------------------------------------
+
+## 2.3 Why the Two Scales Can Disagree
+
+Additive and multiplicative interaction ask different mathematical
+questions.
+
+``` text
+ADDITIVE
+
+Does the probability difference change across c?
+
+PD(r | c)  versus  PD(r | c̄)
+
+              │
+              ▼
+             DDP
+
+
+MULTIPLICATIVE
+
+Does the odds ratio change across c?
+
+OR(r,y | c)  versus  OR(r,y | c̄)
+
+              │
+              ▼
+             RoR
+```
+
+Therefore:
+
+``` math
+\mathrm{DDP}=0
+```
+
+does **not** mathematically require
+
+``` math
+\mathrm{RoR}=1,
+```
+
+and conversely,
+
+``` math
+\mathrm{RoR}=1
+```
+
+does not require
+
+``` math
+\mathrm{DDP}=0.
+```
+
+This gives four possible analytical patterns:
+
+  Additive scale   Multiplicative scale   Interpretation
+  ---------------- ---------------------- --------------------------------------
+  DDP = 0          RoR = 1                No departure on either scale
+  DDP ≠ 0          RoR = 1                Departure from additivity only
+  DDP = 0          RoR ≠ 1                Departure from multiplicativity only
+  DDP ≠ 0          RoR ≠ 1                Departure on both scales
+
+The two measures should therefore be interpreted as **complementary
+descriptions of the same four-cell probability structure**, rather than
+as competing tests that must necessarily reach the same conclusion.
+
+------------------------------------------------------------------------
+
+## 2.4 From Epidemiological Measures to the Present Framework
+
+Epidemiological research has long emphasized that interaction can be
+evaluated on different scales. Additive interaction is commonly
+represented using measures such as the **relative excess risk due to
+interaction (RERI)**, attributable proportion due to interaction, and
+synergy index, whereas multiplicative interaction can be assessed
+through relative measures and product terms.
+
+The present framework follows the same underlying principle of
+**scale-specific departure from a no-interaction reference**, but
+expresses the two comparisons directly through:
+
+``` text
+                  INTERACTION ANALYSIS
+                          │
+             ┌────────────┴────────────┐
+             │                         │
+             ▼                         ▼
+      ADDITIVE SCALE            MULTIPLICATIVE SCALE
+             │                         │
+             ▼                         ▼
+            DDP                       RoR
+             │                         │
+       Null value = 0            Null value = 1
+             │                         │
+             └────────────┬────────────┘
+                          ▼
+                95% confidence intervals
+                          │
+                          ▼
+               Context-specific profile
+```
+
+This distinction is important: **DDP and RoR are the measures used in
+this framework**, while measures such as RERI belong to related
+epidemiological formulations of additive interaction.
+
+**Methodological sources:**
+
+Andersson T, Alfredsson L, Källberg H, Zdravkovic S, Ahlbom A.
+*Calculating measures of biological interaction.* European Journal of
+Epidemiology. 2005;20(7):575--579.\
+**[DOI:
+10.1007/s10654-005-7835-x](https://doi.org/10.1007/s10654-005-7835-x)**
+
+Richardson DB, Kaufman JS. *Estimation of the Relative Excess Risk Due
+to Interaction and Associated Confidence Bounds.* American Journal of
+Epidemiology. 2009;169(6):756--760.\
+**[DOI: 10.1093/aje/kwn411](https://doi.org/10.1093/aje/kwn411)**
+
+Knol MJ, VanderWeele TJ, Groenwold RHH, Klungel OH, Rovers MM, Grobbee
+DE. *Estimating measures of interaction on an additive scale for
+preventive exposures.* European Journal of Epidemiology.
+2011;26:433--438.\
+**[DOI:
+10.1007/s10654-011-9554-9](https://doi.org/10.1007/s10654-011-9554-9)**
+
+Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of
+effect modification and interaction.* International Journal of
+Epidemiology. 2012;41(2):514--520.\
+**[DOI: 10.1093/ije/dyr218](https://doi.org/10.1093/ije/dyr218)**
+
+------------------------------------------------------------------------
+
+## 2.5 Why Both Scales Are Retained
+
+Using both scales allows the contextual pattern to be examined without
+making one scale the sole definition of interaction.
+
+For every contextual comparison, the framework therefore asks two
+parallel questions:
+
+``` text
+1. ADDITIVE
+   Does the absolute probability difference vary across the context?
+                         │
+                         ▼
+                        DDP
+
+
+2. MULTIPLICATIVE
+   Does the odds-ratio association vary across the context?
+                         │
+                         ▼
+                        RoR
+```
+
+Together, these measures provide two complementary views of how an
+observed relationship changes across context.
+
+The next sections examine the **forms that these departures can take**,
+including positive and negative departures, amplification and
+attenuation, crossover patterns, conditional independence, and related
+contextual structures.
+
+# 3. Patterns of Interaction
+
+Once interaction has been established as a departure from a specified
+no-interaction reference, the next question concerns the **form of that
+departure**.
+
+Two distinctions are especially useful. First, the relationship may
+retain the same direction across contexts while changing in magnitude.
+Second, the relationship may change direction across contexts. These are
+commonly described as **quantitative** and **qualitative (or crossover)
+interaction**, respectively.
+
+**Methodological source:**\
+VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic
+Methods. 2014;3(1):33--72.\
+**[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
+
+``` text
+                    CONTEXTUAL VARIATION
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+                ▼                       ▼
+        SAME DIRECTION            DIRECTION CHANGES
+        different magnitude       across context
+                │                       │
+                ▼                       ▼
+          QUANTITATIVE             QUALITATIVE /
+          INTERACTION               CROSSOVER
+```
+
+------------------------------------------------------------------------
+
+## 3.1 Quantitative Interaction: Same Direction, Different Magnitude
+
+A **quantitative interaction** occurs when the relationship of a focal
+factor with the outcome remains in the same direction across levels of
+another factor, but its magnitude differs.
+
+Using the notation developed above, suppose the relationship associated
+with (r) is examined within (c) and (`\bar `{=tex}c).
+
+On the probability-difference scale:
+
+``` math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+```
+
+and
+
+``` math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
+
+A quantitative interaction can occur when, for example,
+
+``` math
+PD_{r\mid c}>0
+\qquad\text{and}\qquad
+PD_{r\mid\bar c}>0,
+```
+
+but
+
+``` math
+PD_{r\mid c}
+\neq
+PD_{r\mid\bar c}.
+```
+
+Thus, the **direction is retained**, but the **magnitude changes**.
+
+``` text
+                    RELATIONSHIP OF r WITH y
+
+c̄                  ───────────────►
+                       positive
+
+c                   ───────────────────────────►
+                              positive
+
+                    same direction
+                    different magnitude
+                           │
+                           ▼
+                 QUANTITATIVE INTERACTION
+```
+
+The same principle applies when both relationships are negative:
+
+``` math
+PD_{r\mid c}<0
+\qquad\text{and}\qquad
+PD_{r\mid\bar c}<0,
+```
+
+while their magnitudes differ.
+
+Therefore, quantitative interaction does **not** require a reversal of
+the relationship. Context can modify how strongly a relationship is
+observed while its direction remains unchanged.
+
+### Game-research interpretation
+
+Suppose:
+
+``` text
+r = Ads
+c = Game genre
+y = Install success
+```
+
+Ads may be positively associated with install success in two genres
+while the magnitude of that association differs substantially between
+them.
+
+``` text
+Genre A       Ads ─────────► Install success
+                    +0.08
+
+Genre B       Ads ───────────────────► Install success
+                              +0.25
+```
+
+Both relationships point in the same direction, but they are not
+equivalent in magnitude.
+
+The substantive conclusion is therefore not that Ads are associated with
+success in one genre and failure in another. Rather, the **strength of
+the observed Ads--success relationship depends on gameplay context**.
+
+This distinction is particularly important for contextual analysis
+because an overall relationship may conceal substantial variation in
+magnitude even when its direction appears stable across contexts.
+
+------------------------------------------------------------------------
+
+### Quantitative interaction is not the same as positive interaction
+
+The word **quantitative** should not be confused with the sign of the
+interaction measure.
+
+For example, suppose:
+
+``` math
+PD_{r\mid\bar c}=0.25
+```
+
+and
+
+``` math
+PD_{r\mid c}=0.10.
+```
+
+Both relationships remain positive, so their directions agree. However,
+
+``` math
+\mathrm{DDP}
+=
+0.10-0.25
+=
+-0.15.
+```
+
+Thus:
+
+``` text
+Both stratum-specific relationships are positive
+                    │
+                    ▼
+        Same direction across context
+                    │
+                    ▼
+          QUANTITATIVE INTERACTION
+
+BUT
+
+Relationship is weaker within c
+                    │
+                    ▼
+              DDP = -0.15
+                    │
+                    ▼
+      NEGATIVE DEPARTURE FROM ADDITIVITY
+```
+
+This distinction is fundamental:
+
+> **The direction of the interaction measure is not the same thing as
+> the direction of the underlying stratum-specific relationships.**
+
+A negative DDP can therefore arise even when the focal relationship
+remains positive in both contexts, just as a positive DDP can arise when
+two negative relationships differ in magnitude.
+
+The sign of DDP describes the **direction of departure from the additive
+reference**, whereas the signs of the stratum-specific probability
+differences describe the **direction of the underlying relationships**.
+
+## 3.2 Qualitative / Crossover Interaction
+
+A stronger form of contextual variation occurs when the relationship
+between (r) and (y) **changes direction across levels of (c)**.
+
+This is commonly described as **qualitative interaction** or **crossover
+interaction**.
+
+Where quantitative interaction preserves the direction of the
+relationship, qualitative interaction does not.
+
+``` text
+                    RELATIONSHIP OF r WITH y
+                              │
+               ┌──────────────┴──────────────┐
+               │                             │
+               ▼                             ▼
+       QUANTITATIVE                    QUALITATIVE /
+        INTERACTION                      CROSSOVER
+               │                             │
+      direction retained              direction changes
+      magnitude changes                across context
+```
+
+### Game-data example
 
 ![Qualitative crossover interaction](example/crossover.png)
 
-*Illustrative game-marketplace example of a qualitative/crossover interaction. The direction of the focal relationship differs across the compared contexts. The figure illustrates the statistical pattern rather than a causal mechanism.*
+*Illustrative game-marketplace example of qualitative interaction. The
+relationship changes direction across the contextual condition,
+producing a crossover pattern.*
 
-## 3.3 Amplification and Attenuation
+**Methodological source:**\
+VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic
+Methods. 2014;3(1):33--72.\
+**[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
 
-**Amplification** and **attenuation** are useful descriptive labels for same-direction quantitative interaction. They describe whether the magnitude of the focal conditional relationship becomes stronger or weaker across contexts; they are not separate formal epidemiological interaction measures.
+------------------------------------------------------------------------
 
-Amplification can be represented as:
+### Direction reversal across context
 
-$$
-|PD_{r\mid c}|>|PD_{r\mid \bar c}|,
-$$
+Using the probability-difference formulation developed above, consider
+the relationship associated with (r) within (c):
 
-whereas attenuation can be represented as:
+``` math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+```
 
-$$
-|PD_{r\mid c}|<|PD_{r\mid \bar c}|.
-$$
+and within (`\bar `{=tex}c):
 
-The absolute values matter. If the underlying relationships are negative, a more negative probability difference represents amplification in magnitude even though DDP may itself be negative. Conversely, movement toward zero represents attenuation.
+``` math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
 
-The same logic applies multiplicatively. The two conditional odds ratios should be inspected relative to the null value of 1 rather than interpreting RoR alone as automatically indicating amplification or attenuation.
+A qualitative interaction occurs when these relationships have
+**opposite directions**.
 
-In a game example, the association between a free-game characteristic and marketplace success may become stronger or weaker when IAP is present. The interpretation concerns the conditional association, not a causal claim about why it changes.
+For example:
+
+``` math
+PD_{r\mid\bar c}>0
+\qquad\text{and}\qquad
+PD_{r\mid c}<0.
+```
+
+or conversely:
+
+``` math
+PD_{r\mid\bar c}<0
+\qquad\text{and}\qquad
+PD_{r\mid c}>0.
+```
+
+The important feature is therefore the sign reversal:
+
+``` math
+\boxed{
+PD_{r\mid c}\times PD_{r\mid\bar c}<0
+}
+```
+
+Conceptually:
+
+``` text
+c̄                    r̄ ─────────────► r
+                         positive
+                            │
+                            │ context changes
+                            ▼
+c                     r̄ ◄───────────── r
+                         negative
+
+                            │
+                            ▼
+                   DIRECTION REVERSAL
+                            │
+                            ▼
+                QUALITATIVE / CROSSOVER
+                     INTERACTION
+```
+
+The relationship associated with (r) is therefore not adequately
+described by saying that it merely becomes stronger or weaker. Its
+**direction depends on the contextual condition**.
+
+------------------------------------------------------------------------
+
+### A simple numerical example
+
+Suppose:
+
+``` math
+p_{y\mid\bar r\bar c}=0.30,
+\qquad
+p_{y\mid r\bar c}=0.50.
+```
+
+When (c) is absent:
+
+``` math
+PD_{r\mid\bar c}
+=
+0.50-0.30
+=
++0.20.
+```
+
+Now suppose:
+
+``` math
+p_{y\mid\bar r c}=0.60,
+\qquad
+p_{y\mid rc}=0.40.
+```
+
+When (c) is present:
+
+``` math
+PD_{r\mid c}
+=
+0.40-0.60
+=
+-0.20.
+```
+
+Thus:
+
+``` text
+c̄             0.30 ─────────────► 0.50
+                         +0.20
+
+c              0.60 ◄───────────── 0.40
+                         -0.20
+
+                         │
+                         ▼
+                 relationship reverses
+                         │
+                         ▼
+               CROSSOVER INTERACTION
+```
+
+The additive interaction contrast is:
+
+``` math
+\mathrm{DDP}
+=
+(-0.20)-(+0.20)
+=
+-0.40.
+```
+
+The DDP captures the difference between the two stratum-specific
+probability differences, while the **crossover classification** comes
+from the fact that those relationships have opposite signs.
+
+------------------------------------------------------------------------
+
+### Why crossover is different from a large interaction contrast
+
+A large DDP or RoR does not, by itself, establish crossover interaction.
+
+Consider:
+
+``` math
+PD_{r\mid\bar c}=+0.10
+```
+
+and
+
+``` math
+PD_{r\mid c}=+0.40.
+```
+
+The relationship changes substantially in magnitude, but both values
+remain positive.
+
+``` text
++0.10 ─────────────► +0.40
+
+same direction
+different magnitude
+
+QUANTITATIVE INTERACTION
+```
+
+By contrast:
+
+``` math
+PD_{r\mid\bar c}=+0.10
+```
+
+and
+
+``` math
+PD_{r\mid c}=-0.10
+```
+
+cross the null value:
+
+``` text
++0.10 ───────► 0 ◄─────── -0.10
+
+      direction changes
+
+QUALITATIVE / CROSSOVER INTERACTION
+```
+
+Thus, **magnitude of departure** and **direction reversal** describe
+different features of the contextual pattern.
+
+------------------------------------------------------------------------
+
+### Visual signature of crossover
+
+Crossover interaction is particularly intuitive when represented using
+stratum-specific probability profiles.
+
+``` text
+Probability
+of success
+
+high │       ╲        ╱
+     │        ╲      ╱
+     │         ╲    ╱
+     │          ╲  ╱
+     │           ╳
+     │          ╱ ╲
+     │         ╱   ╲
+low  │        ╱     ╲
+     └────────────────────
+             c̄      c
+```
+
+The crossing lines indicate that the ordering of the groups changes
+across context.
+
+However, the visual crossing should be interpreted together with the
+underlying estimates and their uncertainty rather than treated as
+sufficient statistical evidence by itself.
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+Consider a gameplay example in which:
+
+``` text
+r = Game type
+c = Age-rating context
+y = Marketplace success
+```
+
+Suppose one game type is associated with a higher probability of
+marketplace success under a broad age-rating condition, but with a lower
+probability under a restrictive age-rating condition.
+
+``` text
+                         Broad rating       Restrictive rating
+
+Game type A                  HIGH  ───────────────╲  LOW
+                                                  ╲
+                                                   ╳
+                                                  ╱
+Game type B                  LOW   ──────────────╱   HIGH
+```
+
+The contextual condition does more than alter the magnitude of the
+observed relationship. It changes its direction.
+
+The appropriate interpretation is therefore:
+
+> **The direction of the observed game-type--marketplace-success
+> relationship differs across the age-rating context represented in the
+> data.**
+
+For observational marketplace data, this is a statement about
+**conditional empirical relationships**. It does not, by itself,
+establish that the contextual variable causally produces the reversal.
+
+### Game-data example
 
 ![Amplification pattern](example/freeIAP.jpg)
 
-*Illustrative game-marketplace example of amplification. The figure shows a stronger conditional relationship under one context than another and is intended to demonstrate the interaction pattern rather than a primary empirical result.*
+*Illustrative game-marketplace example of amplification. The conditional
+relationship retains its direction but becomes stronger under the
+combined context. The figure illustrates a quantitative interaction
+pattern rather than a direction reversal.* ---
 
----
+### Quantitative versus qualitative interaction
+
+The distinction can now be summarized as:
+
+  --------------------------------------------------------------------------
+  Pattern           Relationship within  Relationship within Defining
+                                      c̄                    c feature
+  ---------------- -------------------- -------------------- ---------------
+  **No contextual                    \+                   \+ Same direction
+  variation**                                                and equivalent
+                                                             magnitude
+
+  **Quantitative                     \+                   \+ Same direction,
+  interaction**                                              different
+                                                             magnitude
+
+  **Quantitative                      −                    − Same direction,
+  interaction**                                              different
+                                                             magnitude
+
+  **Qualitative /                    \+                    − Direction
+  crossover                                                  reversal
+  interaction**                                              
+
+  **Qualitative /                     −                   \+ Direction
+  crossover                                                  reversal
+  interaction**                                              
+  --------------------------------------------------------------------------
+
+The same distinction can be expressed visually:
+
+``` text
+QUANTITATIVE                       QUALITATIVE / CROSSOVER
+
+c̄   ─────────►                    c̄   ─────────►
+c    ─────────────────►            c    ◄─────────
+
+same direction                     opposite directions
+different magnitude                direction reversal
+```
+
+Qualitative interaction therefore represents a particularly
+consequential form of contextual dependence because a single overall
+direction can fail to represent the relationships observed within
+different contexts.
+
+## 3.3 Amplification and Attenuation
+
+When a relationship retains the same direction across contexts,
+contextual variation can often be described in terms of
+**amplification** or **attenuation**.
+
+These terms describe what happens to the **magnitude of the underlying
+relationship** as the contextual condition changes.
+
+``` text
+                 SAME-DIRECTION RELATIONSHIP
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+                ▼                       ▼
+         magnitude becomes       magnitude becomes
+              larger                  smaller
+                │                       │
+                ▼                       ▼
+          AMPLIFICATION             ATTENUATION
+```
+
+This distinction belongs within the broader category of **quantitative
+interaction** introduced above: the direction is retained, but the
+strength of the relationship differs across context.
+
+------------------------------------------------------------------------
+
+### Amplification
+
+Amplification occurs when the magnitude of the relationship between (r)
+and (y) is greater within one contextual condition than within the
+reference condition.
+
+For a positive probability-difference relationship, suppose:
+
+``` math
+PD_{r\mid\bar c}=+0.10
+```
+
+and
+
+``` math
+PD_{r\mid c}=+0.30.
+```
+
+The relationship remains positive, but becomes stronger in the presence
+of (c):
+
+``` text
+c̄        r̄ ─────────► r
+              +0.10
+
+c         r̄ ─────────────────────► r
+                       +0.30
+
+                  same direction
+                        +
+                 larger magnitude
+                        │
+                        ▼
+                  AMPLIFICATION
+```
+
+The corresponding additive interaction contrast is:
+
+``` math
+\mathrm{DDP}
+=
+0.30-0.10
+=
++0.20.
+```
+
+Here, the positive DDP and amplification point in the same direction
+because the underlying relationship is positive and becomes more
+positive within (c).
+
+------------------------------------------------------------------------
+
+### Attenuation
+
+Now suppose:
+
+``` math
+PD_{r\mid\bar c}=+0.30
+```
+
+but
+
+``` math
+PD_{r\mid c}=+0.10.
+```
+
+The relationship remains positive, but its magnitude becomes smaller:
+
+``` text
+c̄        r̄ ─────────────────────► r
+                       +0.30
+
+c         r̄ ─────────► r
+              +0.10
+
+                  same direction
+                        +
+                 smaller magnitude
+                        │
+                        ▼
+                   ATTENUATION
+```
+
+The DDP is:
+
+``` math
+\mathrm{DDP}
+=
+0.10-0.30
+=
+-0.20.
+```
+
+Thus, in this example, the negative departure corresponds to attenuation
+of an underlying positive relationship.
+
+------------------------------------------------------------------------
+
+### Why the sign of DDP is not sufficient
+
+Amplification and attenuation should **not be assigned solely from
+whether DDP is positive or negative**.
+
+Consider an underlying negative relationship.
+
+Suppose:
+
+``` math
+PD_{r\mid\bar c}=-0.10
+```
+
+and
+
+``` math
+PD_{r\mid c}=-0.30.
+```
+
+The relationship becomes **more strongly negative** within (c).
+
+Its magnitude changes from
+
+``` math
+|{-0.10}|=0.10
+```
+
+to
+
+``` math
+|{-0.30}|=0.30.
+```
+
+Therefore, the relationship has been **amplified in magnitude**.
+
+Yet:
+
+``` math
+\mathrm{DDP}
+=
+-0.30-(-0.10)
+=
+-0.20.
+```
+
+So a negative DDP can describe amplification when the underlying
+relationship is negative.
+
+Conversely:
+
+``` math
+PD_{r\mid\bar c}=-0.30
+```
+
+and
+
+``` math
+PD_{r\mid c}=-0.10
+```
+
+represent attenuation of the negative relationship, even though:
+
+``` math
+\mathrm{DDP}
+=
+-0.10-(-0.30)
+=
++0.20.
+```
+
+The distinction is therefore:
+
+``` text
+SIGN OF DDP
+     │
+     ▼
+Direction of departure from
+the additive reference
+
+
+AMPLIFICATION / ATTENUATION
+     │
+     ▼
+Change in magnitude of the
+underlying relationship
+```
+
+These are related descriptions, but they are **not interchangeable**.
+
+------------------------------------------------------------------------
+
+### A magnitude-based representation
+
+For same-direction relationships, amplification can be represented
+descriptively as:
+
+``` math
+\left|PD_{r\mid c}\right|
+>
+\left|PD_{r\mid\bar c}\right|,
+```
+
+whereas attenuation corresponds to:
+
+``` math
+\left|PD_{r\mid c}\right|
+<
+\left|PD_{r\mid\bar c}\right|.
+```
+
+This absolute-magnitude comparison is useful for describing the pattern,
+but it should not replace DDP as the formal additive interaction
+contrast.
+
+``` text
+                       FORMAL CONTRAST
+                             │
+                             ▼
+                            DDP
+                             │
+                  direction of departure
+
+
+                    PATTERN DESCRIPTION
+                             │
+              ┌──────────────┴──────────────┐
+              ▼                             ▼
+       |relationship| grows          |relationship| shrinks
+              │                             │
+              ▼                             ▼
+       AMPLIFICATION                  ATTENUATION
+```
+
+------------------------------------------------------------------------
+
+### Multiplicative interpretation
+
+The same conceptual distinction can be made on the odds-ratio scale, but
+the null reference is now (1), rather than (0).
+
+For example:
+
+``` math
+\theta_{yr\mid\bar c}=1.20
+```
+
+and
+
+``` math
+\theta_{yr\mid c}=1.80
+```
+
+describe a positive association that is stronger within (c).
+
+The corresponding ratio of odds ratios is:
+
+``` math
+\mathrm{RoR}
+=
+\frac{1.80}{1.20}
+=
+1.50.
+```
+
+However, as with DDP, the value of RoR must be interpreted together with
+the underlying conditional odds ratios.
+
+For example:
+
+``` math
+\theta_{yr\mid\bar c}=0.80,
+\qquad
+\theta_{yr\mid c}=0.50
+```
+
+describes an association moving farther below the null value of (1),
+even though:
+
+``` math
+\mathrm{RoR}
+=
+\frac{0.50}{0.80}
+=
+0.625.
+```
+
+Therefore, RoR describes the **relative change between conditional odds
+ratios**, whereas amplification or attenuation describes how the
+magnitude of the underlying association changes relative to its null.
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+Suppose:
+
+``` text
+r = Free
+c = Offers IAP
+y = Marketplace success
+```
+
+The relationship between being Free and marketplace success can first be
+estimated among games without IAP and then among games offering IAP.
+
+Conceptually:
+
+``` text
+                       FREE–SUCCESS
+                       RELATIONSHIP
+                            │
+                 compare across IAP
+                            │
+              ┌─────────────┴─────────────┐
+              ▼                           ▼
+           No IAP                        IAP
+              │                           │
+       weaker relationship        stronger relationship
+              │                           │
+              └─────────────┬─────────────┘
+                            ▼
+                    AMPLIFICATION
+```
+
+If the Free--success relationship remains in the same direction but
+becomes substantially stronger among games offering IAP, the observed
+pattern can be described as **amplification of the Free--success
+relationship in the IAP context**.
+
+The reverse pattern---where the relationship remains in the same
+direction but moves closer to its null---can be described as
+**attenuation**.
+
+Because these are observational marketplace relationships, amplification
+and attenuation here describe changes in the **observed conditional
+association**; they do not imply that the contextual factor causally
+strengthens or weakens the relationship.
+
+------------------------------------------------------------------------
+
+### Relationship to the preceding concepts
+
+The terminology can now be organized as:
+
+``` text
+                    CONTEXTUAL VARIATION
+                            │
+             Does direction change?
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+               NO                      YES
+                │                       │
+                ▼                       ▼
+         QUANTITATIVE              QUALITATIVE /
+          INTERACTION                CROSSOVER
+                │
+        Does magnitude change?
+                │
+       ┌────────┴────────┐
+       ▼                 ▼
+   becomes             becomes
+   stronger             weaker
+       │                 │
+       ▼                 ▼
+AMPLIFICATION        ATTENUATION
+```
+
+Thus, **quantitative interaction** identifies a same-direction
+difference in magnitude, while **amplification** and **attenuation**
+provide descriptive language for the direction of that magnitude change.
+
+The next distinction concerns patterns in which additive and
+multiplicative interaction do not agree, showing why the same contextual
+relationship may appear differently depending on the scale used to
+evaluate it.
 
 # 4. Homogeneity and Conditional Independence
 
 ## 4.1 Homogeneous Association
 
-**Homogeneity** means that the association is equivalent across levels of the contextual variable on the specified effect measure. It does **not** require the association itself to be null.
+### The principle
 
-On the odds-ratio scale:
+When an association is examined across levels of a contextual variable,
+the stratum-specific associations may either **differ** or remain
+**equivalent**.
 
-$$
-\theta_{yr\mid c}=\theta_{yr\mid \bar c}.
-$$
+If the association between (r) and (y) is equivalent across levels of
+(c) on a specified measure, the association is described as
+**homogeneous on that measure**.
+
+``` text
+                 ASSOCIATION BETWEEN r AND y
+                           │
+                    examined across c
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+              ▼                         ▼
+        within c̄                   within c
+              │                         │
+              ▼                         ▼
+        M(r,y | c̄)                M(r,y | c)
+              │                         │
+              └────────────┬────────────┘
+                           │
+                         compare
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+            EQUAL                    UNEQUAL
+              │                         │
+              ▼                         ▼
+         HOMOGENEOUS              HETEROGENEOUS
+         ASSOCIATION               ASSOCIATION
+```
+
+The key point is that **homogeneity concerns equality across strata**.
+It does not require the association itself to be absent.
+
+**Methodological sources:**
+
+Greenland S. *Interpretation and estimation of summary ratios under
+heterogeneity.* Statistics in Medicine. 1982;1(3):217--227.\
+**[DOI:
+10.1002/sim.4780010304](https://doi.org/10.1002/sim.4780010304)**
+
+Mantel N, Brown C, Byar DP. *Tests for homogeneity of effect in an
+epidemiologic investigation.* American Journal of Epidemiology.
+1977;106(2):125--129.\
+**[DOI:
+10.1093/oxfordjournals.aje.a112441](https://doi.org/10.1093/oxfordjournals.aje.a112441)**
+
+------------------------------------------------------------------------
+
+### Homogeneity on the odds-ratio scale
+
+Using the notation developed throughout this page, consider the
+association between (r) and (y) within the two levels of (c).
+
+Within (c):
+
+``` math
+\theta_{yr\mid c}
+=
+\frac{o_{y\mid rc}}
+     {o_{y\mid\bar r c}}.
+```
+
+Within (`\bar `{=tex}c):
+
+``` math
+\theta_{yr\mid\bar c}
+=
+\frac{o_{y\mid r\bar c}}
+     {o_{y\mid\bar r\bar c}}.
+```
+
+The odds-ratio associations are homogeneous across (c) when:
+
+``` math
+\boxed{
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+}
+```
+
+Notice that this condition does **not** require either odds ratio to
+equal (1).
 
 For example:
 
-$$
-\theta_{yr\mid c}=2,
-\qquad
-\theta_{yr\mid \bar c}=2.
-$$
+``` math
+\theta_{yr\mid c}=2
+\qquad\text{and}\qquad
+\theta_{yr\mid\bar c}=2
+```
 
-The relationship is non-null in both contexts, but it is homogeneous on the odds-ratio scale. Equivalently:
+represent a homogeneous association on the odds-ratio scale.
 
-$$
-RoR=1.
-$$
+The association is present within both strata, but its measured
+magnitude is the same.
 
-On the probability-difference scale, homogeneity corresponds to:
+``` text
+c̄       OR(r,y | c̄) = 2
+                    │
+                    │ equal
+                    │
+c        OR(r,y | c)  = 2
+                    │
+                    ▼
+          HOMOGENEOUS ASSOCIATION
 
-$$
-PD_{r\mid c}=PD_{r\mid \bar c},
-$$
+          association remains present
+```
 
-and therefore:
+By contrast:
 
-$$
-DDP=0.
-$$
+``` math
+\theta_{yr\mid c}=2
+\qquad\text{and}\qquad
+\theta_{yr\mid\bar c}=1.2
+```
 
-Homogeneity is scale-specific. A relationship can be homogeneous on one measure and heterogeneous on another [9,10].
+are not homogeneous on the odds-ratio scale:
 
-For example, if \(r\) represents Ads, \(c\) genre context, and \(y\) install success, homogeneity means that the Ads-install relationship is equivalent across the compared genre contexts on the measure being examined.
+``` text
+c̄       OR(r,y | c̄) = 1.2
+                     │
+                     │ differ
+                     │
+c        OR(r,y | c)  = 2.0
+                     │
+                     ▼
+          HETEROGENEOUS ASSOCIATION
+```
 
-## 4.2 Conditional Independence
+This heterogeneity is precisely the type of contextual variation
+examined by interaction and effect-measure-modification analyses.
 
-**Conditional independence** is a stronger condition. It means that the relationship between \(r\) and \(y\) is absent after conditioning on \(c\):
+------------------------------------------------------------------------
 
-$$
-y\perp r\mid c.
-$$
+### Connection to the Ratio of Odds Ratios
 
-Within context \(c\):
+The homogeneity condition connects directly to the multiplicative
+interaction measure introduced in Section 2.
 
-$$
-p_{y\mid rc}=p_{y\mid \bar r c},
-$$
+Recall:
 
-and within \(\bar c\):
+``` math
+\mathrm{RoR}
+=
+\frac{\theta_{yr\mid c}}
+     {\theta_{yr\mid\bar c}}.
+```
 
-$$
-p_{y\mid r\bar c}=p_{y\mid \bar r\bar c}.
-$$
+If the two conditional odds ratios are equal:
+
+``` math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c},
+```
+
+then:
+
+``` math
+\boxed{\mathrm{RoR}=1}.
+```
 
 Therefore:
 
-$$
-PD_{r\mid c}=PD_{r\mid \bar c}=0,
-$$
+``` text
+OR(r,y | c̄) = OR(r,y | c)
+             │
+             ▼
+   HOMOGENEOUS ODDS-RATIO
+         ASSOCIATION
+             │
+             ▼
+          RoR = 1
+             │
+             ▼
+   NO MULTIPLICATIVE
+      DEPARTURE
+```
 
-and on the odds-ratio scale:
+Conversely:
 
-$$
-\theta_{yr\mid c}=\theta_{yr\mid \bar c}=1.
-$$
+``` math
+\mathrm{RoR}\neq1
+```
 
-Conditional independence is therefore a special case of homogeneous conditional association in which the common association is null.
+indicates that the conditional odds-ratio associations are not
+homogeneous across the two levels of (c).
 
-This distinction is crucial. A null interaction contrast does not imply conditional independence. For example:
+This provides a direct bridge between the classical concept of
+homogeneous association and the RoR used in the present
+Interaction-Analysis Framework.
 
-$$
-PD_{r\mid c}=PD_{r\mid \bar c}=0.20
-$$
+------------------------------------------------------------------------
 
-produces \(DDP=0\), yet a positive association remains in both contexts. Likewise:
+### Homogeneity is scale specific
 
-$$
-\theta_{yr\mid c}=\theta_{yr\mid \bar c}=2
-$$
+Just as interaction is scale dependent, **homogeneity must be defined
+with respect to a particular association measure**.
 
-produces \(RoR=1\), but the conditional association is not null.
+For example, the probability-difference associations may satisfy:
 
-A marginal relationship can also coexist with conditional independence. For example, if \(r\) is Ads, \(c\) an age-rating group, and \(y\) install success, a pooled Ads-install association may be visible even when no association is observed within the examined age-rating strata.
+``` math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c},
+```
+
+while the corresponding odds ratios need not satisfy:
+
+``` math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}.
+```
+
+The reverse is also possible.
+
+Therefore:
+
+``` text
+                  SAME DATA
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+          ▼                     ▼
+   PROBABILITY-DIFFERENCE    ODDS-RATIO
+          SCALE                 SCALE
+          │                     │
+      homogeneous?          homogeneous?
+          │                     │
+          └──────────┬──────────┘
+                     ▼
+            Conclusions need not
+               be equivalent
+```
+
+In the present framework, this corresponds directly to the two
+no-interaction references:
+
+``` math
+\mathrm{DDP}=0
+```
+
+for homogeneity of the probability differences across (c), and
+
+``` math
+\mathrm{RoR}=1
+```
+
+for homogeneity of the odds-ratio associations across (c).
+
+This is why homogeneity should not be described without specifying the
+measure on which it is being evaluated.
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+Suppose:
+
+``` text
+r = Ads
+c = Game genre
+y = Install success
+```
+
+Consider two genre contexts.
+
+If the Ads--install-success association has the same measured magnitude
+in both contexts, the association is homogeneous on that measure.
+
+For example:
+
+``` text
+Puzzle
+
+Ads ─────────────────► Install success
+          OR = 1.50
+
+
+RPG
+
+Ads ─────────────────► Install success
+          OR = 1.50
+
+               │
+               ▼
+       SAME ASSOCIATION
+        ACROSS CONTEXT
+```
+
+This does **not** mean that Ads and install success are unrelated.
+
+Instead:
+
+> **The measured Ads--install-success association is present, but it
+> does not vary across the compared genre contexts on the specified
+> scale.**
+
+This distinction is fundamental for contextual analysis.
+
+``` text
+ASSOCIATION PRESENT?
+        │
+        └── Yes
+
+DOES IT VARY ACROSS CONTEXT?
+        │
+        └── No
+
+        ↓
+
+HOMOGENEOUS ASSOCIATION
+```
+
+The stronger condition in which the association itself disappears within
+the relevant strata is conceptually different.
+
+That condition leads to **conditional independence**.
+
+## 4.2 Conditional Independence
+
+### The principle
+
+Homogeneity does not necessarily mean that two variables are
+independent.
+
+A stronger condition occurs when the association between (r) and (y)
+disappears after conditioning on (c).
+
+This is **conditional independence**.
+
+Using standard notation:
+
+``` math
+\boxed{
+y \perp r \mid c
+}
+```
+
+which states that (y) and (r) are independent conditional on (c).
+
+Conceptually:
+
+``` text
+                    r ─────────► y
+                         │
+                  marginal relationship
+                         │
+                         ▼
+                   CONDITION ON c
+                         │
+             ┌───────────┴───────────┐
+             ▼                       ▼
+            c̄                       c
+             │                       │
+       r ─── ? ─── y           r ─── ? ─── y
+             │                       │
+             └───────────┬───────────┘
+                         ▼
+              association absent
+              within the strata
+                         │
+                         ▼
+              CONDITIONAL INDEPENDENCE
+```
+
+The important point is that conditional independence concerns the
+relationship between two variables **after another variable has been
+conditioned on**.
+
+------------------------------------------------------------------------
+
+### Conditional probabilities
+
+Conditional independence can be expressed directly through the success
+probabilities.
+
+Within (c), independence between (r) and (y) requires:
+
+``` math
+p_{y\mid rc}
+=
+p_{y\mid\bar r c}.
+```
+
+Within (`\bar `{=tex}c):
+
+``` math
+p_{y\mid r\bar c}
+=
+p_{y\mid\bar r\bar c}.
+```
+
+Thus, if independence holds within both strata:
+
+``` math
+\boxed{
+p_{y\mid rc}
+=
+p_{y\mid\bar r c}
+}
+```
+
+and
+
+``` math
+\boxed{
+p_{y\mid r\bar c}
+=
+p_{y\mid\bar r\bar c}
+}
+```
+
+The corresponding probability differences are therefore:
+
+``` math
+PD_{r\mid c}=0
+```
+
+and
+
+``` math
+PD_{r\mid\bar c}=0.
+```
+
+In words, once (c) is held fixed, knowing whether (r) is present
+provides no difference in the conditional probability of (y).
+
+------------------------------------------------------------------------
+
+### Conditional independence on the odds-ratio scale
+
+The same condition can be represented using conditional odds ratios.
+
+Recall:
+
+``` math
+\theta_{yr\mid c}
+=
+\frac{o_{y\mid rc}}
+     {o_{y\mid\bar r c}}
+```
+
+and
+
+``` math
+\theta_{yr\mid\bar c}
+=
+\frac{o_{y\mid r\bar c}}
+     {o_{y\mid\bar r\bar c}}.
+```
+
+Under conditional independence:
+
+``` math
+\boxed{
+\theta_{yr\mid c}=1
+}
+```
+
+and
+
+``` math
+\boxed{
+\theta_{yr\mid\bar c}=1.
+}
+```
+
+Therefore:
+
+``` math
+\boxed{
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1
+}
+```
+
+This is stronger than ordinary homogeneity.
+
+------------------------------------------------------------------------
+
+### Homogeneity versus conditional independence
+
+The distinction can now be stated precisely.
+
+Suppose:
+
+``` math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+2.
+```
+
+The conditional associations are equal.
+
+Therefore, they are **homogeneous**.
+
+But:
+
+``` math
+2\neq1,
+```
+
+so (r) and (y) remain associated within both strata.
+
+This is **not conditional independence**.
+
+By contrast:
+
+``` math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1
+```
+
+means that the conditional associations are both homogeneous **and
+null**.
+
+``` text
+                 CONDITIONAL ODDS RATIOS
+                          │
+              ┌───────────┴───────────┐
+              │                       │
+            UNEQUAL                  EQUAL
+              │                       │
+              ▼                       ▼
+       HETEROGENEOUS             HOMOGENEOUS
+                                      │
+                             Are they equal to 1?
+                                      │
+                           ┌──────────┴──────────┐
+                           │                     │
+                          NO                    YES
+                           │                     │
+                           ▼                     ▼
+                   HOMOGENEOUS             CONDITIONAL
+                   ASSOCIATION             INDEPENDENCE
+                   remains present
+```
+
+Therefore:
+
+> **Conditional independence is a special case of homogeneous
+> conditional association in which the common association is the null
+> association.**
+
+------------------------------------------------------------------------
+
+### Connection to DDP and RoR
+
+Conditional independence also has an important implication for the
+interaction measures used in the present framework.
+
+If:
+
+``` math
+PD_{r\mid c}=0
+```
+
+and
+
+``` math
+PD_{r\mid\bar c}=0,
+```
+
+then:
+
+``` math
+\mathrm{DDP}
+=
+0-0
+=
+0.
+```
+
+Similarly, if:
+
+``` math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1,
+```
+
+then:
+
+``` math
+\mathrm{RoR}
+=
+\frac{1}{1}
+=
+1.
+```
+
+Thus:
+
+``` text
+             CONDITIONAL INDEPENDENCE
+                       │
+            ┌──────────┴──────────┐
+            ▼                     ▼
+      PD(r | c̄) = 0         PD(r | c) = 0
+            │                     │
+            └──────────┬──────────┘
+                       ▼
+                     DDP = 0
+
+
+             OR(r,y | c̄) = 1
+             OR(r,y | c)  = 1
+                       │
+                       ▼
+                     RoR = 1
+```
+
+However, the reverse implication does **not** generally hold.
+
+For example:
+
+``` math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+0.20
+```
+
+gives:
+
+``` math
+\mathrm{DDP}=0,
+```
+
+but the focal relationship remains present in both strata.
+
+Likewise:
+
+``` math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+2
+```
+
+gives:
+
+``` math
+\mathrm{RoR}=1,
+```
+
+while (r) and (y) remain associated.
+
+Therefore:
+
+``` text
+CONDITIONAL INDEPENDENCE
+          │
+          ├────────► DDP = 0
+          └────────► RoR = 1
+
+BUT
+
+DDP = 0 or RoR = 1
+          │
+          ╳
+          └──── does not by itself imply
+                conditional independence
+```
+
+This distinction is essential: **absence of interaction is not the same
+as absence of association**.
+
+------------------------------------------------------------------------
+
+### Marginal association can coexist with conditional independence
+
+Conditional independence also does not require the corresponding
+**marginal association** to be absent.
+
+It is possible for (r) and (y) to appear associated when the data are
+considered without conditioning on (c), while being independent within
+levels of (c).
+
+Conceptually:
+
+``` text
+                    MARGINAL DATA
+
+                    r ───────► y
+                     association
+                          │
+                          ▼
+                   CONDITION ON c
+                          │
+             ┌────────────┴────────────┐
+             ▼                         ▼
+            c̄                         c
+             │                         │
+        r ───── y                 r ───── y
+       no association            no association
+             │                         │
+             └────────────┬────────────┘
+                          ▼
+                CONDITIONAL INDEPENDENCE
+```
+
+This does not mean that the marginal result was computationally
+incorrect. Rather, the marginal and conditional comparisons describe
+different structures in the data.
+
+This distinction becomes especially important when interpreting
+contextual relationships.
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+Suppose:
+
+``` text
+r = Ads
+c = Age-rating group
+y = Install success
+```
+
+An overall comparison might show different install-success probabilities
+between games with and without Ads.
+
+The next question is whether that relationship remains after games are
+compared within the same age-rating context.
+
+For example:
+
+``` text
+                       MARGINAL
+
+                Ads ─────────► Install success
+                    observed association
+
+                           │
+                    condition on age
+                           │
+             ┌─────────────┴─────────────┐
+             ▼                           ▼
+          <18 rating                  18+ rating
+             │                           │
+      Ads ───── Success            Ads ───── Success
+       no association               no association
+             │                           │
+             └─────────────┬─────────────┘
+                           ▼
+                CONDITIONAL INDEPENDENCE
+```
+
+The appropriate interpretation is:
+
+> **The marginal Ads--install-success association is not observed within
+> the examined age-rating strata; within those strata, Ads and install
+> success are conditionally independent in the analyzed data.**
+
+For observational marketplace data, this should remain a statement about
+the observed statistical structure.
+
+It does **not** by itself establish that age rating caused, explained,
+or produced the marginal association.
+
+------------------------------------------------------------------------
+
+### Game-data example
 
 ![Conditional independence](example/conditional-independence.jpg)
 
-*Illustrative game-marketplace example of conditional independence. A relationship is visible in the marginal comparison but is not observed within the examined age-rating strata. The example illustrates the distinction between marginal association and conditional association; it does not assign a causal explanation to the contextual variable.*
+*Illustrative game-marketplace example of conditional independence. A
+relationship is visible in the marginal comparison but is not observed
+within the examined age-rating strata. The example illustrates the
+distinction between marginal association and conditional association; it
+does not assign a causal explanation to the contextual variable.*
+
+------------------------------------------------------------------------
+
+### The key distinction
+
+``` text
+HOMOGENEITY
+     │
+     ▼
+Are the conditional associations equal?
+
+θ(yr | c̄) = θ(yr | c)
+
+     │
+     ▼
+They may still be non-null.
+
+
+CONDITIONAL INDEPENDENCE
+     │
+     ▼
+Is the conditional association null?
+
+θ(yr | c̄) = θ(yr | c) = 1
+
+     │
+     ▼
+No conditional association
+within the examined strata.
+```
+
+The distinction can therefore be summarized as:
+
+> **Homogeneity asks whether associations differ across context.
+> Conditional independence asks whether an association remains after
+> conditioning on that context.**
 
 ## 4.3 Homogeneity ≠ Conditional Independence
 
-| Pattern | Probability-difference scale | Odds-ratio scale |
-|---|---|---|
-| **Homogeneous association** | PD<sub>r\|c</sub> = PD<sub>r\|c̄</sub> | θ<sub>yr\|c</sub> = θ<sub>yr\|c̄</sub> |
-| **Conditional independence** | PD<sub>r\|c</sub> = PD<sub>r\|c̄</sub> = 0 | θ<sub>yr\|c</sub> = θ<sub>yr\|c̄</sub> = 1 |
+Homogeneity and conditional independence are related, but they answer
+different questions.
 
-Three simple cases make the distinction explicit:
+  ---------------------------------------------------------------------------------------------------------------
+  Concept           Question          Probability-difference scale          Odds-ratio scale
+  ----------------- ----------------- ------------------------------------- -------------------------------------
+  **Homogeneous     Is the            PD`<sub>`{=html}r\|c`</sub>`{=html} = θ`<sub>`{=html}yr\|c`</sub>`{=html} =
+  association**     association       PD`<sub>`{=html}r\|c̄`</sub>`{=html}   θ`<sub>`{=html}yr\|c̄`</sub>`{=html}
+                    equivalent across                                       
+                    levels of (c)?                                          
 
-```text
-A. Homogeneous, non-independent:  ORc = 2.0, ORc̄ = 2.0
-B. Homogeneous and independent:  ORc = 1.0, ORc̄ = 1.0
-C. Heterogeneous:                ORc = 1.2, ORc̄ = 2.0
+  **Conditional     Is the            PD`<sub>`{=html}r\|c`</sub>`{=html} = θ`<sub>`{=html}yr\|c`</sub>`{=html} =
+  independence**    association       PD`<sub>`{=html}r\|c̄`</sub>`{=html} = θ`<sub>`{=html}yr\|c̄`</sub>`{=html} =
+                    absent within     0                                     1
+                    levels of (c)?                                          
+  ---------------------------------------------------------------------------------------------------------------
+
+The distinction can be seen with three simple patterns.
+
+``` text
+A. HOMOGENEOUS, BUT NOT INDEPENDENT
+
+c̄       OR(r,y | c̄) = 2
+c        OR(r,y | c)  = 2
+
+              │
+              ▼
+      equal across context
+              │
+              ▼
+         HOMOGENEOUS
+
+        but 2 ≠ 1
+
+              │
+              ▼
+   ASSOCIATION STILL PRESENT
 ```
 
-Thus, **no interaction** means that the specified association measure does not vary across the compared contexts. **Conditional independence** means that the conditional association itself is absent.
+``` text
+B. HOMOGENEOUS AND CONDITIONALLY INDEPENDENT
 
----
+c̄       OR(r,y | c̄) = 1
+c        OR(r,y | c)  = 1
+
+              │
+              ▼
+      equal across context
+              +
+        equal to null
+              │
+              ▼
+   CONDITIONAL INDEPENDENCE
+```
+
+``` text
+C. HETEROGENEOUS
+
+c̄       OR(r,y | c̄) = 1.2
+c        OR(r,y | c)  = 2.0
+
+              │
+              ▼
+      unequal across context
+              │
+              ▼
+        HETEROGENEITY
+```
+
+Thus:
+
+``` text
+                  CONDITIONAL ASSOCIATIONS
+                           │
+                 Are they equivalent?
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+             NO                        YES
+              │                         │
+              ▼                         ▼
+       HETEROGENEITY               HOMOGENEITY
+                                        │
+                              Are they also null?
+                                        │
+                           ┌────────────┴────────────┐
+                           │                         │
+                          NO                        YES
+                           │                         │
+                           ▼                         ▼
+                 HOMOGENEOUS NON-NULL        CONDITIONAL
+                     ASSOCIATION              INDEPENDENCE
+```
+
+This distinction also clarifies the interpretation of the interaction
+measures used in the framework.
+
+``` math
+\mathrm{DDP}=0
+```
+
+indicates homogeneity on the probability-difference scale, while
+
+``` math
+\mathrm{RoR}=1
+```
+
+indicates homogeneity on the odds-ratio scale.
+
+Neither condition alone establishes conditional independence.
+
+Conditional independence additionally requires the stratum-specific
+associations themselves to equal their corresponding null values:
+
+``` math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+0
+```
+
+and, equivalently on the odds-ratio scale,
+
+``` math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1.
+```
+
+> **No interaction means that a specified association measure does not
+> vary across the compared contexts. Conditional independence means that
+> the conditional association itself is absent.**
+
+This distinction prevents an important interpretive error: a null
+interaction contrast should not be interpreted as evidence that (r) and
+(y) are unrelated.
 
 # 5. Marginal and Conditional Relationships
 
+Interaction analysis often requires distinguishing between a
+relationship observed in the population as a whole and the relationships
+observed after conditioning on another variable.
+
+These are **marginal** and **conditional** relationships.
+
+``` text
+                         OBSERVED DATA
+                              │
+                ┌─────────────┴─────────────┐
+                │                           │
+                ▼                           ▼
+             MARGINAL                  CONDITIONAL
+            RELATIONSHIP               RELATIONSHIP
+                │                           │
+        ignore strata of c            condition on c
+                │                           │
+                ▼                           ▼
+          r ───────── y          r ─── y | c̄
+                                 r ─── y | c
+```
+
+The distinction is important because marginal and conditional
+relationships need not have the same magnitude or even the same
+direction.
+
+------------------------------------------------------------------------
+
 ## 5.1 Marginal versus Conditional Association
 
-A **marginal association** compares \(r\) and \(y\) without conditioning on \(c\). On the probability-difference scale:
+### Marginal association
 
-$$
-PD_r=p_{y\mid r}-p_{y\mid \bar r}.
-$$
+A marginal association compares (r) and (y) without conditioning on (c).
+
+The marginal probability of success among observations with (r) is:
+
+``` math
+p_{y\mid r}=P(y\mid r),
+```
+
+whereas among observations with (`\bar `{=tex}r):
+
+``` math
+p_{y\mid\bar r}=P(y\mid\bar r).
+```
+
+A marginal probability difference can therefore be written as:
+
+``` math
+PD_r
+=
+p_{y\mid r}
+-
+p_{y\mid\bar r}.
+```
 
 On the odds-ratio scale:
 
-$$
-\theta_{yr}=\frac{o_{y\mid r}}{o_{y\mid \bar r}}.
-$$
+``` math
+\theta_{yr}
+=
+\frac{o_{y\mid r}}
+     {o_{y\mid\bar r}}.
+```
 
-Conditional associations instead compare \(r\) and \(y\) separately within \(c\) and \(\bar c\), producing \(PD_{r\mid c}\), \(PD_{r\mid \bar c}\), \(\theta_{yr\mid c}\), and \(\theta_{yr\mid \bar c}\).
+These quantities summarize the (r)--(y) relationship **across the
+combined distribution of (c)**.
 
-The marginal probability is a mixture of conditional probabilities. For example:
+------------------------------------------------------------------------
 
-$$
+### Conditional association
+
+The conditional relationship instead compares (r) and (y) within
+particular levels of (c).
+
+Within (c):
+
+``` math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c},
+```
+
+and within (`\bar `{=tex}c):
+
+``` math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
+
+Similarly, the conditional odds ratios are:
+
+``` math
+\theta_{yr\mid c}
+```
+
+and
+
+``` math
+\theta_{yr\mid\bar c}.
+```
+
+Thus:
+
+``` text
+MARGINAL
+
+r ───────────── y
+
+one relationship across
+the combined observations
+
+
+CONDITIONAL
+
+             c̄
+             │
+       r ─────── y
+
+             c
+             │
+       r ─────── y
+
+relationships examined
+within contextual strata
+```
+
+Neither representation is simply a more detailed version of the other.
+They answer different statistical questions.
+
+------------------------------------------------------------------------
+
+### Why marginal and conditional relationships can differ
+
+The marginal relationship combines observations across the distribution
+of (c).
+
+Using the law of total probability:
+
+``` math
 P(y\mid r)
 =
 P(y\mid r,c)P(c\mid r)
 +
 P(y\mid r,\bar c)P(\bar c\mid r).
-$$
+```
 
 Similarly:
 
-$$
-P(y\mid \bar r)
+``` math
+P(y\mid\bar r)
 =
-P(y\mid \bar r,c)P(c\mid \bar r)
+P(y\mid\bar r,c)P(c\mid\bar r)
 +
-P(y\mid \bar r,\bar c)P(\bar c\mid \bar r).
-$$
-
-The marginal relationship therefore depends both on the conditional outcome probabilities and on how observations are distributed across the contextual variable.
-
-Several patterns are possible: marginal and conditional relationships may agree; their magnitudes may differ; a marginal relationship may disappear after conditioning; or its direction may reverse.
-
-For example, with \(r\)=Ads, \(c\)=country, and \(y\)=install success, a pooled cross-market association need not reproduce the association observed within each national market.
-
-Importantly, **not every difference between marginal and conditional estimates is Simpson's paradox**.
-
-## 5.2 Simpson's Paradox
-
-**Simpson's paradox** refers specifically to a reversal in the direction of a relationship between an aggregated comparison and the corresponding conditional comparisons.
-
-For example:
-
-$$
-PD_r>0,
-$$
-
-while:
-
-$$
-PD_{r\mid c}<0
-\qquad\text{and}\qquad
-PD_{r\mid \bar c}<0.
-$$
-
-An illustrative configuration is:
-
-$$
-PD_r=+0.10,
-$$
-
-but:
-
-$$
-PD_{r\mid c}=-0.10,
-\qquad
-PD_{r\mid \bar c}=-0.10.
-$$
-
-The pooled relationship is positive even though the relationship within both examined strata is negative. A comparable reversal can occur on the odds-ratio scale, for example with a marginal odds ratio above 1 and conditional odds ratios below 1.
-
-This reversal arises because aggregation combines conditional outcome probabilities with the distribution of observations across \(c\). The statistical pattern should not automatically be assigned a causal explanation.
-
-The distinction from interaction is fundamental:
-
-```text
-Interaction:
-Does the conditional relationship differ between c and c̄?
-
-Simpson-type reversal:
-Does the marginal direction differ from the conditional direction(s)?
+P(y\mid\bar r,\bar c)P(\bar c\mid\bar r).
 ```
 
-A Simpson-type reversal can occur even when the conditional relationships are homogeneous. In the numerical example above, both conditional probability differences are \(-0.10\), so \(DDP=0\), despite the reversal between the pooled and conditional comparisons.
+The marginal comparison therefore depends not only on the conditional
+success probabilities, but also on how observations with (r) and
+(`\bar `{=tex}r) are distributed across (c).
 
-Simpson's paradox is also different from conditional independence. Under conditional independence, the within-stratum relationships are null. Under a Simpson-type reversal, the conditional relationships are non-null and point in the opposite direction from the marginal relationship.
-
-In game research, \(r\) could represent a monetization feature, \(c\) game genre, and \(y\) marketplace success. A pooled relationship may point in one direction while the genre-specific relationships point in the other.
-
-![Simpson's paradox](example/fallacy.png)
-
-*Illustrative game-marketplace example of an aggregation reversal. The direction observed in the pooled comparison differs from the direction observed within the examined contextual strata. The figure illustrates a marginal-conditional reversal and should not, by itself, be interpreted as evidence of interaction or as establishing a causal explanation.*
-
----
-
-# 6. Suppression-Type Patterns and Revealed Conditional Relationships
-
-## 6.1 Suppression
-
-The term **suppression** has been used in several related statistical traditions, including regression, mediation, confounding, and epidemiologic discussions of reversal phenomena. It should therefore be used with an explicit operational definition rather than treated as a universally standardized interaction category.
-
-In the descriptive sense used here, a **suppression-type pattern** occurs when a marginal relationship is weak or close to null, but a stronger relationship becomes visible after conditioning on a contextual variable.
-
-A simple probability-difference pattern is:
-
-$$
-PD_r\approx0,
-$$
-
-while at least one conditional relationship satisfies:
-
-$$
-|PD_{r\mid c}|>|PD_r|
-$$
-
-or
-
-$$
-|PD_{r\mid \bar c}|>|PD_r|.
-$$
-
-The same idea can be expressed using other association measures: conditioning reveals or strengthens a relationship that was obscured in the aggregate comparison. In regression terminology, suppression commonly refers to situations in which including another variable increases the predictive or estimated contribution of a focal predictor. MacKinnon, Krull, and Lockwood discuss the close relationships among mediation, confounding, and suppression effects [11].
-
-For this framework, **suppression-type pattern** is intentionally descriptive. It identifies a marginal-to-conditional change and does not imply that the contextual variable has been established as the causal reason for that change.
-
-## 6.2 Suppression versus Interaction
-
-Suppression and interaction compare different quantities.
-
-```text
-Suppression-type pattern
-Marginal relationship  ↔  Conditional relationship
-
-Interaction
-Conditional relationship under c  ↔  Conditional relationship under c̄
+``` text
+                   MARGINAL RELATIONSHIP
+                            │
+               formed from a combination of
+                            │
+            ┌───────────────┴───────────────┐
+            │                               │
+            ▼                               ▼
+    CONDITIONAL SUCCESS              DISTRIBUTION ACROSS
+       PROBABILITIES                    CONTEXTS
+            │                               │
+   P(y | r,c), etc.                  P(c | r), etc.
+            │                               │
+            └───────────────┬───────────────┘
+                            ▼
+                     P(y | r)
 ```
 
-A relationship can therefore be revealed after conditioning without necessarily showing interaction between the conditional strata. Conversely, strong interaction can occur even when the marginal relationship is not suppressed.
+Consequently, conditioning on (c) can reveal a pattern that differs from
+the marginal relationship.
+
+------------------------------------------------------------------------
+
+### Possible marginal--conditional patterns
+
+Several structures are possible.
+
+``` text
+1. MARGINAL AND CONDITIONAL AGREEMENT
+
+Marginal:       positive
+Within c̄:      positive
+Within c:       positive
+
+
+2. CHANGE IN MAGNITUDE
+
+Marginal:       positive
+Within c̄:      weak positive
+Within c:       strong positive
+
+
+3. MARGINAL ASSOCIATION DISAPPEARS CONDITIONALLY
+
+Marginal:       positive
+Within c̄:      null
+Within c:       null
+
+
+4. DIRECTION REVERSAL
+
+Marginal:       positive
+Within c̄:      negative
+Within c:       negative
+```
+
+These patterns should not be given the same interpretation.
+
+In particular, a marginal relationship disappearing after conditioning
+is not automatically the same phenomenon as a marginal relationship
+reversing direction after conditioning.
+
+------------------------------------------------------------------------
+
+### Connection to conditional independence
+
+The third pattern connects directly to Section 4.
 
 Suppose:
 
-$$
-PD_r\approx0,
-$$
+``` math
+p_{y\mid r}\neq p_{y\mid\bar r},
+```
 
-but:
+so that a marginal association is observed.
 
-$$
-PD_{r\mid c}=0.20,
-\qquad
-PD_{r\mid \bar c}=0.20.
-$$
+But after conditioning on (c):
 
-The conditional relationship is stronger than the marginal relationship, but:
+``` math
+p_{y\mid rc}
+=
+p_{y\mid\bar r c}
+```
 
-$$
-DDP=0.20-0.20=0.
-$$
+and
 
-Thus, a suppression-type marginal-to-conditional pattern can coexist with homogeneous conditional relationships.
+``` math
+p_{y\mid r\bar c}
+=
+p_{y\mid\bar r\bar c}.
+```
+
+Then (r) and (y) are conditionally independent within the examined
+strata even though they are marginally associated.
+
+``` text
+                   MARGINAL
+                      │
+                      ▼
+               r ───────── y
+                 association
+
+                      │
+                condition on c
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+         c̄                       c
+          │                       │
+     r ───── y               r ───── y
+       null                     null
+          │                       │
+          └───────────┬───────────┘
+                      ▼
+            CONDITIONAL INDEPENDENCE
+```
+
+This pattern should be described directly as a difference between the
+marginal and conditional associations. It does not, by itself, require a
+causal explanation for why the difference occurs.
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+Suppose:
+
+``` text
+r = Ads
+c = Country
+y = Install success
+```
+
+A pooled marketplace analysis may first estimate:
+
+``` math
+P(y\mid r)
+\quad\text{versus}\quad
+P(y\mid\bar r).
+```
+
+This provides the **marginal Ads--install-success relationship** across
+the combined observations.
+
+The analysis can then estimate:
+
+``` math
+P(y\mid r,c_k)
+\quad\text{versus}\quad
+P(y\mid\bar r,c_k)
+```
+
+within individual national markets (c_k).
+
+``` text
+                   POOLED DATA
+                       │
+                       ▼
+              Ads ─────── Success
+                       │
+                 marginal pattern
+                       │
+                       ▼
+                CONDITION ON COUNTRY
+                       │
+       ┌───────────────┼───────────────┐
+       ▼               ▼               ▼
+    Country 1       Country 2       Country K
+       │               │               │
+  Ads–success      Ads–success      Ads–success
+  relationship     relationship     relationship
+```
+
+The pooled relationship and the country-specific relationships answer
+different questions.
+
+The pooled estimate summarizes the relationship across the combined
+marketplace observations, whereas the conditional estimates characterize
+the relationship within the national contexts represented in the data.
+
+For contextual game research, examining both is therefore important when
+the objective is to determine whether an overall marketplace
+relationship adequately represents the relationships observed within
+particular contexts.
+
+------------------------------------------------------------------------
+
+### An important terminology distinction
+
+Not every disagreement between marginal and conditional relationships
+should be called **Simpson's paradox**.
+
+``` text
+MARGINAL ≠ CONDITIONAL
+        │
+        ▼
+broad class of possible
+aggregation/conditioning differences
+
+        ≠
+
+SIMPSON'S PARADOX
+        │
+        ▼
+specific reversal pattern
+under aggregation
+```
+
+The next subsection therefore considers the more specific case in which
+the direction observed in aggregated data reverses when the data are
+examined within the relevant strata.
+
+## 5.2 Simpson's Paradox
+
+### The principle
+
+A particularly important marginal--conditional pattern occurs when the
+direction of an association in aggregated data differs from the
+direction observed within the relevant strata.
+
+This is commonly described as **Simpson's paradox**.
+
+``` text
+                    AGGREGATED DATA
+                         │
+                         ▼
+                    r ─────► y
+                      positive
+                         │
+                  condition on c
+                         │
+             ┌───────────┴───────────┐
+             ▼                       ▼
+            c̄                       c
+             │                       │
+        r ◄───── y               r ◄───── y
+          negative                 negative
+             │                       │
+             └───────────┬───────────┘
+                         ▼
+                 DIRECTION REVERSAL
+```
+
+The paradox is not simply that the estimates become larger or smaller
+after conditioning. The defining feature is the **reversal of the
+observed direction under aggregation versus stratification**.
+
+------------------------------------------------------------------------
+
+### Statistical representation
+
+Suppose the marginal probability difference between (r) and (y) is
+positive:
+
+``` math
+PD_r
+=
+p_{y\mid r}
+-
+p_{y\mid\bar r}
+>0.
+```
+
+However, within both levels of (c):
+
+``` math
+PD_{r\mid c}<0
+```
+
+and
+
+``` math
+PD_{r\mid\bar c}<0.
+```
+
+Then the direction of the marginal relationship is opposite to the
+stratum-specific relationships:
+
+``` text
+Marginal association       PDᵣ > 0
+                               │
+                               ▼
+                            POSITIVE
+
+Within c̄                PDᵣ|c̄ < 0
+Within c                 PDᵣ|c  < 0
+                               │
+                               ▼
+                            NEGATIVE
+```
+
+The same general reversal can be represented on a ratio scale.
+
+For example:
+
+``` math
+\theta_{yr}>1
+```
+
+in the aggregated data, while:
+
+``` math
+\theta_{yr\mid c}<1
+```
+
+and
+
+``` math
+\theta_{yr\mid\bar c}<1.
+```
+
+The essential feature remains the reversal between the aggregated and
+stratified relationships.
+
+------------------------------------------------------------------------
+
+### A simple numerical example
+
+Consider the following marginal result:
+
+``` text
+Aggregated data
+
+r        success = 60%
+r̄        success = 50%
+
+PDᵣ = 0.60 − 0.50 = +0.10
+```
+
+The aggregated relationship is positive.
+
+After conditioning on (c), however:
+
+``` text
+Within c̄
+
+r        success = 30%
+r̄        success = 40%
+
+PDᵣ|c̄ = 0.30 − 0.40 = −0.10
+
+
+Within c
+
+r        success = 70%
+r̄        success = 80%
+
+PDᵣ|c = 0.70 − 0.80 = −0.10
+```
+
+Thus:
+
+``` text
+AGGREGATED             +0.10
+                         │
+                         ▼
+                      POSITIVE
+
+CONDITIONAL            −0.10
+                       −0.10
+                         │
+                         ▼
+                      NEGATIVE
+```
+
+The same data structure can therefore produce an overall relationship
+whose direction differs from the relationships observed within the
+contextual strata.
+
+------------------------------------------------------------------------
+
+### Why can reversal occur?
+
+As established in Section 5.1, the marginal probabilities depend on both
+the conditional outcome probabilities and the distribution of
+observations across (c).
+
+Recall:
+
+``` math
+P(y\mid r)
+=
+P(y\mid r,c)P(c\mid r)
++
+P(y\mid r,\bar c)P(\bar c\mid r).
+```
+
+and:
+
+``` math
+P(y\mid\bar r)
+=
+P(y\mid\bar r,c)P(c\mid\bar r)
++
+P(y\mid\bar r,\bar c)P(\bar c\mid\bar r).
+```
+
+Therefore, if (r) and (`\bar `{=tex}r) are distributed differently
+across strata that also have different outcome probabilities,
+aggregation can produce a relationship that differs substantially from
+the within-stratum relationships.
+
+``` text
+                 CONDITIONAL RELATIONSHIPS
+                    within levels of c
+                           │
+                           │
+              combined with different
+                           │
+                           ▼
+                 DISTRIBUTIONS OF c
+               among r and r̄ observations
+                           │
+                           ▼
+                     AGGREGATION
+                           │
+                           ▼
+                 MARGINAL RELATIONSHIP
+                           │
+                           ▼
+               direction may differ
+```
+
+This is a property of aggregation and conditioning. Its substantive
+interpretation depends on the structure of the variables and the
+question being investigated.
+
+------------------------------------------------------------------------
+
+### Simpson's paradox is not interaction
+
+Simpson's paradox and interaction describe different statistical
+features.
+
+**Interaction** asks whether the relationship between (r) and (y) varies
+across levels of (c):
+
+``` math
+PD_{r\mid c}
+\neq
+PD_{r\mid\bar c}
+```
+
+or, on the odds-ratio scale:
+
+``` math
+\theta_{yr\mid c}
+\neq
+\theta_{yr\mid\bar c}.
+```
+
+**Simpson's paradox**, by contrast, compares the direction of the
+**marginal relationship** with the direction of the **conditional
+relationships**.
+
+For example:
+
+``` math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+-0.10
+```
+
+represents homogeneous conditional relationships.
+
+Yet if:
+
+``` math
+PD_r=+0.10,
+```
+
+the marginal relationship has the opposite direction.
+
+Therefore:
+
+``` text
+INTERACTION
+     │
+     ▼
+Do conditional relationships
+differ across context?
+
+           ≠
+
+SIMPSON'S PARADOX
+     │
+     ▼
+Does aggregation produce a
+direction different from the
+within-stratum relationships?
+```
+
+A Simpson-type reversal can therefore occur even when the conditional
+relationships themselves are homogeneous.
+
+------------------------------------------------------------------------
+
+### Simpson's paradox is also not conditional independence
+
+The distinction from Section 4 is equally important.
+
+Under conditional independence:
+
+``` math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+0.
+```
+
+Under a Simpson-type reversal, the conditional relationships remain
+present but point in a direction opposite to the marginal relationship.
+
+``` text
+CONDITIONAL INDEPENDENCE
+
+Marginal       association may be present
+Within c̄      null
+Within c       null
+
+
+SIMPSON-TYPE REVERSAL
+
+Marginal       positive
+Within c̄      negative
+Within c       negative
+```
+
+Thus, disappearance and reversal are different marginal--conditional
+patterns.
+
+------------------------------------------------------------------------
+
+### Translation to game research
+
+Suppose:
+
+``` text
+r = Monetization feature
+c = Game genre
+y = Marketplace success
+```
+
+An aggregated analysis might indicate:
+
+``` text
+Monetization feature ─────► higher marketplace success
+```
+
+while genre-specific comparisons indicate:
+
+``` text
+Genre 1:
+Monetization feature ─────► lower marketplace success
+
+Genre 2:
+Monetization feature ─────► lower marketplace success
+```
+
+The pooled association would then communicate a different direction from
+the relationships observed within the examined genre contexts.
+
+For game research, this matters because marketplace datasets commonly
+combine games that differ substantially in genre, design, player
+engagement, market, and other contextual characteristics.
+
+An aggregated association should therefore not automatically be assumed
+to represent the corresponding relationship within each constituent
+context.
+
+------------------------------------------------------------------------
+
+### Game-data example
+
+![Simpson's paradox](example/fallacy.png)
+
+*Illustrative game-marketplace example of an aggregation reversal. The
+direction observed in the pooled comparison differs from the direction
+observed within the examined contextual strata. The figure illustrates a
+marginal--conditional reversal and should not, by itself, be interpreted
+as evidence of interaction or as establishing a causal explanation.*
+
+------------------------------------------------------------------------
+
+### Interpretation rule
+
+``` text
+MARGINAL ≠ CONDITIONAL
+        │
+        ├── magnitude changes only
+        │        ↓
+        │   not necessarily
+        │   Simpson's paradox
+        │
+        ├── marginal association disappears
+        │        ↓
+        │   possible conditional
+        │   independence
+        │
+        └── direction reverses
+                 ↓
+          SIMPSON-TYPE
+             REVERSAL
+```
+
+> **Simpson's paradox concerns reversal between aggregated and
+> stratum-specific relationships. Interaction concerns heterogeneity
+> among the stratum-specific relationships themselves. The two should
+> not be treated as equivalent.**
+
+# 6. Suppression and Revealed Conditional Relationships
+
+A further marginal--conditional pattern occurs when a relationship that
+appears weak or absent in an aggregated comparison becomes stronger
+after another variable is taken into account.
+
+This pattern is commonly discussed as **suppression**.
+
+In statistical terms, suppression refers to situations in which
+consideration of a third variable increases the magnitude of the focal
+relationship rather than reducing it. However, the statistical pattern
+should be distinguished from a causal claim about the role of that third
+variable.
+
+**Methodological source:**
+
+MacKinnon DP, Krull JL, Lockwood CM. *Equivalence of the mediation,
+confounding and suppression effect.* Prevention Science.
+2000;1(4):173--181.\
+**[DOI:
+10.1023/A:1026595011371](https://doi.org/10.1023/A:1026595011371)**
+
+------------------------------------------------------------------------
+
+## 6.1 Suppression as a Statistical Pattern
+
+Consider a relationship between (r) and (y) that is weak when examined
+marginally:
+
+``` text
+                    MARGINAL DATA
+
+                    r ─────── y
+                    weak / null
+                         │
+                         ▼
+                  condition on c
+                         │
+             ┌───────────┴───────────┐
+             ▼                       ▼
+            c̄                       c
+             │                       │
+        r ───────► y            r ───────► y
+          stronger                 stronger
+             │                       │
+             └───────────┬───────────┘
+                         ▼
+               RELATIONSHIP REVEALED
+                 OR STRENGTHENED
+```
+
+For a specified association measure (M), the general descriptive pattern
+can be represented as:
+
+``` math
+\left|M(r,y\mid c)\right|
+>
+\left|M(r,y)\right|.
+```
+
+The important feature is the increase in the magnitude of the focal
+relationship after conditioning.
+
+For example, on the probability-difference scale:
+
+``` math
+PD_r=0.05
+```
+
+in the marginal data, whereas within one contextual stratum:
+
+``` math
+PD_{r\mid c}=0.25.
+```
+
+The relationship has not reversed direction. Instead, it has become more
+pronounced after conditioning.
+
+``` text
+Marginal              +0.05
+                        │
+                        ▼
+                       weak
+
+Conditional           +0.25
+                        │
+                        ▼
+                     stronger
+```
+
+This differs from the attenuation pattern discussed in Section 3, where
+the magnitude of a relationship becomes smaller across contextual
+conditions.
+
+------------------------------------------------------------------------
+
+### Suppression does not establish a causal suppressor
+
+A stronger conditional relationship does not, by itself, establish that
+(c) causally suppressed the relationship between (r) and (y).
+
+MacKinnon, Krull, and Lockwood show that suppression, confounding, and
+mediation can involve related statistical structures while carrying
+different substantive interpretations.
+
+Therefore, in observational game-marketplace analyses, the safer
+description is:
+
+> **A suppression-type pattern is observed when the focal relationship
+> becomes stronger or more visible after conditioning on another
+> variable.**
+
+This describes the statistical pattern without assigning a causal role
+to the conditioning variable.
+
+------------------------------------------------------------------------
+
+## 6.2 Suppression versus Interaction
+
+Suppression and interaction concern different comparisons.
+
+Interaction compares the relationship between (r) and (y) **across
+levels of (c)**.
+
+For example:
+
+``` math
+PD_{r\mid c}
+\neq
+PD_{r\mid\bar c}.
+```
+
+The question is:
+
+``` text
+INTERACTION
+
+Within c̄        r ───── y
+                      │
+                    compare
+                      │
+Within c         r ───────── y
+
+                      ↓
+
+Does the r–y relationship
+vary across context?
+```
+
+Suppression instead concerns the difference between a **marginal
+relationship** and a relationship observed after conditioning.
+
+``` text
+SUPPRESSION-TYPE PATTERN
+
+Marginal         r ─── y
+                    weak
+                      │
+                condition on c
+                      │
+                      ▼
+Conditional      r ─────────► y
+                    stronger
+```
+
+Thus:
+
+  -----------------------------------------------------------------------
+  Concept                 Primary comparison      Main question
+  ----------------------- ----------------------- -----------------------
+  **Interaction**         Conditional ↔           Does the relationship
+                          Conditional             vary across levels of
+                                                  (c)?
+
+  **Suppression-type      Marginal ↔ Conditional  Does conditioning
+  pattern**                                       reveal or strengthen
+                                                  the relationship?
+  -----------------------------------------------------------------------
+
+A suppression-type pattern therefore does **not automatically imply
+interaction**.
+
+For example:
+
+``` math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+0.25
+```
+
+may coexist with:
+
+``` math
+PD_r=0.05.
+```
+
+The conditional relationships are homogeneous:
+
+``` math
+\mathrm{DDP}=0,
+```
+
+yet they are substantially stronger than the marginal relationship.
+
+``` text
+Marginal                  +0.05
+                            │
+                    condition on c
+                            │
+               ┌────────────┴────────────┐
+               ▼                         ▼
+              c̄                         c
+            +0.25                      +0.25
+               │                         │
+               └────────────┬────────────┘
+                            ▼
+                  HOMOGENEOUS CONDITIONAL
+                       RELATIONSHIPS
+
+                  but stronger than the
+                  marginal relationship
+```
+
+This demonstrates why suppression and interaction should not be treated
+as synonyms.
+
+------------------------------------------------------------------------
 
 ## 6.3 Suppression versus Simpson's Paradox
 
-The distinction is whether the primary marginal-to-conditional change is **revelation/strengthening** or **direction reversal**.
+Suppression-type patterns should also be distinguished from the reversal
+described in Section 5.
 
-| Pattern | Marginal relationship | Conditional relationship |
-|---|---|---|
-| **Suppression-type** | Weak, attenuated, or near null | Stronger/revealed after conditioning |
-| **Simpson-type reversal** | Points in one direction | Points in the opposite direction within the relevant strata |
+In a suppression-type pattern, conditioning primarily **reveals or
+strengthens** the focal relationship.
 
-A suppression-type pattern does not require a sign reversal. Simpson's paradox does.
+``` text
+SUPPRESSION-TYPE PATTERN
 
-Because the term suppression is used differently across disciplines, analyses should report the actual marginal and conditional estimates rather than relying on the label alone.
+Marginal             +0.05
+                       │
+                       ▼
+Conditional          +0.25
 
-## 6.4 Game-Data Example
+Direction retained
+Magnitude strengthened
+```
 
-In a game-marketplace setting, a monetization-success relationship may appear weak when games are pooled, while a clearer association becomes visible after conditioning on a relevant game characteristic. This can occur because the aggregate comparison combines observations from contexts with different compositions or relationships.
+In a Simpson-type reversal, the marginal and conditional relationships
+point in opposite directions.
 
-![Suppression-type pattern](example/suppression.png)
+``` text
+SIMPSON-TYPE REVERSAL
 
-*Illustrative game-marketplace example of a suppression-type pattern. A relationship that is weak or obscured in the aggregate comparison becomes more apparent after conditioning on the examined context. The figure is descriptive and does not establish that the contextual variable causally produces the change.*
+Marginal             +0.10
+                       │
+                       ▼
+Conditional          −0.10
 
----
+Direction reversed
+```
+
+The distinction is therefore:
+
+  ----------------------------------------------------------------------------
+  Pattern                Marginal          Conditional       Defining feature
+                         relationship      relationship      
+  ---------------------- ----------------- ----------------- -----------------
+  **Suppression-type**   weak or masked    stronger          relationship
+                                                             revealed or
+                                                             strengthened
+
+  **Conditional          may be present    null              relationship
+  independence**                                             disappears
+                                                             conditionally
+
+  **Simpson-type         one direction     opposite          relationship
+  reversal**                               direction         reverses
+
+  **Interaction**        not the defining  differs across    conditional
+                         comparison        strata            relationships are
+                                                             heterogeneous
+  ----------------------------------------------------------------------------
+
+These patterns describe different aspects of the data and should not be
+interchanged merely because conditioning changes an estimate.
+
+------------------------------------------------------------------------
+
+## 6.4 Translation to Game Research
+
+Suppose:
+
+``` text
+r = Monetization feature
+c = Game characteristic
+y = Marketplace success
+```
+
+The aggregated data may show only a weak relationship:
+
+``` text
+                  ALL GAMES
+
+Monetization ─────── Marketplace success
+                weak
+```
+
+After conditioning on a relevant game characteristic, the relationship
+may become substantially stronger:
+
+``` text
+                 CONDITION ON
+             GAME CHARACTERISTIC
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+         c̄                       c
+          │                       │
+ Monetization ───► Success   Monetization ───► Success
+        stronger                    stronger
+```
+
+The appropriate conclusion is not that the game characteristic
+necessarily *caused* the original relationship to be hidden.
+
+Rather:
+
+> **The monetization--success relationship is more pronounced within the
+> examined conditional comparisons than in the corresponding aggregated
+> comparison.**
+
+This is particularly relevant for heterogeneous game marketplaces, where
+aggregation across substantially different game characteristics can
+obscure relationships that are more apparent within contextual
+comparisons.
+
+------------------------------------------------------------------------
+
+## 6.5 Game-Data Example
+
+![Suppression pattern](example/suppression.png)
+
+*Illustrative game-marketplace example of a suppression-type pattern.
+The focal relationship is weak or masked in the aggregated comparison
+but becomes more pronounced after conditioning on the contextual
+variable. The figure illustrates a statistical marginal--conditional
+pattern and does not establish that the conditioning variable is a
+causal suppressor.*
+
+------------------------------------------------------------------------
+
+## 6.6 Position within the Interaction-Analysis Framework
+
+Suppression completes the distinction among several patterns that can
+emerge when contextual variables are introduced.
+
+``` text
+                     START WITH r–y
+                       RELATIONSHIP
+                            │
+                            ▼
+                    CONDITION ON c
+                            │
+          ┌─────────────────┴─────────────────┐
+          │                                   │
+          ▼                                   ▼
+COMPARE CONDITIONAL                    COMPARE MARGINAL
+RELATIONSHIPS                          WITH CONDITIONAL
+ACROSS c                               RELATIONSHIP
+          │                                   │
+          ▼                                   ▼
+Do they differ?                   What happens after conditioning?
+          │                                   │
+    ┌─────┴─────┐                ┌────────────┼────────────┐
+    │           │                │            │            │
+   YES          NO           disappears    reverses     strengthens
+    │           │                │            │            │
+    ▼           ▼                ▼            ▼            ▼
+INTERACTION  HOMOGENEITY    CONDITIONAL    SIMPSON-    SUPPRESSION-
+                             INDEPENDENCE     TYPE         TYPE
+                                           REVERSAL      PATTERN
+```
+
+This separation is important because a change produced by conditioning
+does not automatically constitute interaction.
+
+Interaction concerns **variation among conditional relationships**.
+
+Conditional independence concerns the **absence of a conditional
+relationship**.
+
+Simpson's paradox concerns **directional reversal between marginal and
+conditional relationships**.
+
+Suppression-type patterns concern a relationship becoming **more visible
+or stronger after conditioning**.
+
+Together, these concepts provide a structured vocabulary for describing
+how empirical relationships behave when game, market, or other
+contextual conditions are introduced into an analysis.
 
 # 7. Interpretation Guide
 
-The concepts above can be organized around two separate comparisons: **conditional-to-conditional** comparisons, which evaluate interaction, and **marginal-to-conditional** comparisons, which evaluate how aggregation changes the observed relationship.
+The concepts developed above can be organized around two questions:
+**whether conditional relationships vary across context**, and **how
+conditioning changes the relationship observed in aggregated data**.
 
-```text
-START WITH THE CONDITIONAL RELATIONSHIPS
-
-Do the r-y relationships differ across c and c̄?
-│
-├── YES → Heterogeneity / interaction on the specified scale
-│          │
-│          ├── Same direction, different magnitude
-│          │      → Quantitative interaction
-│          │      → May be described as amplification/attenuation
-│          │
-│          └── Opposite directions
-│                 → Qualitative / crossover interaction
-│
-└── NO → Homogeneous association on the specified scale
-           │
-           ├── Common relationship is non-null
-           │      → Homogeneous non-null association
-           │
-           └── Common relationship is null
-                  → Conditional independence
-
-THEN COMPARE MARGINAL AND CONDITIONAL RELATIONSHIPS
-
-Does conditioning materially change what is observed?
-│
-├── Marginal association disappears within strata
-│      → Conditional-independence pattern, if conditional associations are null
-│
-├── Direction reverses
-│      → Simpson-type reversal
-│
-└── Weak/obscured marginal relationship becomes stronger
-       → Suppression-type pattern
+``` text
+                    CONTEXTUAL ANALYSIS
+                           │
+             ┌─────────────┴─────────────┐
+             │                           │
+             ▼                           ▼
+     COMPARE CONDITIONAL          COMPARE MARGINAL
+       RELATIONSHIPS             AND CONDITIONAL
+             │                           │
+       Do they differ?          What changes after
+             │                    conditioning?
+       ┌─────┴─────┐                   │
+      YES          NO          ┌────────┼────────┐
+       │            │          │        │        │
+       ▼            ▼          ▼        ▼        ▼
+ INTERACTION   HOMOGENEITY   disappears reverses strengthens
+       │            │          │        │        │
+ ┌─────┴─────┐      │          ▼        ▼        ▼
+same       opposite  │      CONDITIONAL SIMPSON- SUPPRESSION-
+direction  direction │      INDEPENDENCE TYPE     TYPE
+  │           │      │                   REVERSAL  PATTERN
+  ▼           ▼      │
+QUANTITATIVE QUALITATIVE
+             /CROSSOVER
 ```
 
-The key principle is that **contextual variation in outcomes is not the same as contextual variation in relationships**. A country, genre, player group, or time period may have a different outcome level without modifying the focal relationship. Interaction analysis therefore asks a more specific question: whether the measured relationship itself persists, weakens, strengthens, or changes direction as context changes.
+The central interpretive rule is:
 
-This distinction is central to establishing the **contextual scope of empirical evidence**. A relationship demonstrated in one setting is evidence for that setting; generalization beyond it requires examining whether the relationship recurs under the additional contexts to which the conclusion is being extended.
+> **Interaction concerns variation among conditional relationships;
+> marginal-- conditional differences concern what happens to a
+> relationship after aggregation is replaced by contextual comparison.**
 
----
+These distinctions provide the conceptual basis for applying interaction
+analysis to game research without treating every contextual difference
+as the same statistical phenomenon.
 
-# References
+## References
 
-1. Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. *International Journal of Epidemiology*. 2012;41(2):514–520. DOI: [10.1093/ije/dyr218](https://doi.org/10.1093/ije/dyr218)
+1.  Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of
+    effect modification and interaction. *International Journal of
+    Epidemiology*. 2012;41(2):514--520.\
+    **<https://doi.org/10.1093/ije/dyr218>**
 
-2. Greenland S. Tests for interaction in epidemiologic studies: a review and a study of power. *Statistics in Medicine*. 1983;2(2):243–251. DOI: [10.1002/sim.4780020219](https://doi.org/10.1002/sim.4780020219)
+2.  Greenland S. Tests for interaction in epidemiologic studies: A
+    review and a study of power. *Statistics in Medicine*.
+    1983;2(2):243--251.\
+    **<https://doi.org/10.1002/sim.4780020219>**
 
-3. Greenland S. Effect Modification and Interaction. *Wiley StatsRef: Statistics Reference Online*. DOI: [10.1002/9781118445112.stat03728.pub2](https://doi.org/10.1002/9781118445112.stat03728.pub2)
+3.  Greenland S. Effect Modification and Interaction. *Wiley StatsRef:
+    Statistics Reference Online*.\
+    **<https://doi.org/10.1002/9781118445112.stat03728.pub2>**
 
-4. Brumback BA. Discussion of “Estimating measures of interaction on an additive scale for preventive exposures.” *Statistics in Medicine*. 2008. DOI: [10.1002/sim.3246](https://doi.org/10.1002/sim.3246)
+4.  Brumback BA. On effect-measure modification: Relationships among
+    changes in the relative risk, odds ratio, and risk difference.
+    *Statistics in Medicine*. 2008;27(18):3453--3465.\
+    **<https://doi.org/10.1002/sim.3246>**
 
-5. VanderWeele TJ, Knol MJ. A Tutorial on Interaction. *Epidemiologic Methods*. 2014;3(1):33–72. DOI: [10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)
+5.  VanderWeele TJ, Knol MJ. A Tutorial on Interaction. *Epidemiologic
+    Methods*. 2014;3(1):33--72.\
+    **<https://doi.org/10.1515/em-2013-0005>**
 
-6. Andersson T, Alfredsson L, Källberg H, Zdravkovic S, Ahlbom A. Calculating measures of biological interaction. *European Journal of Epidemiology*. 2005;20(7):575–579. DOI: [10.1007/s10654-005-7835-x](https://doi.org/10.1007/s10654-005-7835-x)
+6.  Andersson T, Alfredsson L, Källberg H, Zdravkovic S, Ahlbom A.
+    Calculating measures of biological interaction. *European Journal of
+    Epidemiology*. 2005;20(7):575--579.\
+    **<https://doi.org/10.1007/s10654-005-7835-x>**
 
-7. Richardson DB, Kaufman JS. Estimation of the relative excess risk due to interaction and associated confidence bounds. *American Journal of Epidemiology*. 2009;169(6):756–760. DOI: [10.1093/aje/kwn411](https://doi.org/10.1093/aje/kwn411)
+7.  Richardson DB, Kaufman JS. Estimation of the Relative Excess Risk
+    Due to Interaction and Associated Confidence Bounds. *American
+    Journal of Epidemiology*. 2009;169(6):756--760.\
+    **<https://doi.org/10.1093/aje/kwn411>**
 
-8. Knol MJ, VanderWeele TJ, Groenwold RHH, Klungel OH, Rovers MM, Grobbee DE. Estimating measures of interaction on an additive scale for preventive exposures. *European Journal of Epidemiology*. 2011;26:433–438. DOI: [10.1007/s10654-011-9554-9](https://doi.org/10.1007/s10654-011-9554-9)
+8.  Knol MJ, VanderWeele TJ, Groenwold RHH, Klungel OH, Rovers MM,
+    Grobbee DE. Estimating measures of interaction on an additive scale
+    for preventive exposures. *European Journal of Epidemiology*.
+    2011;26:433--438.\
+    **<https://doi.org/10.1007/s10654-011-9554-9>**
 
-9. Greenland S. Interpretation and estimation of summary ratios under heterogeneity. *Statistics in Medicine*. 1982;1(3):217–227. DOI: [10.1002/sim.4780010304](https://doi.org/10.1002/sim.4780010304)
+9.  Greenland S. Interpretation and estimation of summary ratios under
+    heterogeneity. *Statistics in Medicine*. 1982;1(3):217--227.\
+    **<https://doi.org/10.1002/sim.4780010304>**
 
-10. Mantel N, Brown C, Byar DP. Tests for homogeneity of effect in an epidemiologic investigation. *American Journal of Epidemiology*. 1977;106(2):125–129. DOI: [10.1093/oxfordjournals.aje.a112441](https://doi.org/10.1093/oxfordjournals.aje.a112441)
+10. Mantel N, Brown C, Byar DP. Tests for homogeneity of effect in an
+    epidemiologic investigation. *American Journal of Epidemiology*.
+    1977;106(2):125--129.\
+    **<https://doi.org/10.1093/oxfordjournals.aje.a112441>**
 
-11. MacKinnon DP, Krull JL, Lockwood CM. Equivalence of the mediation, confounding and suppression effect. *Prevention Science*. 2000;1(4):173–181. DOI: [10.1023/A:1026595011371](https://doi.org/10.1023/A:1026595011371)
+11. MacKinnon DP, Krull JL, Lockwood CM. Equivalence of the mediation,
+    confounding and suppression effect. *Prevention Science*.
+    2000;1(4):173--181.\
+    **<https://doi.org/10.1023/A:1026595011371>**
