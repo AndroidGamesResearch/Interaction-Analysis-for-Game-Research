@@ -57,10 +57,10 @@ Let:
 
 For two binary factors, four joint conditions are possible:
 
-| | \(\bar c\) | \(c\) |
+| | c̄ | c |
 |---|---:|---:|
-| **\(\bar r\)** | \(p_{y\mid\bar r\bar c}\) | \(p_{y\mid\bar r c}\) |
-| **\(r\)** | \(p_{y\mid r\bar c}\) | \(p_{y\mid rc}\) |
+| **r̄** | p<sub>y\|r̄c̄</sub> | p<sub>y\|r̄c</sub> |
+| **r** | p<sub>y\|rc̄</sub> | p<sub>y\|rc</sub> |
 
 where
 
