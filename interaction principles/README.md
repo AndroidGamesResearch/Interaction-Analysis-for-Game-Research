@@ -236,7 +236,6 @@ r = Free
 c = Offers IAP
 y = Marketplace success
 ```
-
 This gives four conditions:
 
 | | No IAP (c̄) | IAP (c) |
