@@ -1296,6 +1296,14 @@ qualitative interaction does not.
       direction retained              direction changes
       magnitude changes                across context
 ```
+### Game-data example
+
+![Qualitative crossover interaction](examples/crossover.png)
+
+*Illustrative game-marketplace example of qualitative interaction. The
+relationship changes direction across the contextual condition, producing a
+crossover pattern. The figure is used to illustrate the interaction principle
+rather than as part of the primary empirical results of the study.*
 
 **Methodological source:**  
 VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic Methods.
@@ -1572,6 +1580,14 @@ For observational marketplace data, this is a statement about **conditional
 empirical relationships**. It does not, by itself, establish that the
 contextual variable causally produces the reversal.
 
+### Game-data example
+
+![Amplification pattern](examples/freeIAP.png)
+
+*Illustrative game-marketplace example of amplification. The conditional
+relationship retains its direction but becomes stronger under the combined
+context. The figure illustrates a quantitative interaction pattern rather than
+a direction reversal.*
 ---
 
 ### Quantitative versus qualitative interaction
