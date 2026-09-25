@@ -603,16 +603,16 @@ Interaction has no single scale-independent definition. The same four
 outcome probabilities can be compared using different reference models,
 and the conclusion about interaction can depend on the scale chosen.
 
-For the two factors (r) and (c), the four success probabilities are:
+For the two factors \(r\) and \(c\), the four success probabilities are:
 
-                                              c̄                                     c
-  ------- ------------------------------------- -------------------------------------
-  **r̄**     p`<sub>`{=html}y\|r̄c̄`</sub>`{=html}   p`<sub>`{=html}y\|r̄c`</sub>`{=html}
-  **r**     p`<sub>`{=html}y\|rc̄`</sub>`{=html}   p`<sub>`{=html}y\|rc`</sub>`{=html}
+| | c̄ | c |
+|---|---:|---:|
+| **r̄** | p<sub>y\|r̄c̄</sub> | p<sub>y\|r̄c</sub> |
+| **r** | p<sub>y\|rc̄</sub> | p<sub>y\|rc</sub> |
 
-The question is not simply whether these probabilities differ. The
-question is whether the relationship associated with (r) changes across
-(c), relative to a particular **no-interaction reference**.
+The question is not simply whether these probabilities differ. The question is
+whether the relationship associated with \(r\) changes across \(c\), relative
+to a particular **no-interaction reference**.
 
 ``` text
                          SAME FOUR PROBABILITIES
@@ -641,6 +641,7 @@ evaluated.
 VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic
 Methods. 2014;3(1):33--72.\
 **[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
+
 ---
 
 ## 2.1 Additive Interaction
