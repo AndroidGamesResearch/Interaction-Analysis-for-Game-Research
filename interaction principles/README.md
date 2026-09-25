@@ -1298,12 +1298,11 @@ qualitative interaction does not.
 ```
 ### Game-data example
 
-![Qualitative crossover interaction](interaction principles/example/crossover.png)
+![Qualitative crossover interaction](example/crossover.png)
 
 *Illustrative game-marketplace example of qualitative interaction. The
 relationship changes direction across the contextual condition, producing a
-crossover pattern. The figure is used to illustrate the interaction principle
-rather than as part of the primary empirical results of the study.*
+crossover pattern.*
 
 **Methodological source:**  
 VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic Methods.
@@ -1582,7 +1581,7 @@ contextual variable causally produces the reversal.
 
 ### Game-data example
 
-![Amplification pattern]([interaction principles/example/freeIAP.jpg](https://github.com/AndroidGamesResearch/Interaction-Analysis-for-Game-Research/blob/399f85ab77a9a8ed64e748429393040ed05a572c/interaction%20principles/example/freeIAP.jpg))
+![Amplification pattern](example/freeIAP.jpg)
 
 *Illustrative game-marketplace example of amplification. The conditional
 relationship retains its direction but becomes stronger under the combined
