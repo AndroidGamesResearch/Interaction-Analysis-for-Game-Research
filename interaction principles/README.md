@@ -2975,6 +2975,784 @@ This distinction prevents an important interpretive error: a null interaction
 contrast should not be interpreted as evidence that \(r\) and \(y\) are
 unrelated.
 
+# 5. Marginal and Conditional Relationships
+
+Interaction analysis often requires distinguishing between a relationship
+observed in the population as a whole and the relationships observed after
+conditioning on another variable.
+
+These are **marginal** and **conditional** relationships.
+
+```text
+                         OBSERVED DATA
+                              │
+                ┌─────────────┴─────────────┐
+                │                           │
+                ▼                           ▼
+             MARGINAL                  CONDITIONAL
+            RELATIONSHIP               RELATIONSHIP
+                │                           │
+        ignore strata of c            condition on c
+                │                           │
+                ▼                           ▼
+          r ───────── y          r ─── y | c̄
+                                 r ─── y | c
+```
+
+The distinction is important because marginal and conditional relationships
+need not have the same magnitude or even the same direction.
+
+---
+
+## 5.1 Marginal versus Conditional Association
+
+### Marginal association
+
+A marginal association compares \(r\) and \(y\) without conditioning on
+\(c\).
+
+The marginal probability of success among observations with \(r\) is:
+
+```math
+p_{y\mid r}=P(y\mid r),
+```
+
+whereas among observations with \(\bar r\):
+
+```math
+p_{y\mid\bar r}=P(y\mid\bar r).
+```
+
+A marginal probability difference can therefore be written as:
+
+```math
+PD_r
+=
+p_{y\mid r}
+-
+p_{y\mid\bar r}.
+```
+
+On the odds-ratio scale:
+
+```math
+\theta_{yr}
+=
+\frac{o_{y\mid r}}
+     {o_{y\mid\bar r}}.
+```
+
+These quantities summarize the \(r\)–\(y\) relationship **across the combined
+distribution of \(c\)**.
+
+---
+
+### Conditional association
+
+The conditional relationship instead compares \(r\) and \(y\) within
+particular levels of \(c\).
+
+Within \(c\):
+
+```math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c},
+```
+
+and within \(\bar c\):
+
+```math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
+
+Similarly, the conditional odds ratios are:
+
+```math
+\theta_{yr\mid c}
+```
+
+and
+
+```math
+\theta_{yr\mid\bar c}.
+```
+
+Thus:
+
+```text
+MARGINAL
+
+r ───────────── y
+
+one relationship across
+the combined observations
+
+
+CONDITIONAL
+
+             c̄
+             │
+       r ─────── y
+
+             c
+             │
+       r ─────── y
+
+relationships examined
+within contextual strata
+```
+
+Neither representation is simply a more detailed version of the other.
+They answer different statistical questions.
+
+---
+
+### Why marginal and conditional relationships can differ
+
+The marginal relationship combines observations across the distribution of
+\(c\).
+
+Using the law of total probability:
+
+```math
+P(y\mid r)
+=
+P(y\mid r,c)P(c\mid r)
++
+P(y\mid r,\bar c)P(\bar c\mid r).
+```
+
+Similarly:
+
+```math
+P(y\mid\bar r)
+=
+P(y\mid\bar r,c)P(c\mid\bar r)
++
+P(y\mid\bar r,\bar c)P(\bar c\mid\bar r).
+```
+
+The marginal comparison therefore depends not only on the conditional success
+probabilities, but also on how observations with \(r\) and \(\bar r\) are
+distributed across \(c\).
+
+```text
+                   MARGINAL RELATIONSHIP
+                            │
+               formed from a combination of
+                            │
+            ┌───────────────┴───────────────┐
+            │                               │
+            ▼                               ▼
+    CONDITIONAL SUCCESS              DISTRIBUTION ACROSS
+       PROBABILITIES                    CONTEXTS
+            │                               │
+   P(y | r,c), etc.                  P(c | r), etc.
+            │                               │
+            └───────────────┬───────────────┘
+                            ▼
+                     P(y | r)
+```
+
+Consequently, conditioning on \(c\) can reveal a pattern that differs from
+the marginal relationship.
+
+---
+
+### Possible marginal–conditional patterns
+
+Several structures are possible.
+
+```text
+1. MARGINAL AND CONDITIONAL AGREEMENT
+
+Marginal:       positive
+Within c̄:      positive
+Within c:       positive
+
+
+2. CHANGE IN MAGNITUDE
+
+Marginal:       positive
+Within c̄:      weak positive
+Within c:       strong positive
+
+
+3. MARGINAL ASSOCIATION DISAPPEARS CONDITIONALLY
+
+Marginal:       positive
+Within c̄:      null
+Within c:       null
+
+
+4. DIRECTION REVERSAL
+
+Marginal:       positive
+Within c̄:      negative
+Within c:       negative
+```
+
+These patterns should not be given the same interpretation.
+
+In particular, a marginal relationship disappearing after conditioning is
+not automatically the same phenomenon as a marginal relationship reversing
+direction after conditioning.
+
+---
+
+### Connection to conditional independence
+
+The third pattern connects directly to Section 4.
+
+Suppose:
+
+```math
+p_{y\mid r}\neq p_{y\mid\bar r},
+```
+
+so that a marginal association is observed.
+
+But after conditioning on \(c\):
+
+```math
+p_{y\mid rc}
+=
+p_{y\mid\bar r c}
+```
+
+and
+
+```math
+p_{y\mid r\bar c}
+=
+p_{y\mid\bar r\bar c}.
+```
+
+Then \(r\) and \(y\) are conditionally independent within the examined
+strata even though they are marginally associated.
+
+```text
+                   MARGINAL
+                      │
+                      ▼
+               r ───────── y
+                 association
+
+                      │
+                condition on c
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+         c̄                       c
+          │                       │
+     r ───── y               r ───── y
+       null                     null
+          │                       │
+          └───────────┬───────────┘
+                      ▼
+            CONDITIONAL INDEPENDENCE
+```
+
+This pattern should be described directly as a difference between the
+marginal and conditional associations. It does not, by itself, require a
+causal explanation for why the difference occurs.
+
+---
+
+### Translation to game research
+
+Suppose:
+
+```text
+r = Ads
+c = Country
+y = Install success
+```
+
+A pooled marketplace analysis may first estimate:
+
+```math
+P(y\mid r)
+\quad\text{versus}\quad
+P(y\mid\bar r).
+```
+
+This provides the **marginal Ads–install-success relationship** across the
+combined observations.
+
+The analysis can then estimate:
+
+```math
+P(y\mid r,c_k)
+\quad\text{versus}\quad
+P(y\mid\bar r,c_k)
+```
+
+within individual national markets \(c_k\).
+
+```text
+                   POOLED DATA
+                       │
+                       ▼
+              Ads ─────── Success
+                       │
+                 marginal pattern
+                       │
+                       ▼
+                CONDITION ON COUNTRY
+                       │
+       ┌───────────────┼───────────────┐
+       ▼               ▼               ▼
+    Country 1       Country 2       Country K
+       │               │               │
+  Ads–success      Ads–success      Ads–success
+  relationship     relationship     relationship
+```
+
+The pooled relationship and the country-specific relationships answer
+different questions.
+
+The pooled estimate summarizes the relationship across the combined
+marketplace observations, whereas the conditional estimates characterize the
+relationship within the national contexts represented in the data.
+
+For contextual game research, examining both is therefore important when the
+objective is to determine whether an overall marketplace relationship
+adequately represents the relationships observed within particular contexts.
+
+---
+
+### An important terminology distinction
+
+Not every disagreement between marginal and conditional relationships should
+be called **Simpson's paradox**.
+
+```text
+MARGINAL ≠ CONDITIONAL
+        │
+        ▼
+broad class of possible
+aggregation/conditioning differences
+
+        ≠
+
+SIMPSON'S PARADOX
+        │
+        ▼
+specific reversal pattern
+under aggregation
+```
+
+The next subsection therefore considers the more specific case in which the
+direction observed in aggregated data reverses when the data are examined
+within the relevant strata.
+
+## 5.2 Simpson's Paradox
+
+### The principle
+
+A particularly important marginal–conditional pattern occurs when the
+direction of an association in aggregated data differs from the direction
+observed within the relevant strata.
+
+This is commonly described as **Simpson's paradox**.
+
+```text
+                    AGGREGATED DATA
+                         │
+                         ▼
+                    r ─────► y
+                      positive
+                         │
+                  condition on c
+                         │
+             ┌───────────┴───────────┐
+             ▼                       ▼
+            c̄                       c
+             │                       │
+        r ◄───── y               r ◄───── y
+          negative                 negative
+             │                       │
+             └───────────┬───────────┘
+                         ▼
+                 DIRECTION REVERSAL
+```
+
+The paradox is not simply that the estimates become larger or smaller after
+conditioning. The defining feature is the **reversal of the observed
+direction under aggregation versus stratification**.
+
+---
+
+### Statistical representation
+
+Suppose the marginal probability difference between \(r\) and \(y\) is
+positive:
+
+```math
+PD_r
+=
+p_{y\mid r}
+-
+p_{y\mid\bar r}
+>0.
+```
+
+However, within both levels of \(c\):
+
+```math
+PD_{r\mid c}<0
+```
+
+and
+
+```math
+PD_{r\mid\bar c}<0.
+```
+
+Then the direction of the marginal relationship is opposite to the
+stratum-specific relationships:
+
+```text
+Marginal association       PDᵣ > 0
+                               │
+                               ▼
+                            POSITIVE
+
+Within c̄                PDᵣ|c̄ < 0
+Within c                 PDᵣ|c  < 0
+                               │
+                               ▼
+                            NEGATIVE
+```
+
+The same general reversal can be represented on a ratio scale.
+
+For example:
+
+```math
+\theta_{yr}>1
+```
+
+in the aggregated data, while:
+
+```math
+\theta_{yr\mid c}<1
+```
+
+and
+
+```math
+\theta_{yr\mid\bar c}<1.
+```
+
+The essential feature remains the reversal between the aggregated and
+stratified relationships.
+
+---
+
+### A simple numerical example
+
+Consider the following marginal result:
+
+```text
+Aggregated data
+
+r        success = 60%
+r̄        success = 50%
+
+PDᵣ = 0.60 − 0.50 = +0.10
+```
+
+The aggregated relationship is positive.
+
+After conditioning on \(c\), however:
+
+```text
+Within c̄
+
+r        success = 30%
+r̄        success = 40%
+
+PDᵣ|c̄ = 0.30 − 0.40 = −0.10
+
+
+Within c
+
+r        success = 70%
+r̄        success = 80%
+
+PDᵣ|c = 0.70 − 0.80 = −0.10
+```
+
+Thus:
+
+```text
+AGGREGATED             +0.10
+                         │
+                         ▼
+                      POSITIVE
+
+CONDITIONAL            −0.10
+                       −0.10
+                         │
+                         ▼
+                      NEGATIVE
+```
+
+The same data structure can therefore produce an overall relationship whose
+direction differs from the relationships observed within the contextual
+strata.
+
+---
+
+### Why can reversal occur?
+
+As established in Section 5.1, the marginal probabilities depend on both the
+conditional outcome probabilities and the distribution of observations
+across \(c\).
+
+Recall:
+
+```math
+P(y\mid r)
+=
+P(y\mid r,c)P(c\mid r)
++
+P(y\mid r,\bar c)P(\bar c\mid r).
+```
+
+and:
+
+```math
+P(y\mid\bar r)
+=
+P(y\mid\bar r,c)P(c\mid\bar r)
++
+P(y\mid\bar r,\bar c)P(\bar c\mid\bar r).
+```
+
+Therefore, if \(r\) and \(\bar r\) are distributed differently across strata
+that also have different outcome probabilities, aggregation can produce a
+relationship that differs substantially from the within-stratum
+relationships.
+
+```text
+                 CONDITIONAL RELATIONSHIPS
+                    within levels of c
+                           │
+                           │
+              combined with different
+                           │
+                           ▼
+                 DISTRIBUTIONS OF c
+               among r and r̄ observations
+                           │
+                           ▼
+                     AGGREGATION
+                           │
+                           ▼
+                 MARGINAL RELATIONSHIP
+                           │
+                           ▼
+               direction may differ
+```
+
+This is a property of aggregation and conditioning. Its substantive
+interpretation depends on the structure of the variables and the question
+being investigated.
+
+---
+
+### Simpson's paradox is not interaction
+
+Simpson's paradox and interaction describe different statistical features.
+
+**Interaction** asks whether the relationship between \(r\) and \(y\) varies
+across levels of \(c\):
+
+```math
+PD_{r\mid c}
+\neq
+PD_{r\mid\bar c}
+```
+
+or, on the odds-ratio scale:
+
+```math
+\theta_{yr\mid c}
+\neq
+\theta_{yr\mid\bar c}.
+```
+
+**Simpson's paradox**, by contrast, compares the direction of the
+**marginal relationship** with the direction of the **conditional
+relationships**.
+
+For example:
+
+```math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+-0.10
+```
+
+represents homogeneous conditional relationships.
+
+Yet if:
+
+```math
+PD_r=+0.10,
+```
+
+the marginal relationship has the opposite direction.
+
+Therefore:
+
+```text
+INTERACTION
+     │
+     ▼
+Do conditional relationships
+differ across context?
+
+           ≠
+
+SIMPSON'S PARADOX
+     │
+     ▼
+Does aggregation produce a
+direction different from the
+within-stratum relationships?
+```
+
+A Simpson-type reversal can therefore occur even when the conditional
+relationships themselves are homogeneous.
+
+---
+
+### Simpson's paradox is also not conditional independence
+
+The distinction from Section 4 is equally important.
+
+Under conditional independence:
+
+```math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+0.
+```
+
+Under a Simpson-type reversal, the conditional relationships remain present
+but point in a direction opposite to the marginal relationship.
+
+```text
+CONDITIONAL INDEPENDENCE
+
+Marginal       association may be present
+Within c̄      null
+Within c       null
+
+
+SIMPSON-TYPE REVERSAL
+
+Marginal       positive
+Within c̄      negative
+Within c       negative
+```
+
+Thus, disappearance and reversal are different marginal–conditional
+patterns.
+
+---
+
+### Translation to game research
+
+Suppose:
+
+```text
+r = Monetization feature
+c = Game genre
+y = Marketplace success
+```
+
+An aggregated analysis might indicate:
+
+```text
+Monetization feature ─────► higher marketplace success
+```
+
+while genre-specific comparisons indicate:
+
+```text
+Genre 1:
+Monetization feature ─────► lower marketplace success
+
+Genre 2:
+Monetization feature ─────► lower marketplace success
+```
+
+The pooled association would then communicate a different direction from the
+relationships observed within the examined genre contexts.
+
+For game research, this matters because marketplace datasets commonly combine
+games that differ substantially in genre, design, player engagement, market,
+and other contextual characteristics.
+
+An aggregated association should therefore not automatically be assumed to
+represent the corresponding relationship within each constituent context.
+
+---
+
+### Game-data example
+
+![Simpson's paradox](example/fallacy.png)
+
+*Illustrative game-marketplace example of an aggregation reversal. The
+direction observed in the pooled comparison differs from the direction
+observed within the examined contextual strata. The figure illustrates a
+marginal–conditional reversal and should not, by itself, be interpreted as
+evidence of interaction or as establishing a causal explanation.*
+
+---
+
+### Interpretation rule
+
+```text
+MARGINAL ≠ CONDITIONAL
+        │
+        ├── magnitude changes only
+        │        ↓
+        │   not necessarily
+        │   Simpson's paradox
+        │
+        ├── marginal association disappears
+        │        ↓
+        │   possible conditional
+        │   independence
+        │
+        └── direction reverses
+                 ↓
+          SIMPSON-TYPE
+             REVERSAL
+```
+
+> **Simpson's paradox concerns reversal between aggregated and
+> stratum-specific relationships. Interaction concerns heterogeneity among
+> the stratum-specific relationships themselves. The two should not be
+> treated as equivalent.**
+
 ## References
 
 1. Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. *International Journal of Epidemiology*. 2012;41(2):514–520.  
