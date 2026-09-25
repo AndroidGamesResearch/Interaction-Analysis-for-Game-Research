@@ -239,10 +239,10 @@ y = Marketplace success
 
 This gives four conditions:
 
-| | No IAP | IAP |
+| | No IAP (c̄) | IAP (c) |
 |---|---:|---:|
-| **Not Free** | \(p_{y\mid\bar r\bar c}\) | \(p_{y\mid\bar r c}\) |
-| **Free** | \(p_{y\mid r\bar c}\) | \(p_{y\mid rc}\) |
+| **Not Free (r̄)** | p<sub>y\|r̄c̄</sub> | p<sub>y\|r̄c</sub> |
+| **Free (r)** | p<sub>y\|rc̄</sub> | p<sub>y\|rc</sub> |
 
 The interaction question is **not simply whether Free + IAP games have high marketplace success**.
 
