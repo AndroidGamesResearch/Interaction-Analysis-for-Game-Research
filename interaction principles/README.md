@@ -565,7 +565,14 @@ to a particular **no-interaction reference**.
                     ▼                           ▼
                Null = 0                     Null = 1
 ```
+This distinction between additive and multiplicative interaction is well
+established in epidemiological methodology, where evidence of interaction
+can depend on the scale on which the joint relationship is evaluated.
 
+**Methodological source:**  
+VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic Methods.
+2014;3(1):33–72.  
+**[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
 ---
 
 ## 2.1 Additive Interaction
@@ -1006,6 +1013,16 @@ formulations of additive interaction.
 
 **Methodological sources:**  
 
+Andersson T, Alfredsson L, Källberg H, Zdravkovic S, Ahlbom A.
+*Calculating measures of biological interaction.* European Journal of Epidemiology.
+2005;20(7):575–579.  
+**[DOI: 10.1007/s10654-005-7835-x](https://doi.org/10.1007/s10654-005-7835-x)**
+
+Richardson DB, Kaufman JS. *Estimation of the Relative Excess Risk Due to
+Interaction and Associated Confidence Bounds.* American Journal of Epidemiology.
+2009;169(6):756–760.  
+**[DOI: 10.1093/aje/kwn411](https://doi.org/10.1093/aje/kwn411)**
+
 Knol MJ, VanderWeele TJ, Groenwold RHH, Klungel OH, Rovers MM, Grobbee DE.
 *Estimating measures of interaction on an additive scale for preventive
 exposures.* European Journal of Epidemiology. 2011;26:433–438.  
@@ -1071,3 +1088,6 @@ structures.
 
 7. Richardson DB, Kaufman JS. Estimation of the Relative Excess Risk Due to Interaction and Associated Confidence Bounds. *American Journal of Epidemiology*. 2009;169(6):756–760.  
    **[https://doi.org/10.1093/aje/kwn411](https://doi.org/10.1093/aje/kwn411)**
+
+8. Knol MJ, VanderWeele TJ, Groenwold RHH, Klungel OH, Rovers MM, Grobbee DE. Estimating measures of interaction on an additive scale for preventive exposures. *European Journal of Epidemiology*. 2011;26:433–438.  
+   **[https://doi.org/10.1007/s10654-011-9554-9](https://doi.org/10.1007/s10654-011-9554-9)**
