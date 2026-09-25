@@ -1066,6 +1066,542 @@ including positive and negative departures, amplification and attenuation,
 crossover patterns, conditional independence, and related contextual
 structures.
 
+
+# 3. Patterns of Interaction
+
+Once interaction has been established as a departure from a specified
+no-interaction reference, the next question concerns the **form of that
+departure**.
+
+Two distinctions are especially useful. First, the relationship may retain
+the same direction across contexts while changing in magnitude. Second, the
+relationship may change direction across contexts. These are commonly
+described as **quantitative** and **qualitative (or crossover) interaction**,
+respectively.
+
+**Methodological source:**  
+VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic Methods.
+2014;3(1):33–72.  
+**[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
+
+```text
+                    CONTEXTUAL VARIATION
+                            │
+                ┌───────────┴───────────┐
+                │                       │
+                ▼                       ▼
+        SAME DIRECTION            DIRECTION CHANGES
+        different magnitude       across context
+                │                       │
+                ▼                       ▼
+          QUANTITATIVE             QUALITATIVE /
+          INTERACTION               CROSSOVER
+```
+
+---
+
+## 3.1 Quantitative Interaction: Same Direction, Different Magnitude
+
+A **quantitative interaction** occurs when the relationship of a focal factor
+with the outcome remains in the same direction across levels of another
+factor, but its magnitude differs.
+
+Using the notation developed above, suppose the relationship associated with
+\(r\) is examined within \(c\) and \(\bar c\).
+
+On the probability-difference scale:
+
+```math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+```
+
+and
+
+```math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
+
+A quantitative interaction can occur when, for example,
+
+```math
+PD_{r\mid c}>0
+\qquad\text{and}\qquad
+PD_{r\mid\bar c}>0,
+```
+
+but
+
+```math
+PD_{r\mid c}
+\neq
+PD_{r\mid\bar c}.
+```
+
+Thus, the **direction is retained**, but the **magnitude changes**.
+
+```text
+                    RELATIONSHIP OF r WITH y
+
+c̄                  ───────────────►
+                       positive
+
+c                   ───────────────────────────►
+                              positive
+
+                    same direction
+                    different magnitude
+                           │
+                           ▼
+                 QUANTITATIVE INTERACTION
+```
+
+The same principle applies when both relationships are negative:
+
+```math
+PD_{r\mid c}<0
+\qquad\text{and}\qquad
+PD_{r\mid\bar c}<0,
+```
+
+while their magnitudes differ.
+
+Therefore, quantitative interaction does **not** require a reversal of the
+relationship. Context can modify how strongly a relationship is observed
+while its direction remains unchanged.
+
+### Game-research interpretation
+
+Suppose:
+
+```text
+r = Ads
+c = Game genre
+y = Install success
+```
+
+Ads may be positively associated with install success in two genres while the
+magnitude of that association differs substantially between them.
+
+```text
+Genre A       Ads ─────────► Install success
+                    +0.08
+
+Genre B       Ads ───────────────────► Install success
+                              +0.25
+```
+
+Both relationships point in the same direction, but they are not equivalent
+in magnitude.
+
+The substantive conclusion is therefore not that Ads are associated with
+success in one genre and failure in another. Rather, the **strength of the
+observed Ads–success relationship depends on gameplay context**.
+
+This distinction is particularly important for contextual analysis because an
+overall relationship may conceal substantial variation in magnitude even when
+its direction appears stable across contexts.
+
+---
+
+### Quantitative interaction is not the same as positive interaction
+
+The word **quantitative** should not be confused with the sign of the
+interaction measure.
+
+For example, suppose:
+
+```math
+PD_{r\mid\bar c}=0.25
+```
+
+and
+
+```math
+PD_{r\mid c}=0.10.
+```
+
+Both relationships remain positive, so their directions agree. However,
+
+```math
+\mathrm{DDP}
+=
+0.10-0.25
+=
+-0.15.
+```
+
+Thus:
+
+```text
+Both stratum-specific relationships are positive
+                    │
+                    ▼
+        Same direction across context
+                    │
+                    ▼
+          QUANTITATIVE INTERACTION
+
+BUT
+
+Relationship is weaker within c
+                    │
+                    ▼
+              DDP = -0.15
+                    │
+                    ▼
+      NEGATIVE DEPARTURE FROM ADDITIVITY
+```
+
+This distinction is fundamental:
+
+> **The direction of the interaction measure is not the same thing as the
+> direction of the underlying stratum-specific relationships.**
+
+A negative DDP can therefore arise even when the focal relationship remains
+positive in both contexts, just as a positive DDP can arise when two negative
+relationships differ in magnitude.
+
+The sign of DDP describes the **direction of departure from the additive
+reference**, whereas the signs of the stratum-specific probability
+differences describe the **direction of the underlying relationships**.
+
+## 3.2 Qualitative / Crossover Interaction
+
+A stronger form of contextual variation occurs when the relationship between
+\(r\) and \(y\) **changes direction across levels of \(c\)**.
+
+This is commonly described as **qualitative interaction** or **crossover
+interaction**.
+
+Where quantitative interaction preserves the direction of the relationship,
+qualitative interaction does not.
+
+```text
+                    RELATIONSHIP OF r WITH y
+                              │
+               ┌──────────────┴──────────────┐
+               │                             │
+               ▼                             ▼
+       QUANTITATIVE                    QUALITATIVE /
+        INTERACTION                      CROSSOVER
+               │                             │
+      direction retained              direction changes
+      magnitude changes                across context
+```
+
+**Methodological source:**  
+VanderWeele TJ, Knol MJ. *A Tutorial on Interaction.* Epidemiologic Methods.
+2014;3(1):33–72.  
+**[DOI: 10.1515/em-2013-0005](https://doi.org/10.1515/em-2013-0005)**
+
+---
+
+### Direction reversal across context
+
+Using the probability-difference formulation developed above, consider the
+relationship associated with \(r\) within \(c\):
+
+```math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+```
+
+and within \(\bar c\):
+
+```math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
+
+A qualitative interaction occurs when these relationships have **opposite
+directions**.
+
+For example:
+
+```math
+PD_{r\mid\bar c}>0
+\qquad\text{and}\qquad
+PD_{r\mid c}<0.
+```
+
+or conversely:
+
+```math
+PD_{r\mid\bar c}<0
+\qquad\text{and}\qquad
+PD_{r\mid c}>0.
+```
+
+The important feature is therefore the sign reversal:
+
+```math
+\boxed{
+PD_{r\mid c}\times PD_{r\mid\bar c}<0
+}
+```
+
+Conceptually:
+
+```text
+c̄                    r̄ ─────────────► r
+                         positive
+                            │
+                            │ context changes
+                            ▼
+c                     r̄ ◄───────────── r
+                         negative
+
+                            │
+                            ▼
+                   DIRECTION REVERSAL
+                            │
+                            ▼
+                QUALITATIVE / CROSSOVER
+                     INTERACTION
+```
+
+The relationship associated with \(r\) is therefore not adequately described
+by saying that it merely becomes stronger or weaker. Its **direction depends
+on the contextual condition**.
+
+---
+
+### A simple numerical example
+
+Suppose:
+
+```math
+p_{y\mid\bar r\bar c}=0.30,
+\qquad
+p_{y\mid r\bar c}=0.50.
+```
+
+When \(c\) is absent:
+
+```math
+PD_{r\mid\bar c}
+=
+0.50-0.30
+=
++0.20.
+```
+
+Now suppose:
+
+```math
+p_{y\mid\bar r c}=0.60,
+\qquad
+p_{y\mid rc}=0.40.
+```
+
+When \(c\) is present:
+
+```math
+PD_{r\mid c}
+=
+0.40-0.60
+=
+-0.20.
+```
+
+Thus:
+
+```text
+c̄             0.30 ─────────────► 0.50
+                         +0.20
+
+c              0.60 ◄───────────── 0.40
+                         -0.20
+
+                         │
+                         ▼
+                 relationship reverses
+                         │
+                         ▼
+               CROSSOVER INTERACTION
+```
+
+The additive interaction contrast is:
+
+```math
+\mathrm{DDP}
+=
+(-0.20)-(+0.20)
+=
+-0.40.
+```
+
+The DDP captures the difference between the two stratum-specific probability
+differences, while the **crossover classification** comes from the fact that
+those relationships have opposite signs.
+
+---
+
+### Why crossover is different from a large interaction contrast
+
+A large DDP or RoR does not, by itself, establish crossover interaction.
+
+Consider:
+
+```math
+PD_{r\mid\bar c}=+0.10
+```
+
+and
+
+```math
+PD_{r\mid c}=+0.40.
+```
+
+The relationship changes substantially in magnitude, but both values remain
+positive.
+
+```text
++0.10 ─────────────► +0.40
+
+same direction
+different magnitude
+
+QUANTITATIVE INTERACTION
+```
+
+By contrast:
+
+```math
+PD_{r\mid\bar c}=+0.10
+```
+
+and
+
+```math
+PD_{r\mid c}=-0.10
+```
+
+cross the null value:
+
+```text
++0.10 ───────► 0 ◄─────── -0.10
+
+      direction changes
+
+QUALITATIVE / CROSSOVER INTERACTION
+```
+
+Thus, **magnitude of departure** and **direction reversal** describe different
+features of the contextual pattern.
+
+---
+
+### Visual signature of crossover
+
+Crossover interaction is particularly intuitive when represented using
+stratum-specific probability profiles.
+
+```text
+Probability
+of success
+
+high │       ╲        ╱
+     │        ╲      ╱
+     │         ╲    ╱
+     │          ╲  ╱
+     │           ╳
+     │          ╱ ╲
+     │         ╱   ╲
+low  │        ╱     ╲
+     └────────────────────
+             c̄      c
+```
+
+The crossing lines indicate that the ordering of the groups changes across
+context.
+
+However, the visual crossing should be interpreted together with the
+underlying estimates and their uncertainty rather than treated as sufficient
+statistical evidence by itself.
+
+---
+
+### Translation to game research
+
+Consider a gameplay example in which:
+
+```text
+r = Game type
+c = Age-rating context
+y = Marketplace success
+```
+
+Suppose one game type is associated with a higher probability of marketplace
+success under a broad age-rating condition, but with a lower probability under
+a restrictive age-rating condition.
+
+```text
+                         Broad rating       Restrictive rating
+
+Game type A                  HIGH  ───────────────╲  LOW
+                                                  ╲
+                                                   ╳
+                                                  ╱
+Game type B                  LOW   ──────────────╱   HIGH
+```
+
+The contextual condition does more than alter the magnitude of the observed
+relationship. It changes its direction.
+
+The appropriate interpretation is therefore:
+
+> **The direction of the observed game-type–marketplace-success relationship
+> differs across the age-rating context represented in the data.**
+
+For observational marketplace data, this is a statement about **conditional
+empirical relationships**. It does not, by itself, establish that the
+contextual variable causally produces the reversal.
+
+---
+
+### Quantitative versus qualitative interaction
+
+The distinction can now be summarized as:
+
+| Pattern | Relationship within c̄ | Relationship within c | Defining feature |
+|---|---:|---:|---|
+| **No contextual variation** | + | + | Same direction and equivalent magnitude |
+| **Quantitative interaction** | + | + | Same direction, different magnitude |
+| **Quantitative interaction** | − | − | Same direction, different magnitude |
+| **Qualitative / crossover interaction** | + | − | Direction reversal |
+| **Qualitative / crossover interaction** | − | + | Direction reversal |
+
+The same distinction can be expressed visually:
+
+```text
+QUANTITATIVE                       QUALITATIVE / CROSSOVER
+
+c̄   ─────────►                    c̄   ─────────►
+c    ─────────────────►            c    ◄─────────
+
+same direction                     opposite directions
+different magnitude                direction reversal
+```
+
+Qualitative interaction therefore represents a particularly consequential
+form of contextual dependence because a single overall direction can fail to
+represent the relationships observed within different contexts.
+
 ## References
 
 1. Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. *International Journal of Epidemiology*. 2012;41(2):514–520.  
