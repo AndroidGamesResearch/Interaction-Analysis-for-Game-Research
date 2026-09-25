@@ -531,6 +531,524 @@ The next step is to distinguish **additive and multiplicative interaction**, def
 
 ---
 
+# 2. Additive and Multiplicative Interaction
+
+Interaction has no single scale-independent definition. The same four outcome
+probabilities can be compared using different reference models, and the
+conclusion about interaction can depend on the scale chosen.
+
+For the two factors \(r\) and \(c\), the four success probabilities are:
+
+| | c̄ | c |
+|---|---:|---:|
+| **r̄** | p<sub>y\|r̄c̄</sub> | p<sub>y\|r̄c</sub> |
+| **r** | p<sub>y\|rc̄</sub> | p<sub>y\|rc</sub> |
+
+The question is not simply whether these probabilities differ. The question is
+whether the relationship associated with \(r\) changes across \(c\), relative
+to a particular **no-interaction reference**.
+
+```text
+                         SAME FOUR PROBABILITIES
+                                  │
+                                  ▼
+                 What counts as "no interaction"?
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+             ADDITIVE SCALE              MULTIPLICATIVE SCALE
+                    │                           │
+             Differences are                Ratios are
+                compared                     compared
+                    │                           │
+                    ▼                           ▼
+               Null = 0                     Null = 1
+```
+
+---
+
+## 2.1 Additive Interaction
+
+### Comparing differences
+
+On the additive scale, the relationship is expressed as an **absolute
+difference in outcome probabilities**.
+
+Within \(c\), the probability difference associated with \(r\) is:
+
+```math
+PD_{r\mid c}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}.
+```
+
+Within \(\bar c\), the corresponding probability difference is:
+
+```math
+PD_{r\mid\bar c}
+=
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}.
+```
+
+Additive interaction asks whether these two differences are equal:
+
+```math
+PD_{r\mid c}
+\stackrel{?}{=}
+PD_{r\mid\bar c}.
+```
+
+Their difference gives the **difference in differences of probabilities
+(DDP)**:
+
+```math
+\mathrm{DDP}
+=
+PD_{r\mid c}
+-
+PD_{r\mid\bar c}.
+```
+
+Expanding the expression:
+
+```math
+\mathrm{DDP}
+=
+\left(
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+\right)
+-
+\left(
+p_{y\mid r\bar c}
+-
+p_{y\mid\bar r\bar c}
+\right).
+```
+
+Equivalently:
+
+```math
+\boxed{
+\mathrm{DDP}
+=
+p_{y\mid rc}
+-
+p_{y\mid\bar r c}
+-
+p_{y\mid r\bar c}
++
+p_{y\mid\bar r\bar c}
+}
+```
+
+The additive no-interaction condition is:
+
+```math
+\boxed{\mathrm{DDP}=0}
+```
+
+because this means:
+
+```math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}.
+```
+
+In other words, the absolute probability difference associated with \(r\)
+is the same whether \(c\) is present or absent.
+
+---
+
+### Reading the additive scale
+
+```text
+DDP < 0                    DDP = 0                    DDP > 0
+   │                          │                          │
+   ▼                          ▼                          ▼
+Negative departure       No departure             Positive departure
+from additivity          from additivity           from additivity
+```
+
+Thus, the sign of DDP describes the **direction of departure from the
+additive reference**.
+
+Importantly, a positive DDP does not simply mean that the joint group has a
+high probability of success, and a negative DDP does not simply mean that it
+has a low probability.
+
+The quantity describes how far the observed joint pattern departs from the
+pattern expected under additivity.
+
+---
+
+### A simple numerical example
+
+Suppose:
+
+```math
+p_{y\mid\bar r\bar c}=0.20,
+\qquad
+p_{y\mid r\bar c}=0.30,
+```
+
+```math
+p_{y\mid\bar r c}=0.40,
+\qquad
+p_{y\mid rc}=0.65.
+```
+
+The relationship associated with \(r\) when \(c\) is absent is:
+
+```math
+PD_{r\mid\bar c}
+=
+0.30-0.20
+=
+0.10.
+```
+
+When \(c\) is present:
+
+```math
+PD_{r\mid c}
+=
+0.65-0.40
+=
+0.25.
+```
+
+Therefore:
+
+```math
+\mathrm{DDP}
+=
+0.25-0.10
+=
+0.15.
+```
+
+The positive value indicates that the probability difference associated with
+\(r\) is **0.15 larger in the presence of \(c\)** than in its absence.
+
+Visually:
+
+```text
+                     r̄                     r
+                     │                      │
+
+c̄                  0.20 ───── +0.10 ───► 0.30
+
+c                   0.40 ───── +0.25 ───► 0.65
+                                     
+                         difference
+                         in differences
+                              │
+                              ▼
+                         0.25 - 0.10
+                              │
+                              ▼
+                         DDP = +0.15
+```
+
+This is a **positive departure from additivity**.
+
+---
+
+### Game-research interpretation
+
+Suppose:
+
+```text
+r = Ads
+c = RPG
+y = Install success
+```
+
+Then:
+
+```math
+PD_{r\mid c}
+```
+
+represents the Ads–install-success probability difference among RPG games,
+whereas
+
+```math
+PD_{r\mid\bar c}
+```
+
+represents the corresponding Ads–install-success probability difference among
+non-RPG games.
+
+The DDP therefore asks:
+
+> **How much does the Ads–install-success probability difference change when
+> moving from non-RPG to RPG games?**
+
+This provides an additive measure of contextual variation in the observed
+Ads–success relationship.
+
+---
+
+## 2.2 Multiplicative Interaction
+
+### Comparing relative relationships
+
+The same four probabilities can be examined on a multiplicative scale.
+
+In the present framework, the outcome probabilities are first transformed to
+odds:
+
+```math
+o_{y\mid rc}
+=
+\frac{p_{y\mid rc}}
+     {1-p_{y\mid rc}}.
+```
+
+Analogously:
+
+```math
+o_{y\mid\bar r c},
+\qquad
+o_{y\mid r\bar c},
+\qquad
+o_{y\mid\bar r\bar c}.
+```
+
+Within \(c\), the conditional odds ratio for the association between \(r\)
+and \(y\) is:
+
+```math
+\theta_{yr\mid c}
+=
+\frac{o_{y\mid rc}}
+     {o_{y\mid\bar r c}}.
+```
+
+Within \(\bar c\):
+
+```math
+\theta_{yr\mid\bar c}
+=
+\frac{o_{y\mid r\bar c}}
+     {o_{y\mid\bar r\bar c}}.
+```
+
+Multiplicative interaction asks whether these conditional odds ratios are
+equal:
+
+```math
+\theta_{yr\mid c}
+\stackrel{?}{=}
+\theta_{yr\mid\bar c}.
+```
+
+Their ratio gives the **ratio of odds ratios (RoR)**:
+
+```math
+\boxed{
+\mathrm{RoR}
+=
+\frac{\theta_{yr\mid c}}
+     {\theta_{yr\mid\bar c}}
+}
+```
+
+The multiplicative no-interaction condition is:
+
+```math
+\boxed{\mathrm{RoR}=1}
+```
+
+because:
+
+```math
+\mathrm{RoR}=1
+\iff
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}.
+```
+
+Thus, RoR evaluates whether the odds-ratio association between \(r\) and \(y\)
+is homogeneous across the two conditions defined by \(c\).
+
+---
+
+### Reading the multiplicative scale
+
+```text
+RoR < 1                    RoR = 1                    RoR > 1
+   │                          │                          │
+   ▼                          ▼                          ▼
+Negative departure       No departure             Positive departure
+from multiplicativity    from multiplicativity     from multiplicativity
+```
+
+Again, these values describe **departure from the multiplicative reference**.
+They should not be interpreted simply as low, neutral, or high marketplace
+success.
+
+---
+
+## 2.3 Why the Two Scales Can Disagree
+
+Additive and multiplicative interaction ask different mathematical questions.
+
+```text
+ADDITIVE
+
+Does the probability difference change across c?
+
+PD(r | c)  versus  PD(r | c̄)
+
+              │
+              ▼
+             DDP
+
+
+MULTIPLICATIVE
+
+Does the odds ratio change across c?
+
+OR(r,y | c)  versus  OR(r,y | c̄)
+
+              │
+              ▼
+             RoR
+```
+
+Therefore:
+
+```math
+\mathrm{DDP}=0
+```
+
+does **not** mathematically require
+
+```math
+\mathrm{RoR}=1,
+```
+
+and conversely,
+
+```math
+\mathrm{RoR}=1
+```
+
+does not require
+
+```math
+\mathrm{DDP}=0.
+```
+
+This gives four possible analytical patterns:
+
+| Additive scale | Multiplicative scale | Interpretation |
+|---|---|---|
+| DDP = 0 | RoR = 1 | No departure on either scale |
+| DDP ≠ 0 | RoR = 1 | Departure from additivity only |
+| DDP = 0 | RoR ≠ 1 | Departure from multiplicativity only |
+| DDP ≠ 0 | RoR ≠ 1 | Departure on both scales |
+
+The two measures should therefore be interpreted as **complementary
+descriptions of the same four-cell probability structure**, rather than as
+competing tests that must necessarily reach the same conclusion.
+
+---
+
+## 2.4 From Epidemiological Measures to the Present Framework
+
+Epidemiological research has long emphasized that interaction can be evaluated
+on different scales. Additive interaction is commonly represented using
+measures such as the **relative excess risk due to interaction (RERI)**,
+attributable proportion due to interaction, and synergy index, whereas
+multiplicative interaction can be assessed through relative measures and
+product terms.
+
+The present framework follows the same underlying principle of
+**scale-specific departure from a no-interaction reference**, but expresses
+the two comparisons directly through:
+
+```text
+                  INTERACTION ANALYSIS
+                          │
+             ┌────────────┴────────────┐
+             │                         │
+             ▼                         ▼
+      ADDITIVE SCALE            MULTIPLICATIVE SCALE
+             │                         │
+             ▼                         ▼
+            DDP                       RoR
+             │                         │
+       Null value = 0            Null value = 1
+             │                         │
+             └────────────┬────────────┘
+                          ▼
+                95% confidence intervals
+                          │
+                          ▼
+               Context-specific profile
+```
+
+This distinction is important: **DDP and RoR are the measures used in this
+framework**, while measures such as RERI belong to related epidemiological
+formulations of additive interaction.
+
+**Methodological sources:**  
+
+Knol MJ, VanderWeele TJ, Groenwold RHH, Klungel OH, Rovers MM, Grobbee DE.
+*Estimating measures of interaction on an additive scale for preventive
+exposures.* European Journal of Epidemiology. 2011;26:433–438.  
+**[DOI: 10.1007/s10654-011-9554-9](https://doi.org/10.1007/s10654-011-9554-9)**
+
+Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of effect
+modification and interaction.* International Journal of Epidemiology.
+2012;41(2):514–520.  
+**[DOI: 10.1093/ije/dyr218](https://doi.org/10.1093/ije/dyr218)**
+
+---
+
+## 2.5 Why Both Scales Are Retained
+
+Using both scales allows the contextual pattern to be examined without making
+one scale the sole definition of interaction.
+
+For every contextual comparison, the framework therefore asks two parallel
+questions:
+
+```text
+1. ADDITIVE
+   Does the absolute probability difference vary across the context?
+                         │
+                         ▼
+                        DDP
+
+
+2. MULTIPLICATIVE
+   Does the odds-ratio association vary across the context?
+                         │
+                         ▼
+                        RoR
+```
+
+Together, these measures provide two complementary views of how an observed
+relationship changes across context.
+
+The next sections examine the **forms that these departures can take**,
+including positive and negative departures, amplification and attenuation,
+crossover patterns, conditional independence, and related contextual
+structures.
+
 ## References
 
 1. Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. *International Journal of Epidemiology*. 2012;41(2):514–520.  
