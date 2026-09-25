@@ -2017,6 +2017,964 @@ The next distinction concerns patterns in which additive and multiplicative
 interaction do not agree, showing why the same contextual relationship may
 appear differently depending on the scale used to evaluate it.
 
+## 4.1 Homogeneous Association
+
+### The principle
+
+When an association is examined across levels of a contextual variable, the
+stratum-specific associations may either **differ** or remain **equivalent**.
+
+If the association between \(r\) and \(y\) is equivalent across levels of
+\(c\) on a specified measure, the association is described as
+**homogeneous on that measure**.
+
+```text
+                 ASSOCIATION BETWEEN r AND y
+                           │
+                    examined across c
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+              ▼                         ▼
+        within c̄                   within c
+              │                         │
+              ▼                         ▼
+        M(r,y | c̄)                M(r,y | c)
+              │                         │
+              └────────────┬────────────┘
+                           │
+                         compare
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+            EQUAL                    UNEQUAL
+              │                         │
+              ▼                         ▼
+         HOMOGENEOUS              HETEROGENEOUS
+         ASSOCIATION               ASSOCIATION
+```
+
+The key point is that **homogeneity concerns equality across strata**. It does
+not require the association itself to be absent.
+
+**Methodological sources:**  
+
+Greenland S. *Interpretation and estimation of summary ratios under
+heterogeneity.* Statistics in Medicine. 1982;1(3):217–227.  
+**[DOI: 10.1002/sim.4780010304](https://doi.org/10.1002/sim.4780010304)**
+
+Mantel N, Brown C, Byar DP. *Tests for homogeneity of effect in an
+epidemiologic investigation.* American Journal of Epidemiology.
+1977;106(2):125–129.  
+**[DOI: 10.1093/oxfordjournals.aje.a112441](https://doi.org/10.1093/oxfordjournals.aje.a112441)**
+
+---
+
+### Homogeneity on the odds-ratio scale
+
+Using the notation developed throughout this page, consider the association
+between \(r\) and \(y\) within the two levels of \(c\).
+
+Within \(c\):
+
+```math
+\theta_{yr\mid c}
+=
+\frac{o_{y\mid rc}}
+     {o_{y\mid\bar r c}}.
+```
+
+Within \(\bar c\):
+
+```math
+\theta_{yr\mid\bar c}
+=
+\frac{o_{y\mid r\bar c}}
+     {o_{y\mid\bar r\bar c}}.
+```
+
+The odds-ratio associations are homogeneous across \(c\) when:
+
+```math
+\boxed{
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+}
+```
+
+Notice that this condition does **not** require either odds ratio to equal
+\(1\).
+
+For example:
+
+```math
+\theta_{yr\mid c}=2
+\qquad\text{and}\qquad
+\theta_{yr\mid\bar c}=2
+```
+
+represent a homogeneous association on the odds-ratio scale.
+
+The association is present within both strata, but its measured magnitude is
+the same.
+
+```text
+c̄       OR(r,y | c̄) = 2
+                    │
+                    │ equal
+                    │
+c        OR(r,y | c)  = 2
+                    │
+                    ▼
+          HOMOGENEOUS ASSOCIATION
+
+          association remains present
+```
+
+By contrast:
+
+```math
+\theta_{yr\mid c}=2
+\qquad\text{and}\qquad
+\theta_{yr\mid\bar c}=1.2
+```
+
+are not homogeneous on the odds-ratio scale:
+
+```text
+c̄       OR(r,y | c̄) = 1.2
+                     │
+                     │ differ
+                     │
+c        OR(r,y | c)  = 2.0
+                     │
+                     ▼
+          HETEROGENEOUS ASSOCIATION
+```
+
+This heterogeneity is precisely the type of contextual variation examined by
+interaction and effect-measure-modification analyses.
+
+---
+
+### Connection to the Ratio of Odds Ratios
+
+The homogeneity condition connects directly to the multiplicative interaction
+measure introduced in Section 2.
+
+Recall:
+
+```math
+\mathrm{RoR}
+=
+\frac{\theta_{yr\mid c}}
+     {\theta_{yr\mid\bar c}}.
+```
+
+If the two conditional odds ratios are equal:
+
+```math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c},
+```
+
+then:
+
+```math
+\boxed{\mathrm{RoR}=1}.
+```
+
+Therefore:
+
+```text
+OR(r,y | c̄) = OR(r,y | c)
+             │
+             ▼
+   HOMOGENEOUS ODDS-RATIO
+         ASSOCIATION
+             │
+             ▼
+          RoR = 1
+             │
+             ▼
+   NO MULTIPLICATIVE
+      DEPARTURE
+```
+
+Conversely:
+
+```math
+\mathrm{RoR}\neq1
+```
+
+indicates that the conditional odds-ratio associations are not homogeneous
+across the two levels of \(c\).
+
+This provides a direct bridge between the classical concept of homogeneous
+association and the RoR used in the present Interaction-Analysis Framework.
+
+---
+
+### Homogeneity is scale specific
+
+Just as interaction is scale dependent, **homogeneity must be defined with
+respect to a particular association measure**.
+
+For example, the probability-difference associations may satisfy:
+
+```math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c},
+```
+
+while the corresponding odds ratios need not satisfy:
+
+```math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}.
+```
+
+The reverse is also possible.
+
+Therefore:
+
+```text
+                  SAME DATA
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+          ▼                     ▼
+   PROBABILITY-DIFFERENCE    ODDS-RATIO
+          SCALE                 SCALE
+          │                     │
+      homogeneous?          homogeneous?
+          │                     │
+          └──────────┬──────────┘
+                     ▼
+            Conclusions need not
+               be equivalent
+```
+
+In the present framework, this corresponds directly to the two
+no-interaction references:
+
+```math
+\mathrm{DDP}=0
+```
+
+for homogeneity of the probability differences across \(c\), and
+
+```math
+\mathrm{RoR}=1
+```
+
+for homogeneity of the odds-ratio associations across \(c\).
+
+This is why homogeneity should not be described without specifying the
+measure on which it is being evaluated.
+
+---
+
+### Translation to game research
+
+Suppose:
+
+```text
+r = Ads
+c = Game genre
+y = Install success
+```
+
+Consider two genre contexts.
+
+If the Ads–install-success association has the same measured magnitude in
+both contexts, the association is homogeneous on that measure.
+
+For example:
+
+```text
+Puzzle
+
+Ads ─────────────────► Install success
+          OR = 1.50
+
+
+RPG
+
+Ads ─────────────────► Install success
+          OR = 1.50
+
+               │
+               ▼
+       SAME ASSOCIATION
+        ACROSS CONTEXT
+```
+
+This does **not** mean that Ads and install success are unrelated.
+
+Instead:
+
+> **The measured Ads–install-success association is present, but it does not
+> vary across the compared genre contexts on the specified scale.**
+
+This distinction is fundamental for contextual analysis.
+
+```text
+ASSOCIATION PRESENT?
+        │
+        └── Yes
+
+DOES IT VARY ACROSS CONTEXT?
+        │
+        └── No
+
+        ↓
+
+HOMOGENEOUS ASSOCIATION
+```
+
+The stronger condition in which the association itself disappears within the
+relevant strata is conceptually different.
+
+That condition leads to **conditional independence**.
+
+## 4.2 Conditional Independence
+
+### The principle
+
+Homogeneity does not necessarily mean that two variables are independent.
+
+A stronger condition occurs when the association between \(r\) and \(y\)
+disappears after conditioning on \(c\).
+
+This is **conditional independence**.
+
+Using standard notation:
+
+```math
+\boxed{
+y \perp r \mid c
+}
+```
+
+which states that \(y\) and \(r\) are independent conditional on \(c\).
+
+Conceptually:
+
+```text
+                    r ─────────► y
+                         │
+                  marginal relationship
+                         │
+                         ▼
+                   CONDITION ON c
+                         │
+             ┌───────────┴───────────┐
+             ▼                       ▼
+            c̄                       c
+             │                       │
+       r ─── ? ─── y           r ─── ? ─── y
+             │                       │
+             └───────────┬───────────┘
+                         ▼
+              association absent
+              within the strata
+                         │
+                         ▼
+              CONDITIONAL INDEPENDENCE
+```
+
+The important point is that conditional independence concerns the relationship
+between two variables **after another variable has been conditioned on**.
+
+---
+
+### Conditional probabilities
+
+Conditional independence can be expressed directly through the success
+probabilities.
+
+Within \(c\), independence between \(r\) and \(y\) requires:
+
+```math
+p_{y\mid rc}
+=
+p_{y\mid\bar r c}.
+```
+
+Within \(\bar c\):
+
+```math
+p_{y\mid r\bar c}
+=
+p_{y\mid\bar r\bar c}.
+```
+
+Thus, if independence holds within both strata:
+
+```math
+\boxed{
+p_{y\mid rc}
+=
+p_{y\mid\bar r c}
+}
+```
+
+and
+
+```math
+\boxed{
+p_{y\mid r\bar c}
+=
+p_{y\mid\bar r\bar c}
+}
+```
+
+The corresponding probability differences are therefore:
+
+```math
+PD_{r\mid c}=0
+```
+
+and
+
+```math
+PD_{r\mid\bar c}=0.
+```
+
+In words, once \(c\) is held fixed, knowing whether \(r\) is present provides
+no difference in the conditional probability of \(y\).
+
+---
+
+### Conditional independence on the odds-ratio scale
+
+The same condition can be represented using conditional odds ratios.
+
+Recall:
+
+```math
+\theta_{yr\mid c}
+=
+\frac{o_{y\mid rc}}
+     {o_{y\mid\bar r c}}
+```
+
+and
+
+```math
+\theta_{yr\mid\bar c}
+=
+\frac{o_{y\mid r\bar c}}
+     {o_{y\mid\bar r\bar c}}.
+```
+
+Under conditional independence:
+
+```math
+\boxed{
+\theta_{yr\mid c}=1
+}
+```
+
+and
+
+```math
+\boxed{
+\theta_{yr\mid\bar c}=1.
+}
+```
+
+Therefore:
+
+```math
+\boxed{
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1
+}
+```
+
+This is stronger than ordinary homogeneity.
+
+---
+
+### Homogeneity versus conditional independence
+
+The distinction can now be stated precisely.
+
+Suppose:
+
+```math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+2.
+```
+
+The conditional associations are equal.
+
+Therefore, they are **homogeneous**.
+
+But:
+
+```math
+2\neq1,
+```
+
+so \(r\) and \(y\) remain associated within both strata.
+
+This is **not conditional independence**.
+
+By contrast:
+
+```math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1
+```
+
+means that the conditional associations are both homogeneous **and null**.
+
+```text
+                 CONDITIONAL ODDS RATIOS
+                          │
+              ┌───────────┴───────────┐
+              │                       │
+            UNEQUAL                  EQUAL
+              │                       │
+              ▼                       ▼
+       HETEROGENEOUS             HOMOGENEOUS
+                                      │
+                             Are they equal to 1?
+                                      │
+                           ┌──────────┴──────────┐
+                           │                     │
+                          NO                    YES
+                           │                     │
+                           ▼                     ▼
+                   HOMOGENEOUS             CONDITIONAL
+                   ASSOCIATION             INDEPENDENCE
+                   remains present
+```
+
+Therefore:
+
+> **Conditional independence is a special case of homogeneous conditional
+> association in which the common association is the null association.**
+
+---
+
+### Connection to DDP and RoR
+
+Conditional independence also has an important implication for the interaction
+measures used in the present framework.
+
+If:
+
+```math
+PD_{r\mid c}=0
+```
+
+and
+
+```math
+PD_{r\mid\bar c}=0,
+```
+
+then:
+
+```math
+\mathrm{DDP}
+=
+0-0
+=
+0.
+```
+
+Similarly, if:
+
+```math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1,
+```
+
+then:
+
+```math
+\mathrm{RoR}
+=
+\frac{1}{1}
+=
+1.
+```
+
+Thus:
+
+```text
+             CONDITIONAL INDEPENDENCE
+                       │
+            ┌──────────┴──────────┐
+            ▼                     ▼
+      PD(r | c̄) = 0         PD(r | c) = 0
+            │                     │
+            └──────────┬──────────┘
+                       ▼
+                     DDP = 0
+
+
+             OR(r,y | c̄) = 1
+             OR(r,y | c)  = 1
+                       │
+                       ▼
+                     RoR = 1
+```
+
+However, the reverse implication does **not** generally hold.
+
+For example:
+
+```math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+0.20
+```
+
+gives:
+
+```math
+\mathrm{DDP}=0,
+```
+
+but the focal relationship remains present in both strata.
+
+Likewise:
+
+```math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+2
+```
+
+gives:
+
+```math
+\mathrm{RoR}=1,
+```
+
+while \(r\) and \(y\) remain associated.
+
+Therefore:
+
+```text
+CONDITIONAL INDEPENDENCE
+          │
+          ├────────► DDP = 0
+          └────────► RoR = 1
+
+BUT
+
+DDP = 0 or RoR = 1
+          │
+          ╳
+          └──── does not by itself imply
+                conditional independence
+```
+
+This distinction is essential: **absence of interaction is not the same as
+absence of association**.
+
+---
+
+### Marginal association can coexist with conditional independence
+
+Conditional independence also does not require the corresponding
+**marginal association** to be absent.
+
+It is possible for \(r\) and \(y\) to appear associated when the data are
+considered without conditioning on \(c\), while being independent within
+levels of \(c\).
+
+Conceptually:
+
+```text
+                    MARGINAL DATA
+
+                    r ───────► y
+                     association
+                          │
+                          ▼
+                   CONDITION ON c
+                          │
+             ┌────────────┴────────────┐
+             ▼                         ▼
+            c̄                         c
+             │                         │
+        r ───── y                 r ───── y
+       no association            no association
+             │                         │
+             └────────────┬────────────┘
+                          ▼
+                CONDITIONAL INDEPENDENCE
+```
+
+This does not mean that the marginal result was computationally incorrect.
+Rather, the marginal and conditional comparisons describe different
+structures in the data.
+
+This distinction becomes especially important when interpreting contextual
+relationships.
+
+---
+
+### Translation to game research
+
+Suppose:
+
+```text
+r = Ads
+c = Age-rating group
+y = Install success
+```
+
+An overall comparison might show different install-success probabilities
+between games with and without Ads.
+
+The next question is whether that relationship remains after games are
+compared within the same age-rating context.
+
+For example:
+
+```text
+                       MARGINAL
+
+                Ads ─────────► Install success
+                    observed association
+
+                           │
+                    condition on age
+                           │
+             ┌─────────────┴─────────────┐
+             ▼                           ▼
+          <18 rating                  18+ rating
+             │                           │
+      Ads ───── Success            Ads ───── Success
+       no association               no association
+             │                           │
+             └─────────────┬─────────────┘
+                           ▼
+                CONDITIONAL INDEPENDENCE
+```
+
+The appropriate interpretation is:
+
+> **The marginal Ads–install-success association is not observed within the
+> examined age-rating strata; within those strata, Ads and install success
+> are conditionally independent in the analyzed data.**
+
+For observational marketplace data, this should remain a statement about the
+observed statistical structure.
+
+It does **not** by itself establish that age rating caused, explained, or
+produced the marginal association.
+
+---
+
+### Game-data example
+
+![Conditional independence](example/conditional-independence.jpg)
+
+*Illustrative game-marketplace example of conditional independence. A
+relationship is visible in the marginal comparison but is not observed within
+the examined age-rating strata. The example illustrates the distinction
+between marginal association and conditional association; it does not assign
+a causal explanation to the contextual variable.*
+
+---
+
+### The key distinction
+
+```text
+HOMOGENEITY
+     │
+     ▼
+Are the conditional associations equal?
+
+θ(yr | c̄) = θ(yr | c)
+
+     │
+     ▼
+They may still be non-null.
+
+
+CONDITIONAL INDEPENDENCE
+     │
+     ▼
+Is the conditional association null?
+
+θ(yr | c̄) = θ(yr | c) = 1
+
+     │
+     ▼
+No conditional association
+within the examined strata.
+```
+
+The distinction can therefore be summarized as:
+
+> **Homogeneity asks whether associations differ across context. Conditional
+> independence asks whether an association remains after conditioning on that
+> context.**
+
+## 4.3 Homogeneity ≠ Conditional Independence
+
+Homogeneity and conditional independence are related, but they answer
+different questions.
+
+| Concept | Question | Probability-difference scale | Odds-ratio scale |
+|---|---|---|---|
+| **Homogeneous association** | Is the association equivalent across levels of \(c\)? | PD<sub>r\|c</sub> = PD<sub>r\|c̄</sub> | θ<sub>yr\|c</sub> = θ<sub>yr\|c̄</sub> |
+| **Conditional independence** | Is the association absent within levels of \(c\)? | PD<sub>r\|c</sub> = PD<sub>r\|c̄</sub> = 0 | θ<sub>yr\|c</sub> = θ<sub>yr\|c̄</sub> = 1 |
+
+The distinction can be seen with three simple patterns.
+
+```text
+A. HOMOGENEOUS, BUT NOT INDEPENDENT
+
+c̄       OR(r,y | c̄) = 2
+c        OR(r,y | c)  = 2
+
+              │
+              ▼
+      equal across context
+              │
+              ▼
+         HOMOGENEOUS
+
+        but 2 ≠ 1
+
+              │
+              ▼
+   ASSOCIATION STILL PRESENT
+```
+
+```text
+B. HOMOGENEOUS AND CONDITIONALLY INDEPENDENT
+
+c̄       OR(r,y | c̄) = 1
+c        OR(r,y | c)  = 1
+
+              │
+              ▼
+      equal across context
+              +
+        equal to null
+              │
+              ▼
+   CONDITIONAL INDEPENDENCE
+```
+
+```text
+C. HETEROGENEOUS
+
+c̄       OR(r,y | c̄) = 1.2
+c        OR(r,y | c)  = 2.0
+
+              │
+              ▼
+      unequal across context
+              │
+              ▼
+        HETEROGENEITY
+```
+
+Thus:
+
+```text
+                  CONDITIONAL ASSOCIATIONS
+                           │
+                 Are they equivalent?
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+             NO                        YES
+              │                         │
+              ▼                         ▼
+       HETEROGENEITY               HOMOGENEITY
+                                        │
+                              Are they also null?
+                                        │
+                           ┌────────────┴────────────┐
+                           │                         │
+                          NO                        YES
+                           │                         │
+                           ▼                         ▼
+                 HOMOGENEOUS NON-NULL        CONDITIONAL
+                     ASSOCIATION              INDEPENDENCE
+```
+
+This distinction also clarifies the interpretation of the interaction
+measures used in the framework.
+
+```math
+\mathrm{DDP}=0
+```
+
+indicates homogeneity on the probability-difference scale, while
+
+```math
+\mathrm{RoR}=1
+```
+
+indicates homogeneity on the odds-ratio scale.
+
+Neither condition alone establishes conditional independence.
+
+Conditional independence additionally requires the stratum-specific
+associations themselves to equal their corresponding null values:
+
+```math
+PD_{r\mid c}
+=
+PD_{r\mid\bar c}
+=
+0
+```
+
+and, equivalently on the odds-ratio scale,
+
+```math
+\theta_{yr\mid c}
+=
+\theta_{yr\mid\bar c}
+=
+1.
+```
+
+> **No interaction means that a specified association measure does not vary
+> across the compared contexts. Conditional independence means that the
+> conditional association itself is absent.**
+
+This distinction prevents an important interpretive error: a null interaction
+contrast should not be interpreted as evidence that \(r\) and \(y\) are
+unrelated.
+
 ## References
 
 1. Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. *International Journal of Epidemiology*. 2012;41(2):514–520.  
@@ -2042,3 +3000,12 @@ appear differently depending on the scale used to evaluate it.
 
 8. Knol MJ, VanderWeele TJ, Groenwold RHH, Klungel OH, Rovers MM, Grobbee DE. Estimating measures of interaction on an additive scale for preventive exposures. *European Journal of Epidemiology*. 2011;26:433–438.  
    **[https://doi.org/10.1007/s10654-011-9554-9](https://doi.org/10.1007/s10654-011-9554-9)**
+
+9. Greenland S. Interpretation and estimation of summary ratios under heterogeneity.
+   *Statistics in Medicine*. 1982;1(3):217–227.  
+   **[https://doi.org/10.1002/sim.4780010304](https://doi.org/10.1002/sim.4780010304)**
+
+10. Mantel N, Brown C, Byar DP. Tests for homogeneity of effect in an
+    epidemiologic investigation. *American Journal of Epidemiology*.
+    1977;106(2):125–129.  
+    **[https://doi.org/10.1093/oxfordjournals.aje.a112441](https://doi.org/10.1093/oxfordjournals.aje.a112441)**
