@@ -1582,7 +1582,7 @@ contextual variable causally produces the reversal.
 
 ### Game-data example
 
-![Amplification pattern](interaction principles/example/freeIAP.jpg)
+![Amplification pattern]([interaction principles/example/freeIAP.jpg](https://github.com/AndroidGamesResearch/Interaction-Analysis-for-Game-Research/blob/399f85ab77a9a8ed64e748429393040ed05a572c/interaction%20principles/example/freeIAP.jpg))
 
 *Illustrative game-marketplace example of amplification. The conditional
 relationship retains its direction but becomes stronger under the combined
