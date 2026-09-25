@@ -51,33 +51,33 @@ Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of effect modi
 
 Let:
 
-- \(A\) = first factor
-- \(B\) = second factor
-- \(Y\) = outcome
+- \(r\) = first factor
+- \(c\) = second factor
+- \(y\) = outcome
 
 For two binary factors, four joint conditions are possible:
 
-| | \(B=0\) | \(B=1\) |
+| | \(\bar c\) | \(c\) |
 |---|---:|---:|
-| **\(A=0\)** | \(P_{00}\) | \(P_{01}\) |
-| **\(A=1\)** | \(P_{10}\) | \(P_{11}\) |
+| **\(\bar r\)** | \(p_{y\mid\bar r\bar c}\) | \(p_{y\mid\bar r c}\) |
+| **\(r\)** | \(p_{y\mid r\bar c}\) | \(p_{y\mid rc}\) |
 
 where
 
 ```math
-P_{ab}=P(Y=1\mid A=a,B=b).
+p_{y\mid rc}=P(y\mid r,c).
 ```
 
 Thus,
 
 ```math
-P_{00}=P(Y=1\mid A=0,B=0)
+p_{y\mid\bar r\bar c}=P(y\mid\bar r,\bar c)
 ```
 
 is the outcome probability when neither factor is present, whereas
 
 ```math
-P_{11}=P(Y=1\mid A=1,B=1)
+p_{y\mid rc}=P(y\mid r,c)
 ```
 
 is the outcome probability when both factors are present.
@@ -86,9 +86,9 @@ These four conditions provide the basic structure from which interaction can be 
 
 ### What makes it an interaction?
 
-A large value of \(P_{11}\) is **not, by itself, evidence of interaction**.
+A large value of \(p_{y\mid rc}\) is **not, by itself, evidence of interaction**.
 
-The critical question is whether the observed joint relationship differs from the relationship expected from the separate relationships of \(A\) and \(B\) under a specified **no-interaction model**.
+The critical question is whether the observed joint relationship differs from the relationship expected from the separate relationships of \(r\) and \(c\) under a specified **no-interaction model**.
 
 ```text
 Observed joint relationship
@@ -116,24 +116,24 @@ What counts as the expected joint relationship depends on the **scale** on which
 
 ### Additive reference
 
-On the probability-difference scale, the individual relationships associated with \(A\) and \(B\) can be written as
+On the probability-difference scale, the individual relationships associated with \(r\) and \(c\) can be written as
 
 ```math
-PD_A=P_{10}-P_{00}
+PD_r=p_{y\mid r\bar c}-p_{y\mid\bar r\bar c}
 ```
 
 and
 
 ```math
-PD_B=P_{01}-P_{00}.
+PD_c=p_{y\mid\bar r c}-p_{y\mid\bar r\bar c}.
 ```
 
 Under an additive no-interaction model, the expected joint probability is
 
 ```math
-P_{11}^{(\mathrm{expected})}
+p_{y\mid rc}^{(\mathrm{expected})}
 =
-P_{10}+P_{01}-P_{00}.
+p_{y\mid r\bar c}+p_{y\mid\bar r c}-p_{y\mid\bar r\bar c}.
 ```
 
 The departure from additivity is therefore
@@ -141,7 +141,7 @@ The departure from additivity is therefore
 ```math
 IC_{\mathrm{add}}
 =
-P_{11}-P_{10}-P_{01}+P_{00}.
+p_{y\mid rc}-p_{y\mid r\bar c}-p_{y\mid\bar r c}+p_{y\mid\bar r\bar c}.
 ```
 
 The additive null is
@@ -161,11 +161,11 @@ A different reference is obtained when relationships are represented on a relati
 For example, using risk ratios,
 
 ```math
-RR_{10}=\frac{P_{10}}{P_{00}},
+RR_{10}=\frac{p_{y\mid r\bar c}}{p_{y\mid\bar r\bar c}},
 \qquad
-RR_{01}=\frac{P_{01}}{P_{00}},
+RR_{01}=\frac{p_{y\mid\bar r c}}{p_{y\mid\bar r\bar c}},
 \qquad
-RR_{11}=\frac{P_{11}}{P_{00}}.
+RR_{11}=\frac{p_{y\mid rc}}{p_{y\mid\bar r\bar c}}.
 ```
 
 Under a multiplicative no-interaction model,
@@ -198,7 +198,7 @@ This leads to an important principle:
 ```text
                  SAME FOUR JOINT CONDITIONS
                            │
-                    P₀₀ P₁₀ P₀₁ P₁₁
+                    p(y|r̄c̄) p(y|rc̄) p(y|r̄c) p(y|rc)
                            │
              ┌─────────────┴─────────────┐
              ▼                           ▼
@@ -227,22 +227,22 @@ Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of effect modi
 
 ### Translation to game research
 
-The same structure can be used when \(A\) and \(B\) represent characteristics of games rather than epidemiological exposures.
+The same structure can be used when \(r\) and \(c\) represent characteristics of games rather than epidemiological exposures.
 
 For example:
 
 ```text
-A = Free
-B = Offers IAP
-Y = Marketplace success
+r = Free
+c = Offers IAP
+y = Marketplace success
 ```
 
 This gives four conditions:
 
 | | No IAP | IAP |
 |---|---:|---:|
-| **Not Free** | \(P_{00}\) | \(P_{01}\) |
-| **Free** | \(P_{10}\) | \(P_{11}\) |
+| **Not Free** | \(p_{y\mid\bar r\bar c}\) | \(p_{y\mid\bar r c}\) |
+| **Free** | \(p_{y\mid r\bar c}\) | \(p_{y\mid rc}\) |
 
 The interaction question is **not simply whether Free + IAP games have high marketplace success**.
 
@@ -260,20 +260,20 @@ Interaction can focus on the joint relationship of two factors. **Effect modific
 
 Suppose:
 
-- \(A\) = focal factor
-- \(X\) = modifying factor
-- \(Y\) = outcome
+- \(r\) = focal factor
+- \(c\) = modifying factor
+- \(y\) = outcome
 
-Instead of primarily evaluating the joint \(A \times X\) relationship, the relationship between \(A\) and \(Y\) is examined within different levels of \(X\):
+Instead of primarily evaluating the joint \(r \times c\) relationship, the relationship between \(r\) and \(y\) is examined within different levels of \(c\):
 
 ```math
-M(A,Y\mid X=0)
+M(r,y\mid\bar c)
 ```
 
 versus
 
 ```math
-M(A,Y\mid X=1).
+M(r,y\mid c).
 ```
 
 Conceptually:
@@ -298,20 +298,20 @@ Conceptually:
                    Compare
 ```
 
-If the relationship differs across levels of \(X\), the \(A\)–\(Y\) relationship is modified across \(X\).
+If the relationship differs across levels of \(c\), the \(r\)–\(y\) relationship is modified across \(c\).
 
 The conceptual distinction can therefore be expressed as:
 
 ```text
 INTERACTION
 
-"What happens when A and B occur jointly?"
+"What happens when r and c occur jointly?"
 
                     versus
 
 EFFECT MODIFICATION
 
-"Does the A–Y relationship differ across levels of X?"
+"Does the r–y relationship differ across levels of c?"
 ```
 
 **Methodological source:**  
@@ -325,9 +325,9 @@ Knol MJ, VanderWeele TJ. *Recommendations for presenting analyses of effect modi
 Let:
 
 ```text
-A = Ads
-X = Game genre
-Y = Marketplace success
+r = Ads
+c = Game genre
+y = Marketplace success
 ```
 
 The question becomes:
@@ -384,23 +384,23 @@ Greenland S. *Effect Modification and Interaction.* Wiley StatsRef: Statistics R
 
 ### Formal representation
 
-Let \(M\) denote a chosen measure of the \(A\)–\(Y\) relationship.
+Let \(M\) denote a chosen measure of the \(r\)–\(y\) relationship.
 
 Effect-measure modification can be represented as
 
 ```math
-M(A,Y\mid X=0)
+M(r,y\mid\bar c)
 \neq
-M(A,Y\mid X=1).
+M(r,y\mid c).
 ```
 
 More generally, across \(K\) contexts:
 
 ```math
-M(A,Y\mid X=1),\;
-M(A,Y\mid X=2),\;
+M(r,y\mid c),\;
+M(r,y\mid c_2),\;
 \dots,\;
-M(A,Y\mid X=K)
+M(r,y\mid c_K)
 ```
 
 need not be homogeneous.
@@ -437,7 +437,7 @@ Therefore:
              ▼                     ▼
        ADDITIVE MEASURE     MULTIPLICATIVE MEASURE
              │                     │
-       M_add(A,Y|X)          M_mult(A,Y|X)
+       M_add(r,y|c)          M_mult(r,y|c)
              │                     │
              └──────────┬──────────┘
                         ▼
@@ -505,7 +505,7 @@ The framework therefore evaluates contextual variation on both additive and mult
 ┌──────────────────────────────────────────────────────────────┐
 │                         INTERACTION                          │
 │                                                              │
-│  Do A and B jointly depart from the relationship expected   │
+│  Do r and c jointly depart from the relationship expected   │
 │  from their separate relationships on a specified scale?    │
 └──────────────────────────────────────────────────────────────┘
                               │
@@ -513,16 +513,16 @@ The framework therefore evaluates contextual variation on both additive and mult
 ┌──────────────────────────────────────────────────────────────┐
 │                    EFFECT MODIFICATION                       │
 │                                                              │
-│  Does the relationship between A and Y differ across        │
-│  levels of X?                                               │
+│  Does the relationship between r and y differ across        │
+│  levels of c?                                               │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
 │                EFFECT-MEASURE MODIFICATION                   │
 │                                                              │
-│  Does a specified measure of the A–Y relationship differ    │
-│  across levels of X?                                        │
+│  Does a specified measure of the r–y relationship differ    │
+│  across levels of c?                                        │
 └──────────────────────────────────────────────────────────────┘
 ```
 
